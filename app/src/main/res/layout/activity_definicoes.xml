@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginBottom="2dp"
+        android:paddingVertical="60dp">
+
+
+        <TextView
+            android:id="@+id/def"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="-5dp"
+            android:text="Definições"
+            android:textColor="@color/def"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="41dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="50dp"
+        android:src="@drawable/Group" />
+
+    <TextView
+        android:id="@+id/perfs"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="155dp"
+        android:text="Perfil"
+        android:textColor="@color/def"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="41dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginLeft="50dp"
+        android:src="@drawable/_icon__location_" />
+
+    <TextView
+        android:id="@+id/trad"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="235dp"
+        android:text="Linguagem"
+        android:textColor="@color/def"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="41dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="310dp"
+        android:layout_marginLeft="50dp"
+        android:src="@drawable/_icon__lock_" />
+
+    <TextView
+        android:id="@+id/lock"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="310dp"
+        android:text="As minhas viagens"
+        android:textColor="@color/def"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:layout_width="34dp"
+        android:layout_height="33dp"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="390dp"
+        android:src="@drawable/_icon__heart_" />
+
+    <TextView
+        android:id="@+id/fav"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="395dp"
+        android:text="Terminar sessão"
+        android:textColor="@color/def"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="400dp"
+        android:src="@drawable/_icon__chevron_down_" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="325dp"
+        android:src="@drawable/_icon__chevron_down_" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="240dp"
+        android:src="@drawable/_icon__chevron_down_" />
+
+    <ImageButton
+        android:id="@+id/myButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="155dp"
+        android:background="@android:color/transparent"
+        android:padding="8dp"
+        android:src="@drawable/_icon__chevron_down_" />
+
+
+
+</RelativeLayout>

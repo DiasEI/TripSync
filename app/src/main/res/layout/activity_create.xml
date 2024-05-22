@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/def"
+        android:text="@string/app_name"
+        android:paddingVertical="50dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textColor="@color/def"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/title"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="10dp"
+        android:onClick="btnCreateAccount" />
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_username"
+        android:background="@drawable/round_edit_text"
+        android:paddingVertical="5dp"
+        android:layout_centerHorizontal="true"/>
+
+
+    <TextView
+        android:id="@+id/tv_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textColor="@color/def"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_below="@id/et_username"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="10dp"/>
+
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_password"
+        android:background="@drawable/round_edit_text"
+        android:paddingVertical="5dp"
+        android:layout_centerHorizontal="true"
+        android:radius="10dp"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textColor="@color/def"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_below="@id/et_password"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="10dp"/>
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_email"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/round_edit_text"
+        android:inputType="textEmailAddress"
+        android:paddingVertical="5dp"
+        android:radius="10dp" />
+
+    <TextView
+        android:id="@+id/tv_tele"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telemóvel"
+        android:textColor="@color/def"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_below="@id/et_email"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="10dp"/>
+
+    <EditText
+        android:id="@+id/et_tele"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_tele"
+        android:background="@drawable/round_edit_text"
+        android:paddingVertical="5dp"
+        android:layout_centerHorizontal="true"
+        android:radius="10dp" />
+
+    <TextView
+        android:id="@+id/tv_nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome"
+        android:textColor="@color/def"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_below="@id/et_tele"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="10dp"/>
+
+    <EditText
+        android:id="@+id/et_nome"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_nome"
+        android:background="@drawable/round_edit_text"
+        android:paddingVertical="5dp"
+        android:layout_centerHorizontal="true"
+        android:radius="10dp" />
+
+    <TextView
+        android:id="@+id/tv_foto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome"
+        android:textColor="@color/def"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_below="@id/et_nome"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="10dp"/>
+
+    <Button
+        android:id="@+id/btn_foto"
+        android:textSize="14dp"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:text="Selecionar ficheiro"
+        android:layout_below="@+id/tv_foto"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/btn_criar_conta"
+        android:textSize="14dp"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/round_button"
+        android:onClick="btnCreateAccount"
+        android:text="Criar Conta"
+        android:layout_below="@+id/btn_foto"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>
