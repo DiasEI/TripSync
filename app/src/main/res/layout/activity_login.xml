@@ -78,32 +78,32 @@
 
 
 
-
-
-
     <Button
         android:id="@+id/btnLogin"
-        android:textSize="14dp"
+        android:gravity="center"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/round_button"
+        android:textSize="18sp"
+        android:backgroundTint="@color/def"
         android:onClick="btnLogin"
         android:text="Entrar"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/et_login_password"
-        android:layout_centerHorizontal="true"/>
+        android:layout_marginTop="70dp"
+        />
 
     <Button
         android:id="@+id/btnConta"
         android:onClick="btnRegister"
-        android:textSize="14dp"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:background="@drawable/round_button"
+        android:backgroundTint="@color/def"
         android:text="Criar Conta"
+        android:textSize="16sp"
         android:layout_below="@+id/btnLogin"
         android:layout_centerHorizontal="true"/>
+
 
 
 </RelativeLayout>

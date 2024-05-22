@@ -134,7 +134,7 @@
         android:id="@+id/tv_foto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome"
+        android:text="Fotografia"
         android:textColor="@color/def"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -152,17 +152,20 @@
         android:layout_below="@+id/tv_foto"
         android:layout_centerHorizontal="true"/>
 
+
+
     <Button
         android:id="@+id/btn_criar_conta"
-        android:textSize="14dp"
+        android:gravity="center"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/round_button"
+        android:textSize="16sp"
+        android:backgroundTint="@color/def"
         android:onClick="btnCreateAccount"
         android:text="Criar Conta"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_foto"
-        android:layout_centerHorizontal="true"/>
-
+        android:layout_marginTop="40dp"
+        />
 
 </RelativeLayout>

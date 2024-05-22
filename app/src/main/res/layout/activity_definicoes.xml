@@ -36,7 +36,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="150dp"
         android:layout_marginLeft="50dp"
-        android:src="@drawable/Group" />
+         />
 
     <TextView
         android:id="@+id/perfs"
@@ -54,7 +54,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="230dp"
         android:layout_marginLeft="50dp"
-        android:src="@drawable/_icon__location_" />
+         />
 
     <TextView
         android:id="@+id/trad"
@@ -72,7 +72,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="310dp"
         android:layout_marginLeft="50dp"
-        android:src="@drawable/_icon__lock_" />
+         />
 
     <TextView
         android:id="@+id/lock"
@@ -91,7 +91,7 @@
         android:layout_height="33dp"
         android:layout_marginLeft="54dp"
         android:layout_marginTop="390dp"
-        android:src="@drawable/_icon__heart_" />
+         />
 
     <TextView
         android:id="@+id/fav"
@@ -109,21 +109,21 @@
         android:layout_height="20dp"
         android:layout_marginLeft="350dp"
         android:layout_marginTop="400dp"
-        android:src="@drawable/_icon__chevron_down_" />
+         />
 
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginLeft="350dp"
         android:layout_marginTop="325dp"
-        android:src="@drawable/_icon__chevron_down_" />
+         />
 
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginLeft="350dp"
         android:layout_marginTop="240dp"
-        android:src="@drawable/_icon__chevron_down_" />
+         />
 
     <ImageButton
         android:id="@+id/myButton"
@@ -133,7 +133,8 @@
         android:layout_marginTop="155dp"
         android:background="@android:color/transparent"
         android:padding="8dp"
-        android:src="@drawable/_icon__chevron_down_" />
+
+         />
 
 
 
