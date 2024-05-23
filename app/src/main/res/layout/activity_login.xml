@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:backgroundTint="@color/def"
-        android:onClick="btnLogin"
+
         android:text="Entrar"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/et_login_password"
@@ -94,7 +94,7 @@
 
     <Button
         android:id="@+id/btnConta"
-        android:onClick="btnRegister"
+
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
