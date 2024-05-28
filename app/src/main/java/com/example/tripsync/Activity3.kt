@@ -13,7 +13,13 @@ class Activity3 : AppCompatActivity() {
 
         val button3: Button = findViewById(R.id.Button3)
         button3.setOnClickListener {
-            val intent = Intent(this, Activity3::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        val button4: Button = findViewById(R.id.Button4)
+        button4.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
     }

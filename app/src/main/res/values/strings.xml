@@ -5,4 +5,5 @@
     <string name="linguagem">Linguagem</string>
     <string name="pt">Português</string>
     <string name="ing">Inglês</string>
+    <string name="guardar">Guardar Alterações</string>
 </resources>
