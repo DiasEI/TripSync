@@ -6,4 +6,6 @@
     <string name="pt">Português</string>
     <string name="ing">Inglês</string>
     <string name="guardar">Guardar Alterações</string>
+    <string name="primeiro">Olá! Bem-vindo ao TripSync!</string>
+    <string name="viagem">As minhas viagens</string>
 </resources>

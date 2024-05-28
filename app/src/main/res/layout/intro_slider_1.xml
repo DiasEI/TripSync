@@ -28,7 +28,7 @@
         android:layout_marginEnd="52dp"
         android:fontFamily="@font/nunito_bold"
         android:gravity="center_horizontal"
-        android:text="Olá! Bem-vindo ao TripSync!"
+        android:text="@string/primeiro"
         android:textColor="@color/def"
         android:textSize="35dp"
         app:layout_constraintEnd_toEndOf="parent"
