@@ -2,4 +2,7 @@
     <string name="app_name">TripSync</string>
     <string name="username">Username</string>
     <string name="pass">Password</string>
+    <string name="linguagem">Linguagem</string>
+    <string name="pt">Português</string>
+    <string name="ing">Inglês</string>
 </resources>

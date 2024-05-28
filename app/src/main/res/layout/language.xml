@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginBottom="3dp"
+        android:paddingVertical="60dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/vector__1_"
+            android:paddingRight="30dp"
+            android:layout_marginLeft="40dp"
+            />
+
+        <TextView
+            android:id="@+id/def"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginTop="-5dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/linguagem"
+            android:textColor="@color/def"
+            android:textSize="30dp"
+            />
+
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/pt"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="155dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/pt"
+        android:textColor="@color/def"
+        android:textSize="20dp"
+         />
+
+    <TextView
+        android:id="@+id/ing"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/ing"
+        android:textColor="@color/def"
+        android:layout_below="@+id/pt"
+        android:textSize="20dp"
+         />
+
+    <Button
+        android:id="@+id/btn_criar_conta"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:backgroundTint="@color/def"
+        android:text="Criar Conta"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ing"
+        android:layout_marginTop="40dp"
+        />
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
