@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <LinearLayout
+        android:id="@+id/Ll1"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="20dp">
+
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/group"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+
+            />
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="113dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunitobold"
+            android:text="@string/hello"
+            android:textColor="@color/def"
+            android:textSize="22sp" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/off"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="160dp"
+            />
+
+        <TextView
+            android:id="@+id/intro"
+            android:layout_width="250dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="-350dp"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/nunitobold"
+            android:text="@string/intro"
+            android:textColor="@color/def"
+            android:textSize="15sp" />
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/Ll1">
+
+        <LinearLayout
+            android:id="@+id/Ll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/Llsearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp">
+
+                <EditText
+                    android:id="@+id/search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="11"
+                    android:textSize="15sp"
+                    android:hint="@string/search"
+                    android:importantForAutofill="no"
+                    android:background="@drawable/round_edit_text"
+                    android:inputType="text"
+                    android:paddingStart="16dp"
+
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSearch"
+                    android:layout_width="20dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/def"
+                    android:layout_marginStart="15dp"
+                    app:icon="@drawable/search"
+                    android:onClick="pesquisa"
+                    app:cornerRadius="10dp"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewCat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/rec"
+                android:padding="10dp"
+                android:textColor="@color/def"
+                android:fontFamily="@font/nunitobold"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="15dp"/>
+
+            <LinearLayout
+                android:id="@+id/Ll4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:orientation="vertical">
+
+                    <!-- Recycler View -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginHorizontal="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:listitem="@layout/announce_line"
+                        />
+                </FrameLayout>
+
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/perto"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="15dp"
+                android:fontFamily="@font/nunitobold"
+                android:textColor="@color/def"
+                />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:orientation="vertical">
+
+                <!-- Recycler View -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginHorizontal="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/announce_line"
+                    />
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

@@ -9,8 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="20dp">
+        android:paddingHorizontal="25dp"
+        android:paddingTop="25dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"

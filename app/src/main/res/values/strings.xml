@@ -8,4 +8,9 @@
     <string name="guardar">Guardar Alterações</string>
     <string name="primeiro">Olá! Bem-vindo ao TripSync!</string>
     <string name="viagem">As minhas viagens</string>
+    <string name="hello">Olá!</string>
+    <string name="search">Procurar</string>
+    <string name="intro">Partilhe as suas viagens connosco!</string>
+    <string name="rec">Recomendado</string>
+    <string name="perto">Perto de Si</string>
 </resources>
