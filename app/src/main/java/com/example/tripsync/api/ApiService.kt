@@ -11,9 +11,9 @@ data class RegisterRequest(
     val username: String,
     val password: String,
     val email: String,
-    val phone: String,
-    val name: String,
-    val photo: String?
+    val telemovel: String,
+    val nome: String,
+    val foto: ByteArray?
 )
 data class RegisterResponse(
     val success: Boolean,
@@ -24,6 +24,6 @@ interface ApiService {
     @POST("api/v2/auth/signin")
     fun login(@Body request: LoginRequest): Call<LoginResponse>
 
-    @POST("/api/v2/auth/signup")
-    fun register(@Body registerRequest: RegisterRequest): Call<RegisterResponse>
+    @POST("api/v2/auth/signup")
+    fun register(@Body request: RegisterRequest): Call<RegisterResponse>
 }
