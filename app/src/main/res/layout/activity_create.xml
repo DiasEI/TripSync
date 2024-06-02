@@ -20,7 +20,7 @@
         android:id="@+id/tv_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Username"
+        android:text="@string/username"
         android:textColor="@color/def"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -43,7 +43,7 @@
         android:id="@+id/tv_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
+        android:text="@string/pass"
         android:textColor="@color/def"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -90,7 +90,7 @@
         android:id="@+id/tv_tele"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Telemóvel"
+        android:text="@string/telemovel"
         android:textColor="@color/def"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -112,7 +112,7 @@
         android:id="@+id/tv_nome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome"
+        android:text="@string/nome"
         android:textColor="@color/def"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -134,7 +134,7 @@
         android:id="@+id/tv_foto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fotografia"
+        android:text="@string/foto"
         android:textColor="@color/def"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -148,11 +148,9 @@
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/def"
-        android:text="Selecionar ficheiro"
+        android:text="@string/select"
         android:layout_below="@+id/tv_foto"
         android:layout_centerHorizontal="true"/>
-
-
 
     <Button
         android:id="@+id/btn_criar_conta"
@@ -162,7 +160,7 @@
         android:textSize="16sp"
         android:backgroundTint="@color/def"
 
-        android:text="Criar Conta"
+        android:text="@string/criaruser"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_foto"
         android:layout_marginTop="40dp"

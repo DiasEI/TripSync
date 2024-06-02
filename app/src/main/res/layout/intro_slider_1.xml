@@ -30,7 +30,7 @@
         android:gravity="center_horizontal"
         android:text="@string/primeiro"
         android:textColor="@color/def"
-        android:textSize="35dp"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView"
        />
@@ -40,7 +40,7 @@
         android:layout_width="303dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Começar"
+        android:text="@string/começar"
         android:textSize="18sp"
         android:backgroundTint="@color/def"
         app:layout_constraintStart_toStartOf="parent"

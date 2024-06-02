@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TripSync</string>
-    <string name="username">Username</string>
-    <string name="pass">Password</string>
+    <string name="username">Utilizador</string>
+    <string name="pass">Palavra-Passe</string>
     <string name="linguagem">Linguagem</string>
     <string name="pt">Português</string>
     <string name="ing">Inglês</string>
@@ -13,4 +13,16 @@
     <string name="intro">Partilhe as suas viagens connosco!</string>
     <string name="rec">Recomendado</string>
     <string name="perto">Perto de Si</string>
+    <string name="começar">Começar</string>
+    <string name="criaruser">Criar Conta</string>
+    <string name="entrar">Entrar</string>
+    <string name="logintrue">Login com sucesso!</string>
+    <string name="loginfalse">Erro no login!</string>
+    <string name="networkerror">Erro na conexão:</string>
+    <string name="registertrue">Registado com sucesso!</string>
+    <string name="registerfalse">Erro ao efetuar o registo!</string>
+    <string name="telemovel">Telemóvel</string>
+    <string name="nome">Nome</string>
+    <string name="foto">Fotografia</string>
+    <string name="select">Selecionar Ficheiro</string>
 </resources>

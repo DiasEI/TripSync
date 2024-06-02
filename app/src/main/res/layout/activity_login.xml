@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
 
     <LinearLayout
         android:id="@+id/ll_1"
@@ -20,10 +18,8 @@
             android:text="@string/app_name"
             android:textColor="@color/def"
             android:fontFamily="@font/nunito_bold"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textStyle="bold"/>
-
-
 
     </LinearLayout>
 
@@ -31,14 +27,14 @@
         android:id="@+id/tv_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/username"
-        android:textColor="@color/def"
-        android:textSize="18dp"
-        android:textStyle="bold"
         android:layout_below="@+id/ll_1"
+        android:layout_marginTop="18dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
-        android:layout_marginTop="18dp"/>
+        android:text="@string/username"
+        android:textColor="@color/def"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_login_username"
@@ -49,21 +45,18 @@
         android:paddingVertical="5dp"
         android:layout_centerHorizontal="true"/>
 
-
     <TextView
         android:id="@+id/tv_password"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/pass"
-        android:textColor="@color/def"
-        android:textSize="18dp"
-        android:textStyle="bold"
         android:layout_below="@id/et_login_username"
+        android:layout_marginTop="25dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
-        android:layout_marginTop="25dp"
-        />
-
+        android:text="@string/pass"
+        android:textColor="@color/def"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_login_password"
@@ -76,8 +69,6 @@
         android:radius="10dp"
         android:inputType="textPassword"/>
 
-
-
     <Button
         android:id="@+id/btnLogin"
         android:gravity="center"
@@ -85,8 +76,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:backgroundTint="@color/def"
-
-        android:text="Entrar"
+        android:text="@string/entrar"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/et_login_password"
         android:layout_marginTop="70dp"
@@ -98,11 +88,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:backgroundTint="@color/def"
-        android:text="Criar Conta"
+        android:text="@string/criaruser"
         android:textSize="16sp"
         android:layout_below="@+id/btnLogin"
         android:layout_centerHorizontal="true"/>
-
-
 
 </RelativeLayout>
