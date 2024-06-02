@@ -21,14 +21,14 @@
             android:src="@drawable/group"
             android:background="@android:color/transparent"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
 
             />
         <TextView
             android:id="@+id/welcome"
             android:layout_width="113dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/nunitobold"
             android:text="@string/hello"
@@ -36,19 +36,20 @@
             android:textSize="22sp" />
 
         <ImageButton
+            android:id="@+id/logout"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/off"
             android:background="@android:color/transparent"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="160dp"
+            android:layout_marginStart="160dp"
             />
 
         <TextView
             android:id="@+id/intro"
             android:layout_width="250dp"
             android:layout_height="20dp"
-            android:layout_marginLeft="-350dp"
+            android:layout_marginStart="-350dp"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/nunitobold"
             android:text="@string/intro"
