@@ -26,6 +26,8 @@
     <string name="foto">Fotografia</string>
     <string name="select">Selecionar Ficheiro</string>
     <string name="edit">Editar Perfil</string>
+    <string name="tel">Telemóvel</string>
+    <string name="email">Email</string>
     <string name="intro2">Adicione e partilhe as suas viagens connosco!</string>
     <string name="intro3">Adicione e partilhe as suas viagens connosco! Pode criar o seu perfil e editar as suas informações sempre que desejado.</string>
 </resources>
