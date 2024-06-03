@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -46,12 +45,45 @@ class RegisterActivity : AppCompatActivity() {
         val btnRegister: Button = findViewById(R.id.btn_criar_conta)
         btnRegister.setOnClickListener {
             val username = etUsername.text.toString()
+            if (username.isEmpty()) {
+                Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val password = etPassword.text.toString()
+            if (password.isEmpty()) {
+                Toast.makeText(this, "Password cannot be empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val email = etEmail.text.toString()
-            val telemovel = etPhone.text.toString()
+            if (email.isEmpty()) {
+                Toast.makeText(this, "Email cannot be empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val telemovelStr = etPhone.text.toString()
+            val telemovel = telemovelStr.toIntOrNull()
+            if (telemovel == null) {
+                Toast.makeText(this, "Invalid phone number", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val nome = etName.text.toString()
+            if (nome.isEmpty()) {
+                Toast.makeText(this, "Name cannot be empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val photoByteArray = selectedPhotoUri?.let { getByteArrayFromUri(it) }
             register(username, password, email, telemovel, nome, photoByteArray)
+        }
+
+        val btnVoltar: Button = findViewById(R.id.btn_voltar)
+        btnVoltar.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -84,18 +116,17 @@ class RegisterActivity : AppCompatActivity() {
                 bytes.toByteArray()
             }
         } catch (e: IOException) {
-            Log.e(TAG, "Error converting URI to byte array: ${e.message}")
-            e.printStackTrace()
             null
         }
     }
 
-    private fun register(username: String, password: String, email: String, telemovel: String, nome: String, photoByteArray: ByteArray?) {
+    private fun register(username: String, password: String, email: String, telemovel: Int, nome: String, photoByteArray: ByteArray?) {
         val registerRequest = RegisterRequest(username, password, email, telemovel, nome, photoByteArray)
         val call = ApiClient.apiService.register(registerRequest)
 
         call.enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
+
                 if (response.isSuccessful) {
                     val registerResponse = response.body()
                     if (registerResponse?.success == true) {
@@ -113,7 +144,6 @@ class RegisterActivity : AppCompatActivity() {
 
             @SuppressLint("StringFormatInvalid")
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                Log.e(TAG, "Registration failed: ${t.message}")
                 Toast.makeText(this@RegisterActivity, getString(R.string.networkerror, t.message), Toast.LENGTH_SHORT).show()
             }
         })
@@ -122,6 +152,5 @@ class RegisterActivity : AppCompatActivity() {
     companion object {
         private const val REQUEST_CODE_SELECT_IMAGE = 100
         private const val DEFAULT_BUFFER_SIZE = 1024
-        private const val TAG = "RegisterActivity"
     }
 }

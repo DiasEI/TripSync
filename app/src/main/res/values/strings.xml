@@ -1,33 +1,41 @@
 <resources>
-    <string name="app_name">TripSync</string>
-    <string name="username">Utilizador</string>
-    <string name="pass">Palavra-Passe</string>
-    <string name="linguagem">Linguagem</string>
-    <string name="pt">Português</string>
-    <string name="ing">Inglês</string>
-    <string name="guardar">Guardar Alterações</string>
-    <string name="primeiro">Olá! Bem-vindo ao TripSync!</string>
-    <string name="viagem">As minhas viagens</string>
-    <string name="hello">Olá!</string>
-    <string name="search">Procurar</string>
-    <string name="intro">Partilhe as suas viagens connosco!</string>
-    <string name="rec">Recomendado</string>
-    <string name="perto">Perto de Si</string>
-    <string name="começar">Começar</string>
+
+    <!-- Login/Register Tags -->
     <string name="criaruser">Criar Conta</string>
-    <string name="entrar">Entrar</string>
     <string name="logintrue">Login com sucesso!</string>
     <string name="loginfalse">Erro no login!</string>
+    <string name="entrar">Entrar</string>
     <string name="networkerror">Erro na conexão:</string>
     <string name="registertrue">Registado com sucesso!</string>
     <string name="registerfalse">Erro ao efetuar o registo!</string>
-    <string name="telemovel">Telemóvel</string>
+    <string name="select">Selecionar Ficheiro</string>
+
+    <!-- User Data Tags -->
     <string name="nome">Nome</string>
     <string name="foto">Fotografia</string>
-    <string name="select">Selecionar Ficheiro</string>
+    <string name="telemovel">Telemóvel</string>
+    <string name="username">Utilizador</string>
+    <string name="pass">Palavra-Passe</string>
+
+    <!-- Other Buttons Tags -->
+    <string name="começar">Começar</string>
+    <string name="guardar">Guardar Alterações</string>
+    <string name="search">Procurar</string>
     <string name="edit">Editar Perfil</string>
-    <string name="tel">Telemóvel</string>
-    <string name="email">Email</string>
+    <string name="voltar">Voltar</string>
+
+    <!-- App Layout Tags -->
+    <string name="app_name">TripSync</string>
+    <string name="linguagem">Linguagem</string>
+    <string name="pt">Português</string>
+    <string name="ing">Inglês</string>
+    <string name="primeiro">Olá! Bem-vindo ao TripSync!</string>
+    <string name="viagem">As minhas viagens</string>
+    <string name="hello">Olá!</string>
+    <string name="intro">Partilhe as suas viagens connosco!</string>
+    <string name="rec">Recomendado</string>
+    <string name="perto">Perto de Si</string>
     <string name="intro2">Adicione e partilhe as suas viagens connosco!</string>
     <string name="intro3">Adicione e partilhe as suas viagens connosco! Pode criar o seu perfil e editar as suas informações sempre que desejado.</string>
+
 </resources>

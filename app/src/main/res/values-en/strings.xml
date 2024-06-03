@@ -1,29 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TripSync</string>
-    <string name="username">Username</string>
-    <string name="pass">Password</string>
-    <string name="linguagem">Language</string>
-    <string name="pt">Portuguese</string>
-    <string name="ing">English</string>
-    <string name="guardar">Save Modifications</string>
-    <string name="primeiro">Hello! Welcome to TripSync!</string>
-    <string name="viagem">My trips</string>
-    <string name="hello">Hello!</string>
-    <string name="search">Search</string>
-    <string name="intro">Share yoour trips with us!</string>
-    <string name="rec">Recommended</string>
-    <string name="perto">Close by you</string>
-    <string name="começar">Begin</string>
+
+    <!-- Login/Register Tags -->
     <string name="criaruser">Create Account</string>
-    <string name="entrar">Login</string>
     <string name="logintrue">Login successful!</string>
     <string name="loginfalse">Login failed!</string>
+    <string name="entrar">Login</string>
     <string name="networkerror">Network error:</string>
     <string name="registertrue">Registered successfully!</string>
     <string name="registerfalse">Error while registering!</string>
-    <string name="telemovel">Contact</string>
+    <string name="select">Select File</string>
+
+    <!-- User Data Tags -->
     <string name="nome">Name</string>
     <string name="foto">Photo</string>
-    <string name="select">Select File</string>
+    <string name="telemovel">Contact</string>
+    <string name="username">Username</string>
+    <string name="pass">Password</string>
+
+    <!-- Other Buttons Tags -->
+    <string name="começar">Begin</string>
+    <string name="guardar">Save Modifications</string>
+    <string name="search">Search</string>
+    <string name="edit">Edit Profile</string>
+    <string name="voltar">Go Back</string>
+
+    <!-- App Layout Tags -->
+    <string name="app_name">TripSync</string>
+    <string name="linguagem">Language</string>
+    <string name="pt">Portuguese</string>
+    <string name="ing">English</string>
+    <string name="primeiro">Hello! Welcome to TripSync!</string>
+    <string name="viagem">My trips</string>
+    <string name="hello">Hello!</string>
+    <string name="intro">Share yoour trips with us!</string>
+    <string name="rec">Recommended</string>
+    <string name="perto">Close by you</string>
+    <string name="intro2">Add and share your trips with us!</string>
+    <string name="intro3">Add and share your trips with us! You can create your profile and edit your information whenever desired.</string>
+
 </resources>
