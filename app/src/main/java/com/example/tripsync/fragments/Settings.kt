@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
-import com.example.tripsync.Activity3
 import com.example.tripsync.ChangeLanguageActivity
+import com.example.tripsync.LoginActivity
 import com.example.tripsync.R
 import com.example.tripsync.ViagensActivity
-import com.example.tripsync.perfilActivity
 
 class Settings: Fragment() {
 
@@ -33,7 +32,7 @@ class Settings: Fragment() {
 
         //Set click listeners
         perfilButton.setOnClickListener {
-            val intent = Intent(requireContext(), perfilActivity::class.java)
+            val intent = Intent(requireContext(), Perfil::class.java)
             startActivity(intent)
         }
 
@@ -43,13 +42,14 @@ class Settings: Fragment() {
         }
 
 
-          viagensButton.setOnClickListener {
-              val intent = Intent(requireContext(), ViagensActivity::class.java)
-              startActivity(intent)
-           }
+        viagensButton.setOnClickListener {
+            val intent = Intent(requireContext(), ViagensActivity::class.java)
+            startActivity(intent)
+        }
 
-        //   offButton.setOnClickListener {
-            // Handle offButton click
-            // }
+        offButton.setOnClickListener {
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
