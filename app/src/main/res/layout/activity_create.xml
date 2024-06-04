@@ -159,11 +159,23 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:backgroundTint="@color/def"
-
         android:text="@string/criaruser"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_foto"
         android:layout_marginTop="40dp"
+        />
+
+    <Button
+        android:id="@+id/btn_voltar"
+        android:gravity="center"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:backgroundTint="@color/def"
+        android:text="@string/voltar"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_criar_conta"
+        android:layout_marginTop="20dp"
         />
 
 </RelativeLayout>

@@ -68,7 +68,7 @@
         android:layout_marginTop="2dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
-        android:text="@string/tel"
+        android:text="@string/telemovel"
         android:textColor="@color/def"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -92,7 +92,7 @@
         android:layout_marginTop="2dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
-        android:text="@string/email"
+        android:text="Email"
         android:textColor="@color/def"
         android:textSize="18sp"
         android:textStyle="bold" />

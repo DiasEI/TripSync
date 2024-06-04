@@ -11,7 +11,7 @@ data class RegisterRequest(
     val username: String,
     val password: String,
     val email: String,
-    val telemovel: String,
+    val telemovel: Int,
     val nome: String,
     val foto: ByteArray?
 )
