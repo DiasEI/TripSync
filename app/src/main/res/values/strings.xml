@@ -30,4 +30,9 @@
     <string name="email">Email</string>
     <string name="intro2">Adicione e partilhe as suas viagens connosco!</string>
     <string name="intro3">Adicione e partilhe as suas viagens connosco! Pode criar o seu perfil e editar as suas informações sempre que desejado.</string>
+    <string name="viagens">As minhas viagens</string>
+    <string name="add">Adicionar</string>
+    <string name="classificacao">Classificação</string>
+    <string name="local">Localização</string>
+    <string name="tipo">Tipo</string>
 </resources>
