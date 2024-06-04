@@ -51,7 +51,7 @@ class LoginActivity: AppCompatActivity() {
                     // Lida com o login bem-sucedido
                     Toast.makeText(this@LoginActivity, getString(R.string.logintrue), Toast.LENGTH_SHORT).show()
                     // Redireciona para o MainMenu
-                    val intent = Intent(this@LoginActivity, MainMenu::class.java)
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {

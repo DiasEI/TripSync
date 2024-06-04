@@ -15,17 +15,17 @@
         android:theme="@style/Theme.TripSync"
         tools:targetApi="31">
         <activity
-            android:name=".MainMenu"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity android:name=".ViagensActivity" />
         <activity android:name=".perfilActivity" />
         <activity android:name=".ChangeLanguageActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Activity3" />
-        <activity android:name=".Activity2" />
+        <activity android:name=".Intro3" />
+        <activity android:name=".Intro2" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Intro1"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

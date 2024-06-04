@@ -1,74 +1,51 @@
 package com.example.tripsync
 
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Button
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-
+import androidx.fragment.app.Fragment
+import com.example.tripsync.fragments.Home
+import com.example.tripsync.fragments.Perfil
+import com.example.tripsync.fragments.Settings
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    private val REQUEST_INTERNET_PERMISSION = 102
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.intro_slider_1)
+        setContentView(R.layout.activity_main)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
+
+        // Load the default fragment
+        if (savedInstanceState == null) {
+            loadFragment(Home())
         }
 
-        // Check and request permissions
-        checkPermissions()
-
-        val startButton: Button = findViewById(R.id.startButton)
-        startButton.setOnClickListener {
-            val intent = Intent(this, Activity2::class.java)
-            startActivity(intent)
-        }
-    }
-
-    private fun checkPermissions() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.INTERNET
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.INTERNET),
-                REQUEST_INTERNET_PERMISSION
-            )
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_INTERNET_PERMISSION
-        ) {
-            if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
-                // Permissions granted
-                Toast.makeText(this, "Permissions granted", Toast.LENGTH_SHORT).show()
-            } else {
-                // Permissions denied
-                Toast.makeText(this, "Permissions denied", Toast.LENGTH_SHORT).show()
+        // Set up the item selected listener
+        bottomNavigationView.setOnNavigationItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.home -> {
+                    loadFragment(Home())
+                    true
+                }
+                R.id.perf -> {
+                    loadFragment(Perfil())
+                    true
+                }
+                R.id.settings -> {
+                    loadFragment(Settings())
+                    true
+                }
+                else -> false
             }
         }
     }
 
+    private fun loadFragment(fragment: Fragment) {
+        // Load the fragment into the frame layout
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frame_layout, fragment)
+            .commit()
+    }
 }

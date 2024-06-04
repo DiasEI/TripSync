@@ -185,7 +185,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Include navbar layout -->
-    <include layout="@layout/nav_bar" />
-
 </RelativeLayout>

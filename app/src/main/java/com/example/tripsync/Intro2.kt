@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
-class Activity2 : AppCompatActivity() {
+class Intro2 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -13,7 +13,7 @@ class Activity2 : AppCompatActivity() {
 
         val nextButton: Button = findViewById(R.id.nextButton)
         nextButton.setOnClickListener {
-            val intent = Intent(this, Activity3::class.java)
+            val intent = Intent(this, Intro3::class.java)
             startActivity(intent)
         }
     }
