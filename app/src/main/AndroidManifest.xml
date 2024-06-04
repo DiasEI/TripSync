@@ -17,6 +17,7 @@
         <activity
             android:name=".MainMenu"
             android:exported="false" />
+        <activity android:name=".perfilActivity" />
         <activity android:name=".ChangeLanguageActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />

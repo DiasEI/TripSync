@@ -8,7 +8,7 @@
         android:id="@+id/ll_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="40dp"
+        android:paddingVertical="60dp"
         android:layout_centerHorizontal="true">
 
         <ImageButton
@@ -26,8 +26,8 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/edit"
-            android:layout_marginLeft="30dp"
+            android:text="@string/add"
+            android:layout_marginLeft="45dp"
             android:textColor="@color/def"
             android:fontFamily="@font/nunito_bold"
             android:textSize="30sp"
@@ -35,8 +35,6 @@
 
 
     </LinearLayout>
-
-
 
     <TextView
         android:id="@+id/tv_nome"
@@ -61,47 +59,46 @@
         android:layout_centerHorizontal="true"/>
 
     <TextView
-        android:id="@+id/tv_tel"
+        android:id="@+id/tv_local"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_nome"
         android:layout_marginTop="2dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
-        android:text="@string/tel"
+        android:text="@string/local"
         android:textColor="@color/def"
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/et_tel"
+    <Button
+        android:id="@+id/btnLocal"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_tel"
-        android:background="@drawable/round_edit_text"
-        android:paddingVertical="5dp"
+        android:text="@string/add"
+        android:layout_below="@+id/tv_local"
         android:layout_centerHorizontal="true"
-        android:radius="10dp"
-        />
+        android:layout_marginVertical="10dp"
+        android:backgroundTint="@color/def"/>
 
     <TextView
-        android:id="@+id/tv_email"
+        android:id="@+id/tv_class"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_tel"
+        android:layout_below="@id/btnLocal"
         android:layout_marginTop="2dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
-        android:text="@string/email"
+        android:text="@string/classificacao"
         android:textColor="@color/def"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/et_email"
+        android:id="@+id/et_class"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_email"
+        android:layout_below="@+id/tv_class"
         android:background="@drawable/round_edit_text"
         android:paddingVertical="5dp"
         android:layout_centerHorizontal="true"
@@ -110,10 +107,10 @@
 
 
     <TextView
-        android:id="@+id/tv_password"
+        android:id="@+id/tv_tipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_email"
+        android:layout_below="@id/et_class"
         android:layout_marginTop="2dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
@@ -123,29 +120,14 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/et_password"
+        android:id="@+id/et_tipo"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_password"
+        android:layout_below="@+id/tv_tipo"
         android:background="@drawable/round_edit_text"
         android:paddingVertical="5dp"
         android:layout_centerHorizontal="true"
-        android:radius="10dp"
-        android:inputType="textPassword"
-        />
 
-
-    <Button
-        android:id="@+id/btnFoto"
-        android:gravity="center"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:backgroundTint="@color/def"
-        android:text="@string/foto"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/et_password"
-        android:layout_marginTop="40dp"
         />
 
     <Button
@@ -157,8 +139,8 @@
         android:backgroundTint="@color/def"
         android:text="@string/guardar"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btnFoto"
-        android:layout_marginTop="40dp"
+        android:layout_below="@+id/et_tipo"
+        android:layout_marginTop="70dp"
         />
 
 

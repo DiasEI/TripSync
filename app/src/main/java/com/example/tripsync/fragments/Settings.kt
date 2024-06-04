@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.tripsync.Activity3
 import com.example.tripsync.ChangeLanguageActivity
 import com.example.tripsync.R
+import com.example.tripsync.perfilActivity
 
 class Settings: Fragment() {
 
@@ -31,7 +32,8 @@ class Settings: Fragment() {
 
         //Set click listeners
         perfilButton.setOnClickListener {
-            // Handle perfilButton click
+            val intent = Intent(requireContext(), perfilActivity::class.java)
+            startActivity(intent)
         }
 
         linguagemButton.setOnClickListener {

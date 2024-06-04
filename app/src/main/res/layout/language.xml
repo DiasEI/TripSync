@@ -17,13 +17,14 @@
         android:layout_marginBottom="3dp"
         android:paddingVertical="60dp">
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:src="@drawable/vector__1_"
             android:paddingRight="30dp"
             android:layout_marginLeft="40dp"
+            android:background="@color/white"
             />
 
         <TextView
