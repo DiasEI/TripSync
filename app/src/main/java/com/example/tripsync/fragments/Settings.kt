@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.tripsync.Activity3
 import com.example.tripsync.ChangeLanguageActivity
 import com.example.tripsync.R
+import com.example.tripsync.ViagensActivity
 import com.example.tripsync.perfilActivity
 
 class Settings: Fragment() {
@@ -37,15 +38,15 @@ class Settings: Fragment() {
         }
 
         linguagemButton.setOnClickListener {
-            // Open ChangeLanguageActivity
             val intent = Intent(requireContext(), ChangeLanguageActivity::class.java)
             startActivity(intent)
         }
 
 
-        //  viagensButton.setOnClickListener {
-            // Handle viagensButton click
-        //   }
+          viagensButton.setOnClickListener {
+              val intent = Intent(requireContext(), ViagensActivity::class.java)
+              startActivity(intent)
+           }
 
         //   offButton.setOnClickListener {
             // Handle offButton click

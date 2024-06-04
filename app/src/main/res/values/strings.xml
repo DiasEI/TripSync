@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">TripSync</string>
-    <string name="username">Utilizador</string>
+    <string name="username">Username</string>
     <string name="pass">Palavra-Passe</string>
     <string name="linguagem">Linguagem</string>
     <string name="pt">Português</string>
@@ -35,4 +35,5 @@
     <string name="classificacao">Classificação</string>
     <string name="local">Localização</string>
     <string name="tipo">Tipo</string>
+    <string name="voltar">Voltar</string>
 </resources>
