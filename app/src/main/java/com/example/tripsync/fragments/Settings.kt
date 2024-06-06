@@ -32,9 +32,14 @@ class Settings: Fragment() {
 
         //Set click listeners
         perfilButton.setOnClickListener {
-            val intent = Intent(requireContext(), Perfil::class.java)
-            startActivity(intent)
+            val perfilFragment = Perfil()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_perfil, perfilFragment) // substitua R.id.fragment_container pelo ID do contêiner de fragmento correto
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
+
 
         linguagemButton.setOnClickListener {
             val intent = Intent(requireContext(), ChangeLanguageActivity::class.java)

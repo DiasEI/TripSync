@@ -53,7 +53,6 @@ class Perfil : Fragment() {
         etEmail.setText(email)
         etPassword.setText(password)
     }
-
     private fun guardar() {
         val nome = etNome.text.toString()
         val tel = etTel.text.toString()

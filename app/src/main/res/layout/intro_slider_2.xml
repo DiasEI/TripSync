@@ -53,7 +53,7 @@
         android:layout_width="303dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Continuar"
+        android:text="@string/continuar"
         android:textSize="18sp"
         android:backgroundTint="@color/def"
         app:layout_constraintStart_toStartOf="parent"
