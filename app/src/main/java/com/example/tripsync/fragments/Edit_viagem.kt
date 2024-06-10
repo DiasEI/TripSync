@@ -14,7 +14,8 @@ import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.tripsync.R
 import com.example.tripsync.api.ApiClient
-
+import com.example.tripsync.api.User
+import com.example.tripsync.api
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -79,8 +80,8 @@ class Edit_viagem: Fragment() {
         token = sharedPreferences.getString("token", null)
 
         if (userId != null && token != null) {
-            ApiClient.apiService.getUserDetails(userId!!).enqueue(object : Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
+            ApiClient.apiService.getTripDetails(userId!!).enqueue(object : Callback<Trip> {
+                override fun onResponse(call: Call<Trip>, response: Response<Trip>) {
                     if (response.isSuccessful) {
                         val trip = response.body()
                         trip?.let {
@@ -96,10 +97,9 @@ class Edit_viagem: Fragment() {
                     } else {
                         Toast.makeText(requireContext(), "Failed to load trip details", Toast.LENGTH_SHORT).show()
                     }
-
                 }
 
-                override fun onFailure(call: Call<User>, t: Throwable) {
+                override fun onFailure(call: Call<Trip>, t: Throwable) {
                     Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
             })
@@ -107,6 +107,7 @@ class Edit_viagem: Fragment() {
             Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun guardar() {
         val titulo = et_titulo.text.toString()

@@ -72,7 +72,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/btnLocal"
+        android:id="@+id/btnAdd"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:text="@string/add"
@@ -85,7 +85,7 @@
         android:id="@+id/tv_class"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnLocal"
+        android:layout_below="@id/btnAdd"
         android:layout_marginTop="2dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"

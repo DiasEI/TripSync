@@ -39,5 +39,6 @@
     <string name="perfil">Perfil</string>
     <string name="logout">Terminar Sessão</string>
     <string name="editViagem">Editar Viagem</string>
+    <string name="addFicheiros">Selecionar ficheiros</string>
 
 </resources>

@@ -44,5 +44,7 @@
     <string name="definicoes">Settings</string>
     <string name="perfil">Profile</string>
     <string name="logout">Logout</string>
+    <string name="editViagem">Edit Trip</string>
+    <string name="addFicheiros">Select Files</string>
 
 </resources>
