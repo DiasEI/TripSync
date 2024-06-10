@@ -1,6 +1,7 @@
 package com.example.tripsync
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -40,6 +41,14 @@ class LoginActivity: AppCompatActivity() {
         }
     }
 
+    private fun saveUserInfo(userId: String, token: String) {
+        val sharedPreferences = getSharedPreferences("ProfilePrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("userId", userId)
+        editor.putString("token", token)
+        editor.apply()
+    }
+
     private fun login(username: String, password: String) {
         val loginRequest = LoginRequest(username, password)
         val call = ApiClient.apiService.login(loginRequest)
@@ -48,6 +57,8 @@ class LoginActivity: AppCompatActivity() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
+                    // Save user ID and token
+                    saveUserInfo((loginResponse?.id ?: -1).toString(), loginResponse?.token ?: "")
                     // Lida com o login bem-sucedido
                     Toast.makeText(this@LoginActivity, getString(R.string.logintrue), Toast.LENGTH_SHORT).show()
                     // Redireciona para o MainMenu

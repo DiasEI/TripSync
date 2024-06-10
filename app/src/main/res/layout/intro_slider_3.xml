@@ -6,63 +6,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Intro1"
-    >
+    tools:context=".Intro1">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="406dp"
-        android:layout_height="420dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         android:src="@drawable/slide3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="302dp"
-        android:layout_height="47dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="52dp"
         android:fontFamily="@font/nunito_bold"
-        android:gravity="center_horizontal"
-        android:text="TripSync"
+        android:gravity="center"
+        android:text="@string/app_name"
         android:textColor="@color/def"
-        android:textSize="27dp"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView3"
-         />
+        app:layout_constraintTop_toBottomOf="@id/imageView3"/>
 
     <Button
         android:id="@+id/Button3"
-        android:layout_width="303dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Iniciar Sessão"
+        android:text="@string/entrar"
         android:textSize="18sp"
         android:backgroundTint="@color/def"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView4"
-        android:layout_marginTop="40dp"
-        />
+        android:layout_marginTop="40dp"/>
 
     <Button
         android:id="@+id/Button4"
-        android:layout_width="303dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Criar Conta"
+        android:text="@string/criaruser"
         android:textSize="18sp"
         android:backgroundTint="@color/def"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Button3"
-        android:layout_marginTop="30dp"
-        />
-
-
+        android:layout_marginTop="30dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

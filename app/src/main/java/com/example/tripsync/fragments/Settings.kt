@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
-import com.example.tripsync.ChangeLanguageActivity
 import com.example.tripsync.LoginActivity
 import com.example.tripsync.R
 import com.example.tripsync.ViagensActivity
@@ -24,7 +23,6 @@ class Settings: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val perfilButton = view.findViewById<ImageButton>(R.id.perfilButtton)
         val linguagemButton = view.findViewById<ImageButton>(R.id.linguagemButtton)
         val viagensButton = view.findViewById<ImageButton>(R.id.viagensButtton)
@@ -32,20 +30,20 @@ class Settings: Fragment() {
 
         //Set click listeners
         perfilButton.setOnClickListener {
-            val perfilFragment = Perfil()
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_perfil, perfilFragment) // substitua R.id.fragment_container pelo ID do contêiner de fragmento correto
-            transaction.addToBackStack(null)
+
+            transaction.replace(R.id.frame_layout, Perfil())
             transaction.commit()
         }
 
-
         linguagemButton.setOnClickListener {
-            val intent = Intent(requireContext(), ChangeLanguageActivity::class.java)
-            startActivity(intent)
-        }
+            val fragmentManager = requireActivity().supportFragmentManager
+            val transaction = fragmentManager.beginTransaction()
 
+            transaction.replace(R.id.frame_layout, ChangeLanguage())
+            transaction.commit()
+        }
 
         viagensButton.setOnClickListener {
             val intent = Intent(requireContext(), ViagensActivity::class.java)

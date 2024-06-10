@@ -30,13 +30,12 @@
             android:id="@+id/welcome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:text="@string/viagens"
-            android:fontFamily="@font/nunito_bold"
-            android:textColor="@color/def"
-            android:textSize="25sp"
             android:layout_marginTop="30dp"
-             />
+            android:layout_weight="10"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/viagem"
+            android:textColor="@color/def"
+            android:textSize="25sp" />
 
     </LinearLayout>
 

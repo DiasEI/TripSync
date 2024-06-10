@@ -9,11 +9,10 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginBottom="3dp"
         android:paddingVertical="60dp">
 
         <ImageButton
+            android:id="@+id/btn_voltar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -35,54 +34,44 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/pt"
+    <RadioGroup
+        android:id="@+id/languageRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="155dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/pt"
-        android:textColor="@color/def"
-        android:textSize="20sp"/>
+        android:layout_marginTop="90dp">
 
-    <RadioButton
-        android:id="@+id/ptRadio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/pt"
-        android:layout_alignTop="@id/pt"
-        android:layout_marginStart="20dp"/>
+        <RadioButton
+            android:id="@+id/ptRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/def"
+            android:textSize="16sp"
+            android:text="@string/pt"/>
 
-    <TextView
-        android:id="@+id/ing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pt"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/ing"
-        android:textColor="@color/def"
-        android:textSize="20sp"/>
+        <RadioButton
+            android:id="@+id/enRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/def"
+            android:textSize="16sp"
+            android:text="@string/ing"/>
 
-    <RadioButton
-        android:id="@+id/enRadio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/ing"
-        android:layout_alignTop="@id/ing"
-        android:layout_marginStart="20dp"/>
+    </RadioGroup>
 
     <Button
         android:id="@+id/btn_guard"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
         android:textSize="16sp"
         android:backgroundTint="@color/def"
         android:text="@string/guardar"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/ing"
-        android:layout_marginTop="40dp"/>
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

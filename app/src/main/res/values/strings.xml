@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">TripSync</string>
-    <string name="username">Username</string>
+    <string name="app_name" translatable="false">TripSync</string>
+    <string name="username" translatable="false">Username</string>
     <string name="pass">Palavra-Passe</string>
     <string name="linguagem">Linguagem</string>
     <string name="pt">Português</string>
@@ -26,14 +26,17 @@
     <string name="foto">Fotografia</string>
     <string name="select">Selecionar Ficheiro</string>
     <string name="edit">Editar Perfil</string>
-    <string name="email">Email</string>
+    <string name="email" translatable="false">Email</string>
     <string name="intro2">Adicione e partilhe as suas viagens connosco!</string>
     <string name="intro3">Adicione e partilhe as suas viagens connosco! Pode criar o seu perfil e editar as suas informações sempre que desejado.</string>
-    <string name="viagens">As minhas viagens</string>
     <string name="add">Adicionar</string>
     <string name="classificacao">Classificação</string>
     <string name="local">Localização</string>
     <string name="tipo">Tipo</string>
     <string name="voltar">Voltar</string>
     <string name="continuar">Continuar</string>
+    <string name="definicoes">Definições</string>
+    <string name="perfil">Perfil</string>
+    <string name="logout">Terminar Sessão</string>
+
 </resources>
