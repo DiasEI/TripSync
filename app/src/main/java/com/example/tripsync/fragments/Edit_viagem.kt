@@ -14,11 +14,14 @@ import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.tripsync.R
 import com.example.tripsync.api.ApiClient
+import com.example.tripsync.api.Trip
 import com.example.tripsync.api.User
-import com.example.tripsync.api
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Locale
+
 
 
 class Edit_viagem: Fragment() {
@@ -89,9 +92,17 @@ class Edit_viagem: Fragment() {
                             et_descricao.setText(it.descricao)
                             et_cidade.setText(it.cidade)
                             et_pais.setText(it.pais)
-                            et_inicio.setText(it.data_inicio)
-                            et_fim.setText(it.data_fim)
-                            et_custos.setText(it.custos)
+
+                            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) // Adjust the date format as needed
+                            val startDateString = dateFormat.format(it.data_inicio)
+                            val endDateString = dateFormat.format(it.data_fim)
+
+                            et_inicio.setText(startDateString)
+                            et_fim.setText(endDateString)
+
+                            val custosString = it.custos.toString()
+                            et_custos.setText(custosString)
+
                             et_class.setText(it.classificacao)
                         }
                     } else {
@@ -120,24 +131,6 @@ class Edit_viagem: Fragment() {
         val clasificacao = et_class.text.toString()
         val foto: ByteArray? = null
 
-        if (userId != null && token != null) {
-            val user = User(userId!!, titulo, descricao, cidade, pais, data_inicio, data_fim, custos, clasificacao,  foto)
 
-            ApiClient.apiService.updateUserDetails(userId!!, user).enqueue(object : Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(requireContext(), "Trip updated successfully", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(requireContext(), "Failed to update Trip", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
-        } else {
-            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
-        }
     }
 }

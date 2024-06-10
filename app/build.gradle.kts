@@ -46,11 +46,13 @@ dependencies {
     // Retrofit dependencies
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation(libs.androidx.ui.text.android)
 
     // Test dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
 
 
 }

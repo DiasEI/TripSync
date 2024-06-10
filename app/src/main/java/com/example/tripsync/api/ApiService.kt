@@ -6,6 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import java.util.Date
 
 data class User(
     val id_utilizador: String,
@@ -31,6 +32,16 @@ data class RegisterResponse(
     val message: String
 )
 
+data class Trip(
+    val titulo: String,
+    val descricao: String,
+    val cidade: String,
+    val pais: String,
+    val data_inicio: Date,
+    val data_fim: Date,
+    val custos: Float,
+    val classificacao: String
+    )
 interface ApiService {
     @POST("api/v2/auth/signin")
     fun login(@Body request: LoginRequest): Call<LoginResponse>
@@ -43,4 +54,7 @@ interface ApiService {
 
     @PUT("api/v2/users/{id}")
     fun updateUserDetails(@Path("id") userId: String, @Body user: User): Call<User>
+
+    @GET("api/v2/viagens/{id}")
+    fun getTripDetails(@Path("id") viagemId: String): Call<Trip>
 }
