@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-06-06T14:20:57.873837400Z">
+        <DropdownSelection timestamp="2024-06-06T14:28:45.211439600Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\ana_l\.android\avd\Pixel_6_API_UpsideDownCake.avd" />

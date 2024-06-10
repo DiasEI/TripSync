@@ -38,5 +38,6 @@
     <string name="definicoes">Definições</string>
     <string name="perfil">Perfil</string>
     <string name="logout">Terminar Sessão</string>
+    <string name="editViagem">Editar Viagem</string>
 
 </resources>
