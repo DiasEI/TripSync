@@ -57,4 +57,6 @@ interface ApiService {
 
     @GET("api/v2/viagens/{id}")
     fun getTripDetails(@Path("id") viagemId: String): Call<Trip>
+
+
 }

@@ -37,11 +37,8 @@ class Adicionar: Fragment() {
             transaction.replace(R.id.frame_layout, Map())
             transaction.commit()
         }
-
-
+        return view
     }
-
-
 
 }
 
