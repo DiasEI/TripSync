@@ -15,7 +15,7 @@ import com.example.tripsync.adapters.AsMinhasViagensAdapter
 import com.example.tripsync.api.ApiClient
 import com.example.tripsync.api.Trip
 import com.example.tripsync.api.User
-import com.example.tripsync.fragments.placeholder.PlaceholderContent
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
