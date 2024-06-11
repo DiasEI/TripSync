@@ -1,58 +1,350 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     >
 
-
     <LinearLayout
-        android:id="@+id/ll_1"
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginBottom="3dp"
-        android:paddingVertical="60dp">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/vector__1_"
-            android:paddingRight="20dp"
-            android:layout_marginLeft="40dp"
-            />
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/vector__1_" />
 
         <TextView
-            android:id="@+id/def"
-            android:layout_width="wrap_content"
-            android:layout_height="39dp"
-            android:layout_marginTop="-5dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/viagem"
+            android:id="@+id/roomTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="/room_title"
             android:textColor="@color/def"
-            android:textSize="28dp"
-            />
-
+            android:gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
+    <ScrollView
+        android:id="@+id/sv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/linearLayout1">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ViewFlipper
+                android:id="@+id/imagemA"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp">
+
+                <TextView
+                    android:id="@+id/roomTitle2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="10"
+                    android:textColor="@color/def"
+                    android:textSize="24sp"
+                    android:text="@string/room_title"/>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/location"
+                    android:layout_marginRight="5dp"/>
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Rua XPTO - Viana do Castelo"
+                    android:textSize="12sp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/def"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp">
+
+                <TextView
+                    android:id="@+id/data_inicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Início: 24/05/2023"
+                    android:textColor="@color/def"
+                    android:textSize="18sp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp">
+
+                <TextView
+                    android:id="@+id/type"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Fim: 30/05/2023"
+                    android:textColor="@color/def"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/rectangle_130"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Visitar"
+
+                    android:textColor="@color/def"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="5dp">
+
+                    <LinearLayout
+                        android:id="@+id/LlArCondicionado"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="15dp"
+                        android:paddingVertical="5dp">
 
 
 
 
+                    </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/LlWifi"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="15dp"
+                        android:paddingVertical="5dp">
 
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btWifi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/blue"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_icon_blue"
+                            app:icon="@drawable/baseline_wifi_24"
+                            app:iconGravity="textStart"
+                            app:iconPadding="0dp" />
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/wi_fi"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="16sp"
+                            android:layout_marginStart="15dp"
+                            />
 
+                    </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/LlMaquinaLavar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="15dp"
+                        android:paddingVertical="5dp">
 
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btWashMachine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/blue"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_icon_blue"
+                            app:icon="@drawable/baseline_water_drop_24"
+                            app:iconGravity="textStart"
+                            app:iconPadding="0dp" />
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/maquina_lavar"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="16sp"
+                            android:layout_marginStart="15dp"
+                            />
 
+                    </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/LlMobilia"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginHorizontal="15dp"
+                        android:paddingVertical="5dp">
 
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btMobilia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/blue"
+                            android:gravity="center"
+                            android:background="@drawable/rounded_icon_blue"
+                            app:icon="@drawable/baseline_bed_24"
+                            app:iconGravity="textStart"
+                            app:iconPadding="0dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/mobilia"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="16sp"
+                            android:layout_marginStart="15dp"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                style="@style/Divider.Horizontal"
+                android:layout_margin="15dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/descricao"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="14dp"
+                    android:layout_margin="10dp"
+                    android:text="Descriçao do Quarto"
+                    android:textColor="@color/primaryColor"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginHorizontal="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contacto"
+                    android:textSize="16dp"
+                    android:textColor="@color/primaryColor"/>
+
+                <TextView
+                    android:id="@+id/contacto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="900000000"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center_vertical"
+                    android:textSize="14dp"
+                    android:textColor="@color/primaryColor"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="10dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/btnCall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:text="@string/call"
+                    android:backgroundTint="@color/primaryColor"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

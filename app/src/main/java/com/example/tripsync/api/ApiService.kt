@@ -6,6 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import java.util.ArrayList
 import java.util.Date
 
 data class User(
@@ -58,5 +59,7 @@ interface ApiService {
     @GET("api/v2/viagens/{id}")
     fun getTripDetails(@Path("id") viagemId: String): Call<Trip>
 
+    @GET("api/v2/viagens/byUser/{id}")
+    fun getViagensByUser(@Path("id") userId: String): Call<ArrayList<Trip>>
 
 }
