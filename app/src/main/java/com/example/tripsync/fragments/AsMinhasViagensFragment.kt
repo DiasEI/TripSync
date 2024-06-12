@@ -71,13 +71,9 @@ class AsMinhasViagensFragment : Fragment() {
             ApiClient.apiService.getViagensByUser(userId!!).enqueue(object : Callback<ArrayList<Trip>> {
                 override fun onResponse(call: Call<ArrayList<Trip>>, response: Response<ArrayList<Trip>>) {
                     if (response.isSuccessful) {
-                        var trips = ArrayList<Trip>()
-
-                        // METER O CONTGEUDO NA LISTA
-
-
+                        val trips = response.body() ?: ArrayList()
                         loadAdapter(trips)
-                    } else {
+                    }  else {
                         Toast.makeText(requireContext(), "Failed to load trip", Toast.LENGTH_SHORT).show()
                     }
                 }
