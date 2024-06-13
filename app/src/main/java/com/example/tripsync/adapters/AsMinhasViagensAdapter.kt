@@ -7,7 +7,6 @@ import android.widget.TextView
 import com.example.tripsync.api.Trip
 import com.example.tripsync.databinding.FragmentItemAsMinhasViagensBinding
 
-import com.example.tripsync.fragments.placeholder.PlaceholderContent.PlaceholderItem
 
 /**
  * [RecyclerView.Adapter] that can display a [PlaceholderItem].

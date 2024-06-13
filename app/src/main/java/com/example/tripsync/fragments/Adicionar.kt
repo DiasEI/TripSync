@@ -34,7 +34,7 @@ class Adicionar: Fragment() {
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
 
-            transaction.replace(R.id.frame_layout, Map())
+            transaction.replace(R.id.frame_layout, MapsFragment())
             transaction.commit()
         }
         return view
