@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.tripsync.fragments.AddViagem
+import com.example.tripsync.fragments.Adicionar
 import com.example.tripsync.fragments.Home
 import com.example.tripsync.fragments.Perfil
 import com.example.tripsync.fragments.Settings
@@ -31,6 +33,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.perf -> {
                     loadFragment(Perfil())
+                    true
+                }
+                R.id.add -> {
+                    loadFragment(AddViagem())
                     true
                 }
                 R.id.settings -> {

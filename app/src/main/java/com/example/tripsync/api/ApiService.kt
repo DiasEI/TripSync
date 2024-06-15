@@ -7,7 +7,6 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 import java.util.ArrayList
-import java.util.Date
 
 data class User(
     val id_utilizador: String,
@@ -38,10 +37,11 @@ data class Trip(
     val descricao: String,
     val cidade: String,
     val pais: String,
-    val data_inicio: Date,
-    val data_fim: Date,
+    val data_inicio: String,
+    val data_fim: String,
     val custos: Float,
-    val classificacao: String
+    val classificacao: Int,
+    val id_utilizador: String
     )
 interface ApiService {
     @POST("api/v2/auth/signin")
@@ -61,5 +61,8 @@ interface ApiService {
 
     @GET("api/v2/viagens/byUser/{id}")
     fun getViagensByUser(@Path("id") userId: String): Call<ArrayList<Trip>>
+
+    @POST("api/v2/viagens/create")
+    fun adicionarViagem(@Body trip: Trip): Call<Void>
 
 }
