@@ -1,8 +1,13 @@
 package com.example.tripsync.fragments
 
+import android.app.Activity
 import androidx.fragment.app.Fragment
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +17,16 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
+import com.bumptech.glide.Glide
 import com.example.tripsync.R
 import com.example.tripsync.api.ApiClient
 import com.example.tripsync.api.Trip
-import com.example.tripsync.api.User
+import com.google.ai.client.generativeai.common.RequestOptions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -34,12 +42,15 @@ class Edit_viagem: Fragment() {
     private lateinit var et_fim: EditText
     private lateinit var et_custos: EditText
     private lateinit var et_class: EditText
+    private var selectedImageUri: Uri? = null
     private lateinit var btn_ficheiros: ImageView
     private lateinit var btn_visitar: Button
     private lateinit var btnGuardar: Button
     private lateinit var btnVoltar: ImageButton
     private var userId: String? = null
+    private var tripId: String? = null
     private var token: String? = null
+    private val PICK_IMAGE_REQUEST = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,8 +71,12 @@ class Edit_viagem: Fragment() {
         btnGuardar = view.findViewById(R.id.btnGuardar)
         btnVoltar = view.findViewById(R.id.btnVoltar)
 
+
         loadViagem()
 
+        btn_ficheiros.setOnClickListener {
+            openGallery()
+        }
         btnGuardar.setOnClickListener {
             guardar()
         }
@@ -75,6 +90,20 @@ class Edit_viagem: Fragment() {
         }
 
         return view
+    }
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
+            selectedImageUri = data.data
+            Glide.with(this)
+                .load(selectedImageUri)
+                .into(btn_ficheiros)
+        }
     }
 
     private fun loadViagem() {
@@ -104,6 +133,26 @@ class Edit_viagem: Fragment() {
                             et_custos.setText(custosString)
 
                             et_class.setText(it.classificacao)
+
+                            it.foto?.let { foto ->
+                                when (foto) {
+                                    is ByteArray -> {
+                                        Glide.with(this@Edit_viagem)
+                                            .load(foto)
+                                            .into(btn_ficheiros)
+                                    }
+                                    is Map<*, *> -> {
+                                        val fotoData =
+                                            (foto["data"] as List<Number>).map { it.toByte() }
+                                                .toByteArray()
+                                        Glide.with(this@Edit_viagem)
+                                            .load(fotoData)
+                                            .into(btn_ficheiros)
+                                    }
+                                    else -> {
+                                    }
+                                }
+                            }
                         }
                     } else {
                         Toast.makeText(requireContext(), "Failed to load trip details", Toast.LENGTH_SHORT).show()
@@ -129,8 +178,38 @@ class Edit_viagem: Fragment() {
         val data_fim = et_fim.text.toString()
         val custos = et_custos.text.toString()
         val clasificacao = et_class.text.toString()
-        val foto: ByteArray? = null
+        val fotoData: String? = null
 
+        if (selectedImageUri != null) {
+            try {
+                val inputStream: InputStream? = requireContext().contentResolver.openInputStream(selectedImageUri!!)
+                val photoBytes = inputStream?.readBytes()
+                val base64Image = Base64.encodeToString(photoBytes, Base64.DEFAULT)
+                fotoData = "data:image/jpeg;base64,$base64Image"
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        if (userId != null && token != null) {
+            val trip = Trip( titulo, descricao, cidade, pais, data_inicio, data_fim, custos, clasificacao, fotoData, userId!!,)
+
+            ApiClient.apiService.updateTripDetails(userId!!, trip).enqueue(object : Callback<Trip> {
+                override fun onResponse(call: Call<Trip>, response: Response<Trip>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(requireContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show()
+                        loadViagem()
+                    } else {
+                        Toast.makeText(requireContext(), "Failed to update profile", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                override fun onFailure(call: Call<Trip>, t: Throwable) {
+                    Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        } else {
+            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
+        }
 
     }
 }
