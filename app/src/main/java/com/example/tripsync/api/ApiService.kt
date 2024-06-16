@@ -60,7 +60,7 @@ interface ApiService {
     fun getTripDetails(@Path("id") viagemId: String): Call<Trip>
 
     @GET("api/v2/viagens/byUser/{id}")
-    fun getViagensByUser(@Path("id") userId: String): Call<ArrayList<Trip>>
+    fun getViagensByUser(@Path("id") userId: String): Call<List<Trip>>
 
     @POST("api/v2/viagens/create")
     fun adicionarViagem(@Body trip: Trip): Call<Void>

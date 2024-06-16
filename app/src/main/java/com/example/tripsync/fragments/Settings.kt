@@ -46,8 +46,11 @@ class Settings: Fragment() {
         }
 
         viagensButton.setOnClickListener {
-            val intent = Intent(requireContext(), ViagensActivity::class.java)
-            startActivity(intent)
+            val fragmentManager = requireActivity().supportFragmentManager
+            val transaction = fragmentManager.beginTransaction()
+
+            transaction.replace(R.id.frame_layout, ListViagens())
+            transaction.commit()
         }
 
         offButton.setOnClickListener {
