@@ -176,8 +176,8 @@ class Edit_viagem: Fragment() {
         val pais = et_pais.text.toString()
         val data_inicio = et_inicio.text.toString()
         val data_fim = et_fim.text.toString()
-        val custos = et_custos.text.toString()
-        val clasificacao = et_class.text.toString()
+        val custos = et_custos.text.toString().toFloat()
+        val classificacao = et_class.text.toString().toInt()
         val fotoData: String? = null
 
         if (selectedImageUri != null) {
@@ -192,7 +192,7 @@ class Edit_viagem: Fragment() {
         }
 
         if (userId != null && token != null) {
-            val trip = Trip( titulo, descricao, cidade, pais, data_inicio, data_fim, custos, clasificacao, fotoData, userId!!,)
+            val trip = Trip( titulo, descricao, cidade, pais, data_inicio, data_fim, custos, classificacao, fotoData, userId!!,)
 
             ApiClient.apiService.updateTripDetails(userId!!, trip).enqueue(object : Callback<Trip> {
                 override fun onResponse(call: Call<Trip>, response: Response<Trip>) {
