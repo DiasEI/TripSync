@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="15dp"
-            android:background="@color/white"
+            android:background="@color/none"
             android:paddingEnd="35dp"
             android:src="@drawable/vector__1_" />
 
@@ -30,21 +30,19 @@
             android:fontFamily="@font/nunito_bold"
             android:textSize="30sp"
             android:textStyle="bold"/>
-
     </LinearLayout>
 
     <ImageView
         android:id="@+id/profile_photo"
         android:layout_below="@+id/ll_1"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:contentDescription="@string/foto"
-        android:focusable="true"
-        android:clickable="true"
         android:scaleType="centerCrop"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:onClick="openImageSelectionPopup"/>
+        android:background="@drawable/circle_shape"
+        android:padding="2dp"/>
 
     <TextView
         android:id="@+id/tv_username"
@@ -73,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_username"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="2dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
         android:text="@string/nome"
@@ -101,7 +99,7 @@
         android:text="@string/tel"
         android:textColor="@color/def"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/et_tel"
@@ -124,7 +122,7 @@
         android:text="@string/email"
         android:textColor="@color/def"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/et_email"
@@ -147,7 +145,7 @@
         android:text="@string/pass"
         android:textColor="@color/def"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/et_password"
@@ -158,9 +156,19 @@
         android:paddingVertical="5dp"
         android:layout_centerHorizontal="true"
         android:radius="10dp"
-        android:inputType="textPassword"
-        />
+        android:inputType="textPassword"/>
 
+    <Button
+        android:id="@+id/btnphoto"
+        android:gravity="center"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:backgroundTint="@color/def"
+        android:text="@string/editFoto"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/et_password"
+        android:layout_marginTop="30dp"/>
     <Button
         android:id="@+id/btnGuarda"
         android:gravity="center"
@@ -170,7 +178,7 @@
         android:backgroundTint="@color/def"
         android:text="@string/guardar"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/et_password"
-        android:layout_marginTop="40dp"/>
+        android:layout_below="@+id/btnphoto"
+        android:layout_marginTop="15dp"/>
 
 </RelativeLayout>

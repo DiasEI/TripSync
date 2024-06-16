@@ -1,8 +1,13 @@
 package com.example.tripsync.fragments
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +22,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
-import android.util.Log
+import java.util.*
+import android.widget.ImageView
 
 class AddViagem : Fragment() {
 
@@ -32,9 +36,13 @@ class AddViagem : Fragment() {
     private lateinit var etCustos: EditText
     private lateinit var etClassificacao: EditText
     private lateinit var btnCriar: Button
+    private lateinit var btnSelecionarFoto: Button
+    private lateinit var previewImagem: ImageView
 
     private var userId: String? = null
     private var token: String? = null
+
+    private var selectedImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +60,8 @@ class AddViagem : Fragment() {
         etCustos = view.findViewById(R.id.et_custos)
         etClassificacao = view.findViewById(R.id.et_class)
         btnCriar = view.findViewById(R.id.btn_criar_viagem)
+        btnSelecionarFoto = view.findViewById(R.id.btn_selecionar_foto)
+        previewImagem = view.findViewById(R.id.preview_imagem)
 
         // Get user ID and token from shared preferences
         val sharedPreferences = requireActivity().getSharedPreferences("ProfilePrefs", Context.MODE_PRIVATE)
@@ -73,7 +83,12 @@ class AddViagem : Fragment() {
             showDatePickerDialog { date -> etDataFim.setText(date) }
         }
 
-        // Set onClickListener for the button
+        // Set onClickListener for Selecionar Foto button
+        btnSelecionarFoto.setOnClickListener {
+            selecionarFoto()
+        }
+
+        // Set onClickListener for the Criar Viagem button
         btnCriar.setOnClickListener {
             adicionarViagem()
         }
@@ -95,6 +110,23 @@ class AddViagem : Fragment() {
         }, year, month, day)
 
         datePickerDialog.show()
+    }
+
+    private fun selecionarFoto() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, REQUEST_IMAGE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
+            selectedImageUri = data.data
+            previewImagem.visibility = View.VISIBLE
+            previewImagem.setImageURI(selectedImageUri)
+            Toast.makeText(activity, "Imagem selecionada com sucesso", Toast.LENGTH_SHORT).show()
+            Log.d("AddViagem", "Imagem selecionada: $selectedImageUri")
+        }
     }
 
     private fun adicionarViagem() {
@@ -126,7 +158,7 @@ class AddViagem : Fragment() {
             return
         }
 
-        val trip = Trip(titulo, descricao, cidade, pais, dataInicioDate, dataFimDate, custos, classificacao, userId!!)
+        val trip = Trip(titulo, descricao, cidade, pais, dataInicioDate, dataFimDate, custos, classificacao, userId!!, selectedImageUri.toString())
 
         ApiClient.apiService.adicionarViagem(trip).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
@@ -146,5 +178,9 @@ class AddViagem : Fragment() {
                 Log.e("AddViagem", "Erro de rede", t)
             }
         })
+    }
+
+    companion object {
+        private const val REQUEST_IMAGE = 100
     }
 }

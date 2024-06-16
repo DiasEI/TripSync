@@ -24,7 +24,7 @@
     <string name="tel">Telemóvel</string>
     <string name="nome">Nome</string>
     <string name="foto">Fotografia</string>
-    <string name="select">Selecionar Ficheiro</string>
+    <string name="selectFoto">Selecionar Foto</string>
     <string name="edit">Editar Perfil</string>
     <string name="email" translatable="false">Email</string>
     <string name="intro2">Adicione e partilhe as suas viagens connosco!</string>
@@ -40,5 +40,9 @@
     <string name="logout">Terminar Sessão</string>
     <string name="editViagem">Editar Viagem</string>
     <string name="addFicheiros">Selecionar ficheiros</string>
+    <string name="editFoto">Alterar Foto</string>
+    <string name="userExists">Nome de utilizador já existe!</string>
+    <string name="errorPhoto">Erro ao carregar fotografia!</string>
+    <string name="select">Select</string>
 
 </resources>

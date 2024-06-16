@@ -235,25 +235,31 @@
                 android:layout_marginVertical="5dp"/>
 
             <Button
-                android:id="@+id/btn_ficheiros"
+                android:id="@+id/btn_selecionar_foto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/addFicheiros"
+                android:text="Selecionar Foto"
                 android:layout_below="@id/tv_imagem"
                 android:layout_centerHorizontal="true"
                 android:layout_marginVertical="5dp"
-                android:onClick="selecionarFicheiros"
-                android:backgroundTint="@color/def"
-
+                android:onClick="selecionarFoto"
+                android:backgroundTint="@color/def"/>
                 />
 
+            <ImageView
+                android:id="@+id/preview_imagem"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@id/btn_selecionar_foto"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
 
             <TextView
-                android:id="@+id/tv_visitar"
+                android:id="@+id/iv_imagem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Visitar"
-                android:layout_below="@+id/btn_ficheiros"
+                android:layout_below="@+id/preview_imagem"
                 android:textColor="@color/def"
                 android:fontFamily="@font/nunito_bold"
 
@@ -265,7 +271,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/add"
-                android:layout_below="@id/tv_visitar"
+                android:layout_below="@id/iv_imagem"
                 android:layout_centerHorizontal="true"
                 android:layout_marginVertical="5dp"
                 android:onClick="selecionarFicheiros"

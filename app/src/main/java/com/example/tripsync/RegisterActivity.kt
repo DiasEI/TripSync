@@ -3,8 +3,13 @@ package com.example.tripsync
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -75,8 +80,11 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val photoByteArray = selectedPhotoUri?.let { getByteArrayFromUri(it) }
-            register(username, password, email, telemovel, nome, photoByteArray)
+            val photoByteArray = selectedPhotoUri?.let { uri ->
+                getByteArrayFromUri(uri)
+            }
+
+            register(username, email, nome, telemovel, password, photoByteArray)
         }
 
         val btnVoltar: Button = findViewById(R.id.btn_voltar)
@@ -105,38 +113,41 @@ class RegisterActivity : AppCompatActivity() {
     private fun getByteArrayFromUri(uri: Uri): ByteArray? {
         return try {
             val inputStream = contentResolver.openInputStream(uri)
-            val bytes = ByteArrayOutputStream()
-            inputStream?.use { input ->
-                val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
-                var bytesRead = input.read(buffer)
-                while (bytesRead != -1) {
-                    bytes.write(buffer, 0, bytesRead)
-                    bytesRead = input.read(buffer)
-                }
-                bytes.toByteArray()
-            }
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            val resizedBitmap = resizeBitmap(bitmap, MAX_DIMENSION)
+            val outputStream = ByteArrayOutputStream()
+            resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream)
+            outputStream.toByteArray()
         } catch (e: IOException) {
+            e.printStackTrace()
             null
         }
     }
 
-    private fun register(username: String, password: String, email: String, telemovel: Int, nome: String, photoByteArray: ByteArray?) {
-        val registerRequest = RegisterRequest(username, password, email, telemovel, nome, photoByteArray)
+    private fun resizeBitmap(bitmap: Bitmap, maxDimension: Int): Bitmap {
+        val width = bitmap.width
+        val height = bitmap.height
+        val scale = maxDimension.toFloat() / Math.max(width, height)
+        val matrix = Matrix()
+        matrix.postScale(scale, scale)
+        return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, false)
+    }
+
+    private fun register(username: String, email: String, nome: String, telemovel: Int, password: String, photoByteArray: ByteArray?) {
+        val base64Photo: String? = photoByteArray?.let {
+            val base64Image = Base64.encodeToString(it, Base64.DEFAULT)
+            "data:image/jpeg;base64,$base64Image"
+        }
+        val registerRequest = RegisterRequest(username, password, email, telemovel, nome, base64Photo)
         val call = ApiClient.apiService.register(registerRequest)
 
         call.enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
-
                 if (response.isSuccessful) {
-                    val registerResponse = response.body()
-                    if (registerResponse?.success == true) {
-                        Toast.makeText(this@RegisterActivity, getString(R.string.registertrue), Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Toast.makeText(this@RegisterActivity, registerResponse?.message ?: getString(R.string.registerfalse), Toast.LENGTH_SHORT).show()
-                    }
+                    Toast.makeText(this@RegisterActivity, getString(R.string.registertrue), Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 } else {
                     Toast.makeText(this@RegisterActivity, getString(R.string.registerfalse), Toast.LENGTH_SHORT).show()
                 }
@@ -151,6 +162,6 @@ class RegisterActivity : AppCompatActivity() {
 
     companion object {
         private const val REQUEST_CODE_SELECT_IMAGE = 100
-        private const val DEFAULT_BUFFER_SIZE = 1024
+        private const val MAX_DIMENSION = 1024
     }
 }

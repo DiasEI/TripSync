@@ -54,12 +54,17 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.recyclerview)
     implementation(libs.play.services.maps)
+    implementation(libs.common)
 
     // Test dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 
-
+    // HTTP logging
+    implementation(libs.okhttp)
+    implementation(libs.okhttp3.logging.interceptor)
 }
