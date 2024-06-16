@@ -16,12 +16,10 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.bumptech.glide.Glide
 import com.example.tripsync.R
 import com.example.tripsync.api.ApiClient
 import com.example.tripsync.api.Trip
-import com.google.ai.client.generativeai.common.RequestOptions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,7 +30,7 @@ import java.util.Locale
 
 
 
-class Edit_viagem: Fragment() {
+class EditViagem: Fragment() {
 
     private lateinit var et_titulo: EditText
     private lateinit var et_descricao: EditText
@@ -137,7 +135,7 @@ class Edit_viagem: Fragment() {
                             it.foto?.let { foto ->
                                 when (foto) {
                                     is ByteArray -> {
-                                        Glide.with(this@Edit_viagem)
+                                        Glide.with(this@EditViagem)
                                             .load(foto)
                                             .into(btn_ficheiros)
                                     }
@@ -145,7 +143,7 @@ class Edit_viagem: Fragment() {
                                         val fotoData =
                                             (foto["data"] as List<Number>).map { it.toByte() }
                                                 .toByteArray()
-                                        Glide.with(this@Edit_viagem)
+                                        Glide.with(this@EditViagem)
                                             .load(fotoData)
                                             .into(btn_ficheiros)
                                     }
@@ -185,7 +183,7 @@ class Edit_viagem: Fragment() {
                 val inputStream: InputStream? = requireContext().contentResolver.openInputStream(selectedImageUri!!)
                 val photoBytes = inputStream?.readBytes()
                 val base64Image = Base64.encodeToString(photoBytes, Base64.DEFAULT)
-                fotoData = "data:image/jpeg;base64,$base64Image"
+                val fotoData = "data:image/jpeg;base64,$base64Image"
             } catch (e: IOException) {
                 e.printStackTrace()
             }
