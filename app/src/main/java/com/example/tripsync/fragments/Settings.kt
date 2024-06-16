@@ -49,7 +49,7 @@ class Settings: Fragment() {
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
 
-            transaction.replace(R.id.frame_layout, EditViagem())
+            transaction.replace(R.id.frame_layout, ListViagens())
             transaction.commit()
         }
 
