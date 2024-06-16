@@ -4,5 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="def">#46A8A7</color>
     <color name="edit_text">#EDEEF1</color>
+    <color name="none">#00FFFFFF</color>
 
 </resources>

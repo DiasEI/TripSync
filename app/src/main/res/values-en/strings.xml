@@ -9,7 +9,7 @@
     <string name="networkerror">Network error:</string>
     <string name="registertrue">Registered successfully!</string>
     <string name="registerfalse">Error while registering!</string>
-    <string name="select">Select File</string>
+    <string name="selectFoto">Select Photo</string>
 
     <!-- User Data Tags -->
     <string name="nome">Name</string>
@@ -46,5 +46,8 @@
     <string name="logout">Logout</string>
     <string name="editViagem">Edit Trip</string>
     <string name="addFicheiros">Select Files</string>
+    <string name="editFoto">Change Foto</string>
+    <string name="userExists">Username already exists</string>
+    <string name="errorPhoto">Invalid image</string>
 
 </resources>

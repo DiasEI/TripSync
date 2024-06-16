@@ -60,6 +60,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 
-
+    // HTTP logging
+    implementation(libs.okhttp)
+    implementation(libs.okhttp3.logging.interceptor)
 }
