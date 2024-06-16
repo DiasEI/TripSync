@@ -20,6 +20,7 @@ class Settings: Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -28,28 +29,28 @@ class Settings: Fragment() {
         val viagensButton = view.findViewById<ImageButton>(R.id.viagensButtton)
         val offButton = view.findViewById<ImageButton>(R.id.offButtton)
 
-        //Set click listeners
+        // Set click listeners
         perfilButton.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
-
             transaction.replace(R.id.frame_layout, Perfil())
+            transaction.addToBackStack(null) // Adiciona à pilha de back stack
             transaction.commit()
         }
 
         linguagemButton.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
-
             transaction.replace(R.id.frame_layout, ChangeLanguage())
+            transaction.addToBackStack(null) // Adiciona à pilha de back stack
             transaction.commit()
         }
 
         viagensButton.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
-
             transaction.replace(R.id.frame_layout, ListViagens())
+            transaction.addToBackStack(null) // Adiciona à pilha de back stack
             transaction.commit()
         }
 
