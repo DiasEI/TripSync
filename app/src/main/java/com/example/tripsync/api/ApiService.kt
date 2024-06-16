@@ -46,8 +46,8 @@ data class Trip(
     val data_fim: String,
     val custos: Float,
     val classificacao: Int,
-    val id_utilizador: String,
-    val foto: String
+    val foto: Any? = null,
+    val id_utilizador: String
     )
 
 //Requests
@@ -72,5 +72,8 @@ interface ApiService {
 
     @POST("api/v2/viagens/create")
     fun adicionarViagem(@Body trip: Trip): Call<Void>
+
+    @PUT("api/v2/viagens/update/{id}")
+    fun updateTripDetails(@Path("id") tripId: String, @Body trip: Trip): Call<Trip>
 
 }
