@@ -43,5 +43,6 @@
     <string name="editFoto">Alterar Foto</string>
     <string name="userExists">Nome de utilizador já existe!</string>
     <string name="errorPhoto">Erro ao carregar fotografia!</string>
+    <string name="select">Select</string>
 
 </resources>

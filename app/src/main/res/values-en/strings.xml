@@ -49,5 +49,6 @@
     <string name="editFoto">Change Foto</string>
     <string name="userExists">Username already exists</string>
     <string name="errorPhoto">Invalid image</string>
+    <string name="select">Select</string>
 
 </resources>
