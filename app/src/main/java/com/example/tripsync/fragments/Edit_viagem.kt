@@ -197,10 +197,10 @@ class Edit_viagem: Fragment() {
             ApiClient.apiService.updateTripDetails(userId!!, trip).enqueue(object : Callback<Trip> {
                 override fun onResponse(call: Call<Trip>, response: Response<Trip>) {
                     if (response.isSuccessful) {
-                        Toast.makeText(requireContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Trip updated successfully", Toast.LENGTH_SHORT).show()
                         loadViagem()
                     } else {
-                        Toast.makeText(requireContext(), "Failed to update profile", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Failed to update Trip", Toast.LENGTH_SHORT).show()
                     }
                 }
                 override fun onFailure(call: Call<Trip>, t: Throwable) {
