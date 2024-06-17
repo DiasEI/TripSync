@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.tripsync.R
@@ -23,7 +24,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
-import android.widget.ImageView
 
 class AddViagem : Fragment() {
 
@@ -38,6 +38,7 @@ class AddViagem : Fragment() {
     private lateinit var btnCriar: Button
     private lateinit var btnSelecionarFoto: Button
     private lateinit var previewImagem: ImageView
+    private lateinit var btnVisitar: Button
 
     private var userId: String? = null
     private var token: String? = null
@@ -62,6 +63,7 @@ class AddViagem : Fragment() {
         btnCriar = view.findViewById(R.id.btn_criar_viagem)
         btnSelecionarFoto = view.findViewById(R.id.btn_selecionar_foto)
         previewImagem = view.findViewById(R.id.preview_imagem)
+        btnVisitar = view.findViewById(R.id.btn_visitar)
 
         // Get user ID and token from shared preferences
         val sharedPreferences = requireActivity().getSharedPreferences("ProfilePrefs", Context.MODE_PRIVATE)
@@ -73,6 +75,9 @@ class AddViagem : Fragment() {
             Log.e("AddViagem", "Usuário não autenticado")
             return view
         }
+
+        // Adicione logs para verificar o userId e o token
+        Log.d("AddViagem", "User ID: $userId, Token: $token")
 
         // Set onClickListener for date fields
         etDataInicio.setOnClickListener {
@@ -91,6 +96,15 @@ class AddViagem : Fragment() {
         // Set onClickListener for the Criar Viagem button
         btnCriar.setOnClickListener {
             adicionarViagem()
+        }
+
+        // Set onClickListener for the Visitar button
+        btnVisitar.setOnClickListener {
+            // Intent to open Google Maps
+            val gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(etCidade.text.toString() + ", " + etPais.text.toString()))
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            startActivity(mapIntent)
         }
 
         return view
@@ -150,22 +164,37 @@ class AddViagem : Fragment() {
         val dataFimDate: String
 
         try {
-            dataInicioDate = dateFormat.format(SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dataInicio))
-            dataFimDate = dateFormat.format(SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dataFim))
+            dataInicioDate = dateFormat.format(SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dataInicio)!!)
+            dataFimDate = dateFormat.format(SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dataFim)!!)
         } catch (e: Exception) {
             Toast.makeText(activity, "Formato de data inválido", Toast.LENGTH_SHORT).show()
             Log.e("AddViagem", "Formato de data inválido", e)
             return
         }
 
-        val trip = Trip(titulo, descricao, cidade, pais, dataInicioDate, dataFimDate, custos, classificacao, userId!!, selectedImageUri.toString())
+        val trip = Trip(
+            titulo = titulo,
+            descricao = descricao,
+            cidade = cidade,
+            pais = pais,
+            data_inicio = dataInicioDate,
+            data_fim = dataFimDate,
+            custos = custos,
+            classificacao = classificacao,
+            id_utilizador = userId!!,
+            foto = selectedImageUri.toString()
+        )
+
+        // Adicione logs para verificar os dados da viagem antes de enviar a solicitação
+        Log.d("AddViagem", "Trip data: $trip")
 
         ApiClient.apiService.adicionarViagem(trip).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     Toast.makeText(activity, "Viagem adicionada com sucesso", Toast.LENGTH_SHORT).show()
                     Log.d("AddViagem", "Viagem adicionada com sucesso")
-                    // Optionally, navigate back or clear fields
+                    // Clear fields on success
+                    clearFields()
                 } else {
                     val errorBody = response.errorBody()?.string()
                     Toast.makeText(activity, "Erro ao adicionar viagem: $errorBody", Toast.LENGTH_SHORT).show()
@@ -178,6 +207,19 @@ class AddViagem : Fragment() {
                 Log.e("AddViagem", "Erro de rede", t)
             }
         })
+    }
+
+    private fun clearFields() {
+        etTitulo.text.clear()
+        etDescricao.text.clear()
+        etCidade.text.clear()
+        etPais.text.clear()
+        etDataInicio.text.clear()
+        etDataFim.text.clear()
+        etCustos.text.clear()
+        etClassificacao.text.clear()
+        previewImagem.visibility = View.GONE
+        selectedImageUri = null
     }
 
     companion object {
