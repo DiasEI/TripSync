@@ -10,9 +10,11 @@ import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.example.tripsync.LoginActivity
 import com.example.tripsync.R
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.net.PlacesClient
 
 class Home : Fragment() {
-
+    private lateinit var placesClient: PlacesClient
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,6 +28,9 @@ class Home : Fragment() {
             startActivity(intent)
             activity?.finish()
         }
+
+        Places.initialize(requireContext(), getString(R.string.google_maps_key))
+        placesClient = Places.createClient(requireContext())
 
 
         val search: EditText = view.findViewById(R.id.search)

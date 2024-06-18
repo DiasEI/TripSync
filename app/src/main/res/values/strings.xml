@@ -44,5 +44,6 @@
     <string name="userExists">Nome de utilizador já existe!</string>
     <string name="errorPhoto">Erro ao carregar fotografia!</string>
     <string name="select">Select</string>
+    <string name="google_maps_key">AIzaSyDbIpBonapnUrDQM5xlJqPk0Okub_LBgI4</string>
 
 </resources>
