@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.play.services.maps)
     implementation(libs.common)
+    implementation(libs.places)
 
     // Test dependencies
     testImplementation(libs.junit)

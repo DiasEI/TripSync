@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.example.tripsync.LoginActivity
@@ -26,6 +27,31 @@ class Home : Fragment() {
             activity?.finish()
         }
 
+
+        val search: EditText = view.findViewById(R.id.search)
+        val btnSearch: ImageButton = view.findViewById(R.id.btnSearch)
+
+        btnSearch.setOnClickListener {
+            val query = search.text.toString().trim()
+            if (query.isNotEmpty()) {
+                performSearch(query)
+            }
+        }
+
+
         return view
+
+
     }
+
+    private fun performSearch(query: String) {
+        // Implement your search logic here
+        // For example, you could filter a list of items, make a network request, etc.
+        // Here's a simple example that prints the query to the log
+        println("Search query: $query")
+        // You can replace the println with your actual search logic
+    }
+
+
+
 }

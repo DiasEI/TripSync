@@ -131,22 +131,36 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:orientation="vertical">
+                    android:paddingTop="10dp">
 
-                    <!-- Recycler View -->
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginHorizontal="15dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:listitem="@layout/announce_line"
-                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/rec1"
+                            android:layout_width="125dp"
+                            android:layout_height="125dp"
+                            android:contentDescription="@string/foto"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/circle_shape"
+                            android:padding="2dp"
+                            android:layout_marginEnd="10dp"/>
+
+                        <ImageView
+                            android:id="@+id/rec2"
+                            android:layout_width="125dp"
+                            android:layout_height="125dp"
+                            android:contentDescription="@string/foto"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/circle_shape"
+                            android:padding="2dp"/>
+
+                    </LinearLayout>
+
                 </FrameLayout>
 
             </LinearLayout>
@@ -165,23 +179,38 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:orientation="vertical">
+                android:paddingTop="10dp">
 
-                <!-- Recycler View -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginHorizontal="15dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:listitem="@layout/announce_line"
-                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/foto1"
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        android:contentDescription="@string/foto"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/circle_shape"
+                        android:padding="2dp"
+                        android:layout_marginEnd="10dp"/>
+
+                    <ImageView
+                        android:id="@+id/foto2"
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        android:contentDescription="@string/foto"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/circle_shape"
+                        android:padding="2dp"/>
+
+                </LinearLayout>
+
             </FrameLayout>
+
         </LinearLayout>
     </ScrollView>
 
