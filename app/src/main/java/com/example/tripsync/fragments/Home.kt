@@ -3,6 +3,7 @@ package com.example.tripsync.fragments
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,10 +12,16 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
+import com.bumptech.glide.load.resource.bitmap.TransformationUtils
+import com.bumptech.glide.request.RequestOptions
 import com.example.tripsync.LoginActivity
 import com.example.tripsync.R
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -27,6 +34,7 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import java.security.MessageDigest
 
 class Home : Fragment() {
     private lateinit var placesClient: PlacesClient
@@ -37,6 +45,12 @@ class Home : Fragment() {
         R.id.rec1, R.id.rec2, R.id.rec3, R.id.rec4,
         R.id.rec5, R.id.rec6, R.id.rec7, R.id.rec8
     )
+    private val textViewIds = listOf(
+        R.id.rec1_text, R.id.rec2_text, R.id.rec3_text, R.id.rec4_text,
+        R.id.rec5_text, R.id.rec6_text, R.id.rec7_text, R.id.rec8_text
+    )
+
+    private lateinit var imageViews: List<ImageView>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,10 +58,11 @@ class Home : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
+        // Initialize ImageViews
+        imageViews = imageViewIds.map { id -> view.findViewById<ImageView>(id) }
         // Initialize Places SDK
         Places.initialize(requireContext(), getString(R.string.MAPS_API_KEY))
         placesClient = Places.createClient(requireContext())
-
         // Initialize FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
@@ -70,8 +85,9 @@ class Home : Fragment() {
             }
         }
 
-        return view
+        setupImageViewClickListeners()
 
+        return view
     }
 
     private fun getCurrentPlace() {
@@ -89,16 +105,18 @@ class Home : Fragment() {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             placesClient.findCurrentPlace(request).addOnSuccessListener { response: FindCurrentPlaceResponse ->
-                for (placeLikelihood in response.placeLikelihoods) {
+                for ((index, placeLikelihood) in response.placeLikelihoods.withIndex()) {
+                    if (index >= imageViewIds.size) break
+
                     val place = placeLikelihood.place
+                    // Load photos into the respective ImageViews and set place names to TextViews
+                    val imageView = view?.findViewById<ImageView>(imageViewIds[index])
+                    val textView = view?.findViewById<TextView>(textViewIds[index])
 
-                    // Display place information
-                    Log.i("Location", "Place '${place.name}' has likelihood: ${placeLikelihood.likelihood}")
-
-                    loadPlacePhotos(place)
+                    imageView?.let { loadPlacePhotos(place, it) }
+                    textView?.text = place.name
                 }
             }.addOnFailureListener { exception: Exception ->
-                Log.e("Location", "Failed to get current place: ${exception.message}")
                 Snackbar.make(requireView(), "Failed to get current place", Snackbar.LENGTH_SHORT).show()
             }
         } else {
@@ -106,17 +124,12 @@ class Home : Fragment() {
         }
     }
 
-    private fun loadPlacePhotos(place: Place) {
+    private fun loadPlacePhotos(place: Place, imageView: ImageView) {
         val photoMetadataList = place.photoMetadatas
 
         photoMetadataList?.let {
-            for (i in it.indices) {
-                if (i >= imageViewIds.size) {
-                    break
-                }
-
-                val imageView = view?.findViewById<ImageView>(imageViewIds[i])
-                val photoMetadata = photoMetadataList[i]
+            if (it.isNotEmpty()) {
+                val photoMetadata = it.first()
 
                 photoMetadata?.let { metadata ->
                     val photoRequest = FetchPhotoRequest.builder(metadata)
@@ -126,13 +139,63 @@ class Home : Fragment() {
 
                     placesClient.fetchPhoto(photoRequest).addOnSuccessListener { fetchPhotoResponse ->
                         val bitmap = fetchPhotoResponse.bitmap
-                        imageView?.setImageBitmap(bitmap)
+
+                        Glide.with(this)
+                            .asBitmap()
+                            .load(bitmap)
+                            .apply(RequestOptions.bitmapTransform(CircleCropTransformation()))
+                            .into(imageView)
                     }.addOnFailureListener { exception ->
                         Snackbar.make(requireView(), "Failed to fetch photo for place", Snackbar.LENGTH_SHORT).show()
-                        Log.e("PhotoFetch", "Error fetching photo: $exception")
                     }
                 }
             }
+        }
+    }
+
+    private fun setupImageViewClickListeners() {
+        for (imageViewId in imageViewIds) {
+            view?.findViewById<ImageView>(imageViewId)?.setOnClickListener {
+                // Determine which image view was clicked based on imageViewId
+                val clickedIndex = imageViewIds.indexOf(imageViewId)
+                // Navigate to MapsFragment and pass current location data
+                navigateToMapsFragment()
+            }
+        }
+    }
+
+    private fun navigateToMapsFragment() {
+        // Check if location permission is granted
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            // Get last known location
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                location?.let {
+                    val bundle = Bundle().apply {
+                        putDouble("latitude", it.latitude)
+                        putDouble("longitude", it.longitude)
+                    }
+                    val mapsFragment = MapsFragment()
+                    mapsFragment.arguments = bundle
+
+                    // Navigate to MapsFragment
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.frame_layout, mapsFragment)
+                        .addToBackStack(null)
+                        .commit()
+                } ?: run {
+                    Snackbar.make(requireView(), "Unable to retrieve location", Snackbar.LENGTH_SHORT).show()
+                }
+            }.addOnFailureListener { exception ->
+                Log.e("Location", "Error getting location: ${exception.message}")
+                Snackbar.make(requireView(), "Error getting location", Snackbar.LENGTH_SHORT).show()
+            }
+        } else {
+            // Request location permission
+            requestLocationPermission()
         }
     }
 
@@ -184,4 +247,19 @@ class Home : Fragment() {
         // You can replace the println with your actual search logic
     }
 
+}
+
+class CircleCropTransformation : BitmapTransformation() {
+    override fun updateDiskCacheKey(messageDigest: MessageDigest) {
+        messageDigest.update("circle crop transformation".toByteArray())
+    }
+
+    override fun transform(
+        pool: BitmapPool,
+        toTransform: Bitmap,
+        outWidth: Int,
+        outHeight: Int
+    ): Bitmap {
+        return TransformationUtils.circleCrop(pool, toTransform, outWidth, outHeight)
+    }
 }

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:orientation="horizontal"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp">
 
         <ImageButton
@@ -107,7 +107,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:text="@string/rec"
-                android:padding="10dp"
                 android:textColor="@color/def"
                 android:fontFamily="@font/nunitobold"
                 android:layout_marginTop="10dp"
@@ -118,7 +117,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="15dp">
 
                 <FrameLayout
@@ -133,24 +131,62 @@
                         android:gravity="center"
                         android:layout_gravity="center">
 
-                        <ImageView
-                            android:id="@+id/rec1"
-                            android:layout_width="125dp"
-                            android:layout_height="125dp"
-                            android:contentDescription="@string/foto"
-                            android:scaleType="centerCrop"
-                            android:background="@drawable/circle_shape"
-                            android:padding="2dp"
-                            android:layout_marginEnd="10dp"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginEnd="50dp">
 
-                        <ImageView
-                            android:id="@+id/rec2"
-                            android:layout_width="125dp"
-                            android:layout_height="125dp"
-                            android:contentDescription="@string/foto"
-                            android:scaleType="centerCrop"
-                            android:background="@drawable/circle_shape"
-                            android:padding="2dp"/>
+                            <ImageView
+                                android:id="@+id/rec1"
+                                android:layout_width="125dp"
+                                android:layout_height="125dp"
+                                android:contentDescription="@string/foto"
+                                android:scaleType="centerCrop"
+                                android:background="@drawable/circle_shape"
+                                android:padding="2dp"
+                                android:clickable="true"
+                                android:focusable="true"/>
+
+                            <TextView
+                                android:id="@+id/rec1_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="125dp"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:text="@string/local"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/rec2"
+                                android:layout_width="125dp"
+                                android:layout_height="125dp"
+                                android:contentDescription="@string/foto"
+                                android:scaleType="centerCrop"
+                                android:background="@drawable/circle_shape"
+                                android:padding="2dp" />
+
+                            <TextView
+                                android:id="@+id/rec2_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="125dp"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:text="@string/local"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"/>
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -163,8 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginHorizontal="15dp">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -178,24 +213,60 @@
                         android:gravity="center"
                         android:layout_gravity="center">
 
-                        <ImageView
-                            android:id="@+id/rec3"
-                            android:layout_width="125dp"
-                            android:layout_height="125dp"
-                            android:contentDescription="@string/foto"
-                            android:scaleType="centerCrop"
-                            android:background="@drawable/circle_shape"
-                            android:padding="2dp"
-                            android:layout_marginEnd="10dp"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginEnd="50dp">
 
-                        <ImageView
-                            android:id="@+id/rec4"
-                            android:layout_width="125dp"
-                            android:layout_height="125dp"
-                            android:contentDescription="@string/foto"
-                            android:scaleType="centerCrop"
-                            android:background="@drawable/circle_shape"
-                            android:padding="2dp"/>
+                            <ImageView
+                                android:id="@+id/rec3"
+                                android:layout_width="125dp"
+                                android:layout_height="125dp"
+                                android:contentDescription="@string/foto"
+                                android:scaleType="centerCrop"
+                                android:background="@drawable/circle_shape"
+                                android:padding="2dp" />
+
+                            <TextView
+                                android:id="@+id/rec3_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="125dp"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:text="@string/local"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/rec4"
+                                android:layout_width="125dp"
+                                android:layout_height="125dp"
+                                android:contentDescription="@string/foto"
+                                android:scaleType="centerCrop"
+                                android:background="@drawable/circle_shape"
+                                android:padding="2dp" />
+
+                            <TextView
+                                android:id="@+id/rec4_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="125dp"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:text="@string/local"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"/>
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -233,24 +304,60 @@
                         android:gravity="center"
                         android:layout_gravity="center">
 
-                        <ImageView
-                            android:id="@+id/rec5"
-                            android:layout_width="125dp"
-                            android:layout_height="125dp"
-                            android:contentDescription="@string/foto"
-                            android:scaleType="centerCrop"
-                            android:background="@drawable/circle_shape"
-                            android:padding="2dp"
-                            android:layout_marginEnd="10dp"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginEnd="50dp">
 
-                        <ImageView
-                            android:id="@+id/rec6"
-                            android:layout_width="125dp"
-                            android:layout_height="125dp"
-                            android:contentDescription="@string/foto"
-                            android:scaleType="centerCrop"
-                            android:background="@drawable/circle_shape"
-                            android:padding="2dp"/>
+                            <ImageView
+                                android:id="@+id/rec5"
+                                android:layout_width="125dp"
+                                android:layout_height="125dp"
+                                android:contentDescription="@string/foto"
+                                android:scaleType="centerCrop"
+                                android:background="@drawable/circle_shape"
+                                android:padding="2dp" />
+
+                            <TextView
+                                android:id="@+id/rec5_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="125dp"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:text="@string/local"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/rec6"
+                                android:layout_width="125dp"
+                                android:layout_height="125dp"
+                                android:contentDescription="@string/foto"
+                                android:scaleType="centerCrop"
+                                android:background="@drawable/circle_shape"
+                                android:padding="2dp" />
+
+                            <TextView
+                                android:id="@+id/rec6_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="125dp"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:text="@string/local"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"/>
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -278,24 +385,60 @@
                         android:gravity="center"
                         android:layout_gravity="center">
 
-                        <ImageView
-                            android:id="@+id/rec7"
-                            android:layout_width="125dp"
-                            android:layout_height="125dp"
-                            android:contentDescription="@string/foto"
-                            android:scaleType="centerCrop"
-                            android:background="@drawable/circle_shape"
-                            android:padding="2dp"
-                            android:layout_marginEnd="10dp"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginEnd="50dp">
 
-                        <ImageView
-                            android:id="@+id/rec8"
-                            android:layout_width="125dp"
-                            android:layout_height="125dp"
-                            android:contentDescription="@string/foto"
-                            android:scaleType="centerCrop"
-                            android:background="@drawable/circle_shape"
-                            android:padding="2dp"/>
+                            <ImageView
+                                android:id="@+id/rec7"
+                                android:layout_width="125dp"
+                                android:layout_height="125dp"
+                                android:contentDescription="@string/foto"
+                                android:scaleType="centerCrop"
+                                android:background="@drawable/circle_shape"
+                                android:padding="2dp" />
+
+                            <TextView
+                                android:id="@+id/rec7_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="125dp"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:text="@string/local"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/rec8"
+                                android:layout_width="125dp"
+                                android:layout_height="125dp"
+                                android:contentDescription="@string/foto"
+                                android:scaleType="centerCrop"
+                                android:background="@drawable/circle_shape"
+                                android:padding="2dp" />
+
+                            <TextView
+                                android:id="@+id/rec8_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="125dp"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:text="@string/local"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"/>
+                        </LinearLayout>
 
                     </LinearLayout>
 
