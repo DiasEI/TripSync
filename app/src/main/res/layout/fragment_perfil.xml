@@ -30,6 +30,7 @@
             android:fontFamily="@font/nunito_bold"
             android:textSize="30sp"
             android:textStyle="bold"/>
+
     </LinearLayout>
 
     <ImageView

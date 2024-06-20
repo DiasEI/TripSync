@@ -7,7 +7,7 @@
         android:id="@+id/ll_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingVertical="60dp"
+        android:paddingVertical="30dp"
         android:layout_centerHorizontal="true">
 
         <TextView
@@ -27,7 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_1"
-        android:layout_marginTop="18dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
         android:text="@string/username"
@@ -37,8 +36,9 @@
 
     <EditText
         android:id="@+id/et_login_username"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="95dp"
         android:layout_below="@+id/tv_username"
         android:background="@drawable/round_edit_text"
         android:paddingVertical="5dp"
@@ -49,7 +49,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_login_username"
-        android:layout_marginTop="25dp"
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"
         android:text="@string/pass"
@@ -59,8 +58,9 @@
 
     <EditText
         android:id="@+id/et_login_password"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="95dp"
         android:layout_below="@+id/tv_password"
         android:background="@drawable/round_edit_text"
         android:paddingVertical="5dp"
@@ -73,22 +73,23 @@
         android:gravity="center"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
         android:backgroundTint="@color/def"
         android:text="@string/entrar"
-        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
         android:layout_below="@+id/et_login_password"
-        android:layout_marginTop="70dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"/>
 
     <Button
         android:id="@+id/btnConta"
+        android:gravity="center"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:backgroundTint="@color/def"
         android:text="@string/criaruser"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:layout_below="@+id/btnLogin"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"/>
 
 </RelativeLayout>

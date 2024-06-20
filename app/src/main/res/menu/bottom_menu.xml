@@ -5,7 +5,7 @@
         android:icon="@drawable/home"/>
     <item
         android:id="@+id/perf"
-        android:icon="@drawable/group"/>
+        android:icon="@drawable/plane"/>
     <item
         android:id="@+id/add"
         android:icon="@drawable/add"/>

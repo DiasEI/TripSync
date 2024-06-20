@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/title"
@@ -37,7 +35,6 @@
         android:paddingVertical="5dp"
         android:layout_centerHorizontal="true"/>
 
-
     <TextView
         android:id="@+id/tv_password"
         android:layout_width="wrap_content"
@@ -50,7 +47,6 @@
         android:paddingHorizontal="50dp"
         android:paddingVertical="10dp"/>
 
-
     <EditText
         android:id="@+id/et_password"
         android:layout_width="320dp"
@@ -60,7 +56,7 @@
         android:paddingVertical="5dp"
         android:layout_centerHorizontal="true"
         android:radius="10dp"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"/>
 
     <TextView
         android:id="@+id/tv_email"
@@ -83,7 +79,7 @@
         android:background="@drawable/round_edit_text"
         android:inputType="textEmailAddress"
         android:paddingVertical="5dp"
-        android:radius="10dp" />
+        android:radius="10dp"/>
 
     <TextView
         android:id="@+id/tv_tele"
@@ -105,7 +101,7 @@
         android:background="@drawable/round_edit_text"
         android:paddingVertical="5dp"
         android:layout_centerHorizontal="true"
-        android:radius="10dp" />
+        android:radius="10dp"/>
 
     <TextView
         android:id="@+id/tv_nome"
@@ -127,7 +123,7 @@
         android:background="@drawable/round_edit_text"
         android:paddingVertical="5dp"
         android:layout_centerHorizontal="true"
-        android:radius="10dp" />
+        android:radius="10dp"/>
 
     <TextView
         android:id="@+id/tv_foto"
@@ -161,8 +157,7 @@
         android:text="@string/criaruser"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_foto"
-        android:layout_marginTop="40dp"
-        />
+        android:layout_marginTop="40dp"/>
 
     <Button
         android:id="@+id/btn_voltar"
@@ -174,7 +169,6 @@
         android:text="@string/voltar"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_criar_conta"
-        android:layout_marginTop="20dp"
-        />
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

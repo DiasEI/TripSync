@@ -31,10 +31,6 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(Home())
                     true
                 }
-                R.id.perf -> {
-                    loadFragment(Perfil())
-                    true
-                }
                 R.id.add -> {
                     loadFragment(AddViagem())
                     true
