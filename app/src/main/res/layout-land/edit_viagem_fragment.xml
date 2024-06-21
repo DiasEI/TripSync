@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="25dp"
+        android:paddingTop="25dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageButton
+                    android:id="@+id/btnVoltar"
+                    android:background="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/vector__1_"
+                    android:paddingRight="30dp" />
+
+                <TextView
+                    android:id="@+id/tv_add_viagem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/editViagem"
+                    android:textColor="@color/def"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="190dp"
+                    android:fontFamily="@font/nunito_bold" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/plane"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"/>
+
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/tv_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Título"
+                android:layout_below="@+id/ll_header"
+                android:textColor="@color/def"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="16dp"
+                android:paddingTop="15dp"
+                android:layout_marginVertical="10dp"/>
+
+
+            <EditText
+                android:id="@+id/et_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_titulo"
+                android:layout_marginVertical="5dp"
+                android:layout_marginTop="-9dp"
+                android:background="@drawable/round_edit_text"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="5dp" />
+
+            <TextView
+                android:id="@+id/tv_descricao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descrição"
+                android:layout_below="@+id/et_titulo"
+                android:textColor="@color/def"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="16dp"
+                android:layout_marginVertical="5dp"/>
+
+            <EditText
+                android:id="@+id/et_descricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_descricao"
+                android:background="@drawable/round_edit_text"
+                android:paddingVertical="5dp"
+                android:layout_marginVertical="5dp"
+                android:paddingHorizontal="15dp"/>
+
+            <TextView
+                android:id="@+id/tv_cidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cidade"
+                android:fontFamily="@font/nunito_bold"
+                android:layout_below="@+id/et_descricao"
+                android:textColor="@color/def"
+                android:textSize="16dp"
+                android:layout_marginVertical="5dp"/>
+
+            <EditText
+                android:id="@+id/et_cidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_cidade"
+                android:background="@drawable/round_edit_text"
+                android:paddingVertical="5dp" />
+
+            <TextView
+                android:id="@+id/tv_pais"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="País"
+                android:layout_below="@+id/et_cidade"
+                android:textColor="@color/def"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="16dp"
+                android:layout_marginVertical="5dp"/>
+
+            <EditText
+                android:id="@+id/et_pais"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_pais"
+                android:background="@drawable/round_edit_text"
+                android:paddingVertical="5dp"
+                android:layout_marginVertical="5dp"
+                android:paddingHorizontal="15dp"/>
+
+            <TextView
+                android:id="@+id/tv_inicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data Início"
+                android:layout_below="@+id/et_pais"
+                android:textColor="@color/def"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="16dp"
+                android:layout_marginVertical="5dp"/>
+
+            <EditText
+                android:id="@+id/et_inicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_inicio"
+                android:background="@drawable/round_edit_text"
+                android:paddingVertical="5dp"
+                android:layout_marginVertical="5dp"
+                android:paddingHorizontal="15dp"/>
+
+            <TextView
+                android:id="@+id/tv_fim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data Fim"
+                android:layout_below="@+id/et_inicio"
+                android:textColor="@color/def"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="16dp"
+                android:layout_marginVertical="5dp"/>
+
+            <EditText
+                android:id="@+id/et_fim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_fim"
+                android:background="@drawable/round_edit_text"
+                android:paddingVertical="5dp"
+                android:layout_marginVertical="5dp"
+                android:paddingHorizontal="15dp"/>
+
+
+            <TextView
+                android:id="@+id/tv_custos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Custos"
+                android:layout_below="@+id/et_fim"
+                android:textColor="@color/def"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="16dp"
+                android:layout_marginVertical="5dp"/>
+            <EditText
+                android:id="@+id/et_custos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_custos"
+                android:background="@drawable/round_edit_text"
+                android:paddingVertical="5dp"
+                android:layout_marginVertical="5dp"
+                android:paddingHorizontal="15dp"/>
+
+            <TextView
+                android:id="@+id/tv_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Classificação"
+                android:layout_below="@id/et_custos"
+                android:textColor="@color/def"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="16dp"
+                android:layout_marginVertical="5dp"/>
+
+            <EditText
+                android:id="@+id/et_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_class"
+                android:background="@drawable/round_edit_text"
+                android:paddingVertical="5dp"
+                android:layout_marginVertical="5dp"
+                android:paddingHorizontal="15dp"/>
+
+
+
+            <TextView
+                android:id="@+id/tv_imagem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Imagem"
+                android:layout_below="@+id/et_class"
+                android:textColor="@color/def"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="16dp"
+                android:layout_marginVertical="5dp"/>
+
+            <Button
+                android:id="@+id/btn_ficheiros"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selecionar Ficheiros"
+                android:layout_below="@id/tv_imagem"
+                android:layout_centerHorizontal="true"
+                android:layout_marginVertical="5dp"
+                android:onClick="selecionarFicheiros"
+                android:backgroundTint="@color/def"
+
+                />
+
+
+            <TextView
+                android:id="@+id/tv_visitar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Visitar"
+                android:layout_below="@+id/btn_ficheiros"
+                android:textColor="@color/def"
+                android:fontFamily="@font/nunito_bold"
+
+                android:textSize="16dp"
+                android:layout_marginVertical="5dp"/>
+
+            <Button
+                android:id="@+id/btn_visitar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Adicionar"
+                android:layout_below="@id/tv_visitar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginVertical="5dp"
+                android:onClick="selecionarFicheiros"
+                android:backgroundTint="@color/def"
+
+                />
+
+
+
+            <Button
+                android:id="@+id/btnGuardar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Criar"
+                android:layout_below="@+id/btn_visitar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginVertical="10dp"
+                android:backgroundTint="@color/def"/>
+
+
+        </RelativeLayout>
+
+
+
+
+    </ScrollView>
+
+</RelativeLayout>

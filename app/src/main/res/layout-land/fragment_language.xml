@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:paddingVertical="60dp">
+
+        <ImageButton
+            android:id="@+id/btn_voltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/voltar"
+            android:src="@drawable/vector__1_"
+            android:paddingEnd="30dp"
+            android:layout_marginStart="40dp"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/def"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginTop="-5dp"
+            android:layout_marginLeft="190dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/linguagem"
+            android:textColor="@color/def"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/languageRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp">
+
+        <RadioButton
+            android:id="@+id/ptRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/def"
+            android:textSize="16sp"
+            android:text="@string/pt"/>
+
+        <RadioButton
+            android:id="@+id/enRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/def"
+            android:textSize="16sp"
+            android:text="@string/ing"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_guard"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:textSize="16sp"
+        android:backgroundTint="@color/def"
+        android:text="@string/guardar"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
