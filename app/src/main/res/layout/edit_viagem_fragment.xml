@@ -48,11 +48,7 @@
                     android:src="@drawable/plane"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"/>
-
-
             </LinearLayout>
-
-
 
             <TextView
                 android:id="@+id/tv_titulo"
@@ -65,7 +61,6 @@
                 android:textSize="16dp"
                 android:paddingTop="15dp"
                 android:layout_marginVertical="10dp"/>
-
 
             <EditText
                 android:id="@+id/et_titulo"
@@ -181,7 +176,6 @@
                 android:layout_marginVertical="5dp"
                 android:paddingHorizontal="15dp"/>
 
-
             <TextView
                 android:id="@+id/tv_custos"
                 android:layout_width="wrap_content"
@@ -192,6 +186,7 @@
                 android:fontFamily="@font/nunito_bold"
                 android:textSize="16dp"
                 android:layout_marginVertical="5dp"/>
+
             <EditText
                 android:id="@+id/et_custos"
                 android:layout_width="match_parent"
@@ -223,8 +218,6 @@
                 android:layout_marginVertical="5dp"
                 android:paddingHorizontal="15dp"/>
 
-
-
             <TextView
                 android:id="@+id/tv_imagem"
                 android:layout_width="match_parent"
@@ -245,37 +238,18 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginVertical="5dp"
                 android:onClick="selecionarFicheiros"
-                android:backgroundTint="@color/def"
-
-                />
-
-
-            <TextView
-                android:id="@+id/tv_visitar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Visitar"
-                android:layout_below="@+id/btn_ficheiros"
-                android:textColor="@color/def"
-                android:fontFamily="@font/nunito_bold"
-
-                android:textSize="16dp"
-                android:layout_marginVertical="5dp"/>
+                android:backgroundTint="@color/def"/>
 
             <Button
                 android:id="@+id/btn_visitar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Adicionar"
-                android:layout_below="@id/tv_visitar"
+                android:layout_below="@id/btn_ficheiros"
                 android:layout_centerHorizontal="true"
                 android:layout_marginVertical="5dp"
                 android:onClick="selecionarFicheiros"
-                android:backgroundTint="@color/def"
-
-                />
-
-
+                android:backgroundTint="@color/def"/>
 
             <Button
                 android:id="@+id/btnGuardar"
@@ -286,13 +260,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginVertical="10dp"
                 android:backgroundTint="@color/def"/>
-
-
         </RelativeLayout>
-
-
-
-
     </ScrollView>
-
 </RelativeLayout>

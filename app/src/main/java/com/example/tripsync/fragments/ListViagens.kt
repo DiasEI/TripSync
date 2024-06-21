@@ -36,7 +36,7 @@ class ListViagens : Fragment() {
 
         recyclerView = view.findViewById(R.id.list)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        viagemAdapter = ViagemAdapter(viagens)
+        viagemAdapter = ViagemAdapter(viagens, requireActivity(), this::deleteViagem, this::editViagem)
         recyclerView.adapter = viagemAdapter
 
         // Adicionar OnClickListener para o botão de voltar
@@ -77,5 +77,39 @@ class ListViagens : Fragment() {
                 Toast.makeText(activity, "Erro de rede: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun deleteViagem(viagem: Trip) {
+        ApiClient.apiService.deleteViagem(viagem.id_viagem).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    viagens.remove(viagem)
+                    viagemAdapter.notifyDataSetChanged()
+                    Toast.makeText(activity, "Viagem deletada com sucesso", Toast.LENGTH_SHORT).show()
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Toast.makeText(activity, "Erro ao deletar viagem: $errorBody", Toast.LENGTH_SHORT).show()
+                    Log.e("ListViagens", "Erro ao deletar viagem: $errorBody")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(activity, "Erro de rede: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("ListViagens", "Erro de rede", t)
+            }
+        })
+    }
+
+    private fun editViagem(viagem: Trip) {
+        val fragment = EditViagem()
+        val args = Bundle()
+        args.putString("tripId", viagem.id_viagem)
+        fragment.arguments = args
+
+        val fragmentManager = requireActivity().supportFragmentManager
+        fragmentManager.beginTransaction()
+            .replace(R.id.frame_layout, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
