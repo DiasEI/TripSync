@@ -63,6 +63,7 @@
     <string name="criar">Create</string>
     <string name="selectFotos">Select Photos</string>
     <string name="atualizar">Update</string>
+    <string name="add_image">Add Image</string>
 
 
 </resources>

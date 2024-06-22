@@ -36,18 +36,14 @@ class ListViagens : Fragment() {
 
         recyclerView = view.findViewById(R.id.list)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        viagemAdapter = ViagemAdapter(viagens, requireActivity(), this::deleteViagem, this::editViagem)
+        viagemAdapter = ViagemAdapter(viagens, requireActivity(), this::deleteViagem, this::editViagem, this::viewViagem)
         recyclerView.adapter = viagemAdapter
 
-        // Adicionar OnClickListener para o botão de voltar
         val backButton = view.findViewById<ImageButton>(R.id.backBtn)
         backButton.setOnClickListener {
-            Log.d("ListViagens", "Back button clicked") // Adicionando log para depuração
-            // Ação de voltar
             requireActivity().supportFragmentManager.popBackStack()
         }
 
-        // Get user ID and token from shared preferences
         val sharedPreferences = requireActivity().getSharedPreferences("ProfilePrefs", Context.MODE_PRIVATE)
         userId = sharedPreferences.getString("userId", null)
         token = sharedPreferences.getString("token", null)
@@ -104,8 +100,19 @@ class ListViagens : Fragment() {
         val fragment = EditViagem()
         val args = Bundle()
         args.putString("tripId", viagem.id_viagem)
-        // Log do tripId
-        Log.d("ListViagens", "Editing trip with ID: ${viagem.id_viagem}")
+        fragment.arguments = args
+
+        val fragmentManager = requireActivity().supportFragmentManager
+        fragmentManager.beginTransaction()
+            .replace(R.id.frame_layout, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun viewViagem(viagem: Trip) {
+        val fragment = Viagens()
+        val args = Bundle()
+        args.putString("tripId", viagem.id_viagem)
         fragment.arguments = args
 
         val fragmentManager = requireActivity().supportFragmentManager

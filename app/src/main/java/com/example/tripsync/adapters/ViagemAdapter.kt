@@ -9,13 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tripsync.R
 import com.example.tripsync.api.Trip
-import com.example.tripsync.fragments.ListViagens
 
 class ViagemAdapter(
     private val viagens: List<Trip>,
     private val activity: Activity,
     private val deleteViagemCallback: (Trip) -> Unit,
-    private val editViagemCallback: (Trip) -> Unit
+    private val editViagemCallback: (Trip) -> Unit,
+    private val viewViagemCallback: (Trip) -> Unit // Add this parameter
 ) : RecyclerView.Adapter<ViagemAdapter.ViagemViewHolder>() {
 
     inner class ViagemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -32,6 +32,10 @@ class ViagemAdapter(
     override fun onBindViewHolder(holder: ViagemViewHolder, position: Int) {
         val viagem = viagens[position]
         holder.titulo.text = viagem.titulo
+
+        holder.titulo.setOnClickListener {
+            viewViagemCallback(viagem) // Handle item click
+        }
 
         holder.btnEdit.setOnClickListener {
             editViagemCallback(viagem)
