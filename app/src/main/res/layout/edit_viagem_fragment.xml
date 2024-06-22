@@ -213,17 +213,13 @@
                 android:textSize="16dp"
                 android:layout_marginVertical="5dp"/>
 
-            <EditText
+            <NumberPicker
                 android:id="@+id/et_class"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
                 android:layout_below="@id/tv_class"
-                android:background="@drawable/round_edit_text"
-                android:paddingVertical="5dp"
                 android:layout_marginVertical="5dp"
-                android:paddingHorizontal="15dp"/>
-
-
+                android:layout_marginStart="148dp"/>
 
             <TextView
                 android:id="@+id/tv_imagem"
