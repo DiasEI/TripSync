@@ -1,11 +1,14 @@
 package com.example.tripsync.fragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -16,7 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 class Viagens : Fragment() {
 
@@ -49,7 +52,17 @@ class Viagens : Fragment() {
         // Get tripId from arguments
         tripId = arguments?.getString("tripId")
 
-        loadViagem() // Load the trip details
+        loadViagem()
+
+        val btnDelete = view.findViewById<Button>(R.id.btn_delete)
+        btnDelete.setOnClickListener {
+            showDeleteConfirmationDialog()
+        }
+
+        val btnVoltar = view.findViewById<ImageButton>(R.id.btnVoltar)
+        btnVoltar.setOnClickListener{
+            activity?.supportFragmentManager?.popBackStack()
+        }
 
         return view
     }
@@ -69,7 +82,6 @@ class Viagens : Fragment() {
                             tvCidade.text = it.cidade
                             tvPais.text = it.pais
 
-                            // Convert the date strings to Date objects
                             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                             try {
                                 val dataInicioDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(it.data_inicio)
@@ -79,7 +91,6 @@ class Viagens : Fragment() {
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }
-
                             tvClassificacao.text = it.classificacao.toString()
                             tvCustos.text = it.custos.toString()
                         }
@@ -95,5 +106,40 @@ class Viagens : Fragment() {
         } else {
             Toast.makeText(requireContext(), "User not logged in or tripId missing", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun showDeleteConfirmationDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.confirmDel))
+            .setMessage(getString(R.string.confirmDelText))
+            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+                tripId?.let { deleteViagem(it) }
+                dialog.dismiss()
+            }
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    private fun deleteViagem(tripId: String) {
+        ApiClient.apiService.deleteViagem(tripId).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(activity, "Viagem apagada com sucesso", Toast.LENGTH_SHORT).show()
+                    activity?.supportFragmentManager?.popBackStack()
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Toast.makeText(activity, "Erro ao apagar viagem: $errorBody", Toast.LENGTH_SHORT).show()
+                    Log.e("Viagens", "Erro ao apagar viagem: $errorBody")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Toast.makeText(activity, "Erro de rede: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("Viagens", "Erro de rede", t)
+            }
+        })
     }
 }

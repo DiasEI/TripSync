@@ -49,6 +49,16 @@ data class Trip(
     val id_utilizador: String,
 )
 
+data class AddFotosRequest(
+    val id_viagem: String,
+    val foto: List<FotoData>
+)
+
+data class FotoData(
+    val id_foto: String?,
+    val imageData: Any? = null
+)
+
 //Requests
 interface ApiService {
     @POST("api/v2/auth/signin")
@@ -77,4 +87,7 @@ interface ApiService {
 
     @DELETE("api/v2/viagens/delete/{id_viagem}")
     fun deleteViagem(@Path("id_viagem") idViagem: String): Call<Void>
+
+    @POST("api/v2/viagens/fotos")
+    fun addFotos(@Body addFotosRequest: AddFotosRequest): Call<Void>
 }

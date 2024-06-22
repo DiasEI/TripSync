@@ -1,6 +1,5 @@
 package com.example.tripsync.adapters
 
-import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +11,18 @@ import com.example.tripsync.api.Trip
 
 class ViagemAdapter(
     private val viagens: List<Trip>,
-    private val activity: Activity,
-    private val deleteViagemCallback: (Trip) -> Unit,
-    private val editViagemCallback: (Trip) -> Unit,
-    private val viewViagemCallback: (Trip) -> Unit // Add this parameter
+    private val viewViagemCallback: (Trip) -> Unit,
+    private val addLocalCallback: (Trip) -> Unit,
+    private val addFotoCallback: (Trip) -> Unit
+
 ) : RecyclerView.Adapter<ViagemAdapter.ViagemViewHolder>() {
 
     inner class ViagemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titulo: TextView = itemView.findViewById(R.id.tv_titulo)
-        val btnEdit: ImageButton = itemView.findViewById(R.id.btn_edit)
-        val btnDelete: ImageButton = itemView.findViewById(R.id.btn_delete)
+        val local: TextView = itemView.findViewById(R.id.location)
+        val btnView: ImageButton = itemView.findViewById(R.id.btn_view)
+        val btnLocal: ImageButton = itemView.findViewById(R.id.btn_location)
+        val btnFoto: ImageButton = itemView.findViewById(R.id.btn_image)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViagemViewHolder {
@@ -33,16 +34,18 @@ class ViagemAdapter(
         val viagem = viagens[position]
         holder.titulo.text = viagem.titulo
 
-        holder.titulo.setOnClickListener {
-            viewViagemCallback(viagem) // Handle item click
+        "${viagem.pais}, ${viagem.cidade}".also { holder.local.text = it }
+
+        holder.btnView.setOnClickListener {
+            viewViagemCallback(viagem)
         }
 
-        holder.btnEdit.setOnClickListener {
-            editViagemCallback(viagem)
+        holder.btnLocal.setOnClickListener {
+            addLocalCallback(viagem)
         }
 
-        holder.btnDelete.setOnClickListener {
-            deleteViagemCallback(viagem)
+        holder.btnFoto.setOnClickListener {
+            addFotoCallback(viagem)
         }
     }
 

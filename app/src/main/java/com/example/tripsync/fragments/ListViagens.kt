@@ -2,11 +2,9 @@ package com.example.tripsync.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +22,6 @@ class ListViagens : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viagemAdapter: ViagemAdapter
     private var viagens: MutableList<Trip> = mutableListOf()
-
     private var userId: String? = null
     private var token: String? = null
 
@@ -36,13 +33,8 @@ class ListViagens : Fragment() {
 
         recyclerView = view.findViewById(R.id.list)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        viagemAdapter = ViagemAdapter(viagens, requireActivity(), this::deleteViagem, this::editViagem, this::viewViagem)
+        viagemAdapter = ViagemAdapter(viagens, this::viewViagem, this::addLocal ,this::addFoto)
         recyclerView.adapter = viagemAdapter
-
-        val backButton = view.findViewById<ImageButton>(R.id.backBtn)
-        backButton.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
-        }
 
         val sharedPreferences = requireActivity().getSharedPreferences("ProfilePrefs", Context.MODE_PRIVATE)
         userId = sharedPreferences.getString("userId", null)
@@ -75,29 +67,21 @@ class ListViagens : Fragment() {
         })
     }
 
-    private fun deleteViagem(viagem: Trip) {
-        ApiClient.apiService.deleteViagem(viagem.id_viagem).enqueue(object : Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                if (response.isSuccessful) {
-                    viagens.remove(viagem)
-                    viagemAdapter.notifyDataSetChanged()
-                    Toast.makeText(activity, "Viagem deletada com sucesso", Toast.LENGTH_SHORT).show()
-                } else {
-                    val errorBody = response.errorBody()?.string()
-                    Toast.makeText(activity, "Erro ao deletar viagem: $errorBody", Toast.LENGTH_SHORT).show()
-                    Log.e("ListViagens", "Erro ao deletar viagem: $errorBody")
-                }
-            }
+    private fun addLocal(viagem: Trip) {
+        val fragment = AddLocal()
+        val args = Bundle()
+        args.putString("tripId", viagem.id_viagem)
+        fragment.arguments = args
 
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                Toast.makeText(activity, "Erro de rede: ${t.message}", Toast.LENGTH_SHORT).show()
-                Log.e("ListViagens", "Erro de rede", t)
-            }
-        })
+        val fragmentManager = requireActivity().supportFragmentManager
+        fragmentManager.beginTransaction()
+            .replace(R.id.frame_layout, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
-    private fun editViagem(viagem: Trip) {
-        val fragment = EditViagem()
+    private fun addFoto(viagem: Trip) {
+        val fragment = AddFoto()
         val args = Bundle()
         args.putString("tripId", viagem.id_viagem)
         fragment.arguments = args
