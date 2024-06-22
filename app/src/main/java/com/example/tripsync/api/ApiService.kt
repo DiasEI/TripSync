@@ -46,8 +46,7 @@ data class Trip(
     val data_fim: String,
     val custos: Float,
     val classificacao: Int,
-    val foto: Any? = null,
-    val id_utilizador: String
+    val id_utilizador: String,
 )
 
 //Requests

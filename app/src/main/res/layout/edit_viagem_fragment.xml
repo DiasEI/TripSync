@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,43 +19,33 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical">
 
-                <ImageButton
-                    android:id="@+id/btnVoltar"
-                    android:background="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/vector__1_"
-                    android:paddingRight="30dp" />
-
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/plane"/>
+                
                 <TextView
                     android:id="@+id/tv_add_viagem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
                     android:text="@string/editViagem"
                     android:textColor="@color/def"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="40dp"
-                    android:fontFamily="@font/nunito_bold" />
+                    android:textSize="20sp"
+                    android:layout_marginStart="40dp"
+                    android:fontFamily="@font/nunito_bold"/>
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/plane"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="20dp"/>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_titulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Título"
+                android:text="@string/titulo"
                 android:layout_below="@+id/ll_header"
                 android:textColor="@color/def"
                 android:fontFamily="@font/nunito_bold"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:paddingTop="15dp"
                 android:layout_marginVertical="10dp"/>
 
@@ -75,11 +64,11 @@
                 android:id="@+id/tv_descricao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descrição"
+                android:text="@string/desc"
                 android:layout_below="@+id/et_titulo"
                 android:textColor="@color/def"
                 android:fontFamily="@font/nunito_bold"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:layout_marginVertical="5dp"/>
 
             <EditText
@@ -96,11 +85,11 @@
                 android:id="@+id/tv_cidade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cidade"
+                android:text="@string/city"
                 android:fontFamily="@font/nunito_bold"
                 android:layout_below="@+id/et_descricao"
                 android:textColor="@color/def"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:layout_marginVertical="5dp"/>
 
             <EditText
@@ -109,17 +98,19 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_cidade"
                 android:background="@drawable/round_edit_text"
-                android:paddingVertical="5dp" />
+                android:paddingVertical="5dp"
+                android:layout_marginVertical="5dp"
+                android:paddingHorizontal="15dp"/>
 
             <TextView
                 android:id="@+id/tv_pais"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="País"
+                android:text="@string/country"
                 android:layout_below="@+id/et_cidade"
                 android:textColor="@color/def"
                 android:fontFamily="@font/nunito_bold"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:layout_marginVertical="5dp"/>
 
             <EditText
@@ -136,11 +127,11 @@
                 android:id="@+id/tv_inicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data Início"
+                android:text="@string/dtinit"
                 android:layout_below="@+id/et_pais"
                 android:textColor="@color/def"
                 android:fontFamily="@font/nunito_bold"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:layout_marginVertical="5dp"/>
 
             <EditText
@@ -151,17 +142,18 @@
                 android:background="@drawable/round_edit_text"
                 android:paddingVertical="5dp"
                 android:layout_marginVertical="5dp"
-                android:paddingHorizontal="15dp"/>
+                android:paddingHorizontal="15dp"
+                android:inputType="date"/>
 
             <TextView
                 android:id="@+id/tv_fim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data Fim"
+                android:text="@string/dtend"
                 android:layout_below="@+id/et_inicio"
                 android:textColor="@color/def"
                 android:fontFamily="@font/nunito_bold"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:layout_marginVertical="5dp"/>
 
             <EditText
@@ -172,17 +164,18 @@
                 android:background="@drawable/round_edit_text"
                 android:paddingVertical="5dp"
                 android:layout_marginVertical="5dp"
-                android:paddingHorizontal="15dp"/>
+                android:paddingHorizontal="15dp"
+                android:inputType="date"/>
 
             <TextView
                 android:id="@+id/tv_custos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Custos"
+                android:text="@string/cost"
                 android:layout_below="@+id/et_fim"
                 android:textColor="@color/def"
                 android:fontFamily="@font/nunito_bold"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:layout_marginVertical="5dp"/>
 
             <EditText
@@ -199,11 +192,11 @@
                 android:id="@+id/tv_class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Classificação"
+                android:text="@string/classificacao"
                 android:layout_below="@id/et_custos"
                 android:textColor="@color/def"
                 android:fontFamily="@font/nunito_bold"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:layout_marginVertical="5dp"/>
 
             <NumberPicker
@@ -215,46 +208,12 @@
                 android:layout_marginStart="148dp"
                 android:paddingHorizontal="15dp"/>
 
-
-            <TextView
-                android:id="@+id/tv_imagem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Imagem"
-                android:layout_below="@+id/et_class"
-                android:textColor="@color/def"
-                android:fontFamily="@font/nunito_bold"
-                android:textSize="16dp"
-                android:layout_marginVertical="5dp"/>
-
-            <Button
-                android:id="@+id/btn_ficheiros"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Selecionar Ficheiros"
-                android:layout_below="@id/tv_imagem"
-                android:layout_centerHorizontal="true"
-                android:layout_marginVertical="5dp"
-                android:onClick="selecionarFicheiros"
-                android:backgroundTint="@color/def"/>
-
-            <Button
-                android:id="@+id/btn_visitar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Adicionar"
-                android:layout_below="@id/btn_ficheiros"
-                android:layout_centerHorizontal="true"
-                android:layout_marginVertical="5dp"
-                android:onClick="selecionarFicheiros"
-                android:backgroundTint="@color/def"/>
-
             <Button
                 android:id="@+id/btnGuardar"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Criar"
-                android:layout_below="@+id/btn_visitar"
+                android:text="@string/atualizar"
+                android:layout_below="@+id/et_class"
                 android:layout_centerHorizontal="true"
                 android:layout_marginVertical="10dp"
                 android:backgroundTint="@color/def"/>

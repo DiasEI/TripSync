@@ -1,6 +1,7 @@
 package com.example.tripsync.fragments
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -40,15 +41,10 @@ class EditViagem : Fragment() {
     private lateinit var et_fim: EditText
     private lateinit var et_custos: EditText
     private lateinit var et_class: NumberPicker
-    private var selectedImageUri: Uri? = null
-    private lateinit var btn_ficheiros: Button
-    private lateinit var btn_visitar: Button
     private lateinit var btnGuardar: Button
-    private lateinit var btnVoltar: ImageButton
     private var userId: String? = null
     private var tripId: String? = null
     private var token: String? = null
-    private val PICK_IMAGE_REQUEST = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,10 +60,7 @@ class EditViagem : Fragment() {
         et_fim = view.findViewById(R.id.et_fim)
         et_custos = view.findViewById(R.id.et_custos)
         et_class = view.findViewById(R.id.et_class)
-        btn_ficheiros = view.findViewById(R.id.btn_ficheiros)
-        btn_visitar = view.findViewById(R.id.btn_visitar)
         btnGuardar = view.findViewById(R.id.btnGuardar)
-        btnVoltar = view.findViewById(R.id.btnVoltar)
 
         // Set up NumberPicker
         et_class.minValue = 0
@@ -76,18 +69,16 @@ class EditViagem : Fragment() {
         // Get tripId from arguments
         tripId = arguments?.getString("tripId")
 
+        et_inicio.setOnClickListener {
+            showDatePickerDialog { date -> et_inicio.setText(date) }
+        }
 
-
-        btn_ficheiros.setOnClickListener {
-            openGallery()
+        et_fim.setOnClickListener {
+            showDatePickerDialog { date -> et_fim.setText(date) }
         }
 
         btnGuardar.setOnClickListener {
             guardar()
-        }
-
-        btnVoltar.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
         }
 
         loadViagem() // Load the trip details
@@ -95,25 +86,26 @@ class EditViagem : Fragment() {
         return view
     }
 
-    private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, PICK_IMAGE_REQUEST)
-    }
+    private fun showDatePickerDialog(onDateSet: (String) -> Unit) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
-            selectedImageUri = data.data
-        }
+        val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+            val selectedDate = Calendar.getInstance()
+            selectedDate.set(selectedYear, selectedMonth, selectedDay)
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+            onDateSet(dateFormat.format(selectedDate.time))
+        }, year, month, day)
+
+        datePickerDialog.show()
     }
 
     private fun loadViagem() {
-        val sharedPreferences = requireActivity().getSharedPreferences("TripPrefs", Context.MODE_PRIVATE)
+        val sharedPreferences = requireActivity().getSharedPreferences("ProfilePrefs", Context.MODE_PRIVATE)
         userId = sharedPreferences.getString("userId", null)
         token = sharedPreferences.getString("token", null)
-        tripId = arguments?.getString("tripId")
-        // Log the tripId
-        Log.d("EditViagem", "Received tripId: $tripId")
 
         if (tripId != null) {
             ApiClient.apiService.getTripDetails(tripId!!).enqueue(object : Callback<Trip> {
@@ -129,8 +121,8 @@ class EditViagem : Fragment() {
                             // Convert the date strings to Date objects
                             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                             try {
-                                val dataInicioDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).parse(it.data_inicio)
-                                val dataFimDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).parse(it.data_fim)
+                                val dataInicioDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(it.data_inicio)
+                                val dataFimDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(it.data_fim)
                                 et_inicio.setText(dataInicioDate?.let { date -> dateFormat.format(date) })
                                 et_fim.setText(dataFimDate?.let { date -> dateFormat.format(date) })
                             } catch (e: Exception) {
@@ -139,32 +131,11 @@ class EditViagem : Fragment() {
 
                             et_class.value = it.classificacao
                             et_custos.setText(it.custos.toString())
-
-                            it.foto?.let { foto ->
-                                when (foto) {
-                                    is ByteArray -> {
-                                        Glide.with(this@EditViagem)
-                                            .load(foto)
-                                            .into(btn_ficheiros as ImageView)
-                                    }
-                                    is Map<*, *> -> {
-                                        val fotoData =
-                                            (foto["data"] as List<Number>).map { it.toByte() }
-                                                .toByteArray()
-                                        Glide.with(this@EditViagem)
-                                            .load(fotoData)
-                                            .into(btn_ficheiros as ImageView)
-                                    }
-                                    else -> {
-                                    }
-                                }
-                            }
                         }
                     } else {
                         Toast.makeText(requireContext(), "Failed to load trip details", Toast.LENGTH_SHORT).show()
                     }
                 }
-
                 override fun onFailure(call: Call<Trip>, t: Throwable) {
                     Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
@@ -184,17 +155,6 @@ class EditViagem : Fragment() {
         val data_fim = et_fim.text.toString()
         val custos = et_custos.text.toString().toFloatOrNull()
         val classificacao = et_class.value
-        var fotoData: String? = null
-
-        if (selectedImageUri != null) {
-            try {
-                val inputStream: InputStream? = requireContext().contentResolver.openInputStream(selectedImageUri!!)
-                val photoBytes = inputStream?.readBytes()
-                fotoData = Base64.encodeToString(photoBytes, Base64.DEFAULT)
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
 
         if (titulo.isEmpty() || descricao.isEmpty() || cidade.isEmpty() || pais.isEmpty() || data_inicio.isEmpty() || data_fim.isEmpty() || custos == null) {
             Toast.makeText(activity, "Preencha todos os campos corretamente", Toast.LENGTH_SHORT).show()
@@ -210,6 +170,7 @@ class EditViagem : Fragment() {
             dataFimDate = dateFormat.format(SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(data_fim)!!)
         } catch (e: Exception) {
             Toast.makeText(activity, "Formato de data inválido", Toast.LENGTH_SHORT).show()
+            Log.d("Guardar", "Date parsing error: ${e.message}")
             return
         }
 
@@ -219,14 +180,16 @@ class EditViagem : Fragment() {
                 titulo = titulo,
                 descricao = descricao,
                 cidade = cidade,
-                pais = pais,
+                custos = custos,
                 data_inicio = dataInicioDate,
                 data_fim = dataFimDate,
-                custos = custos,
                 classificacao = classificacao,
+                pais = pais,
                 id_utilizador = userId!!,
-                foto = fotoData
             )
+
+            // Log the request data
+            Log.d("Guardar", "Request data: $trip")
 
             ApiClient.apiService.updateTripDetails(tripId!!, trip).enqueue(object : Callback<Trip> {
                 override fun onResponse(call: Call<Trip>, response: Response<Trip>) {
@@ -235,15 +198,18 @@ class EditViagem : Fragment() {
                         requireActivity().supportFragmentManager.popBackStack()
                     } else {
                         Toast.makeText(requireContext(), "Erro ao atualizar viagem", Toast.LENGTH_SHORT).show()
+                        Log.d("Guardar", "API response error: ${response.errorBody()?.string()}")
                     }
                 }
 
                 override fun onFailure(call: Call<Trip>, t: Throwable) {
                     Toast.makeText(requireContext(), "Erro: ${t.message}", Toast.LENGTH_SHORT).show()
+                    Log.d("Guardar", "API call failure: ${t.message}")
                 }
             })
         } else {
             Toast.makeText(requireContext(), "User not logged in or tripId missing", Toast.LENGTH_SHORT).show()
+            Log.d("Guardar", "Authentication error: User not logged in or tripId is missing.")
         }
     }
 }

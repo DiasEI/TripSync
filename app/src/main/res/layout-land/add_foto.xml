@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="60dp"
+        android:layout_centerHorizontal="true">
+
+        <ImageButton
+            android:id="@+id/btnVoltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/vector__1_"
+            android:paddingEnd="35dp"
+            android:layout_marginStart="40dp"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add"
+            android:layout_marginStart="45dp"
+            android:textColor="@color/def"
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_imagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_1"
+        android:layout_marginTop="18dp"
+        android:paddingHorizontal="50dp"
+        android:paddingVertical="10dp"
+        android:text="@string/selectFotos"
+        android:textColor="@color/def"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnSelecionarFoto"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:text="@string/addFicheiros"
+        android:layout_below="@+id/tv_imagem"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="10dp"
+        android:backgroundTint="@color/def"/>
+
+    <Button
+        android:id="@+id/btnAdicionarFoto"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:backgroundTint="@color/def"
+        android:text="@string/add"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btnSelecionarFoto"
+        android:layout_marginTop="20dp"/>
+
+</RelativeLayout>

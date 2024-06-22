@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="20dp"
+        android:layout_centerHorizontal="true">
+
+        <ImageButton
+            android:id="@+id/btnVoltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/vector__1_"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/add"
+            android:textColor="@color/def"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_imagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerLayout"
+        android:layout_marginTop="16dp"
+        android:paddingHorizontal="24dp"
+        android:text="@string/selectFotos"
+        android:textColor="@color/def"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_imagem"
+        android:layout_marginTop="16dp"
+        android:paddingHorizontal="16dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:visibility="visible"
+        android:background="@android:color/transparent"/>
+
+    <Button
+        android:id="@+id/btnSelecionarFoto"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recyclerView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/addFicheiros"
+        android:textSize="18sp"
+        android:backgroundTint="@color/def"/>
+
+    <Button
+        android:id="@+id/btnAdicionarFoto"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnSelecionarFoto"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/add"
+        android:textSize="18sp"
+        android:backgroundTint="@color/def"/>
+
+</RelativeLayout>

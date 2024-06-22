@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/ll_1"
@@ -17,23 +16,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:src="@drawable/vector__1_"
-            android:paddingRight="35dp"
-            android:layout_marginLeft="40dp"
-            android:background="@color/white"
-
-            />
+            android:paddingEnd="35dp"
+            android:layout_marginStart="40dp"
+            android:background="@color/white"/>
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add"
-            android:layout_marginLeft="45dp"
+            android:layout_marginStart="45dp"
             android:textColor="@color/def"
             android:fontFamily="@font/nunito_bold"
             android:textSize="30sp"
             android:textStyle="bold"/>
-
 
     </LinearLayout>
 
@@ -48,7 +44,7 @@
         android:text="@string/nome"
         android:textColor="@color/def"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/et_nome"
@@ -70,7 +66,7 @@
         android:text="@string/local"
         android:textColor="@color/def"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/btnAdd"
@@ -93,7 +89,7 @@
         android:text="@string/classificacao"
         android:textColor="@color/def"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/et_class"
@@ -103,9 +99,7 @@
         android:background="@drawable/round_edit_text"
         android:paddingVertical="5dp"
         android:layout_centerHorizontal="true"
-        android:radius="10dp"
-        />
-
+        android:radius="10dp"/>
 
     <TextView
         android:id="@+id/tv_tipo"
@@ -127,9 +121,7 @@
         android:layout_below="@+id/tv_tipo"
         android:background="@drawable/round_edit_text"
         android:paddingVertical="5dp"
-        android:layout_centerHorizontal="true"
-
-        />
+        android:layout_centerHorizontal="true"/>
 
     <Button
         android:id="@+id/btnGuarda"
@@ -141,9 +133,6 @@
         android:text="@string/guardar"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/et_tipo"
-        android:layout_marginTop="70dp"
-        />
-
-
+        android:layout_marginTop="70dp"/>
 
 </RelativeLayout>

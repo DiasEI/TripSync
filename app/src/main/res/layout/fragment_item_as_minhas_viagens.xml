@@ -6,16 +6,6 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
-    <ImageButton
-        android:id="@+id/btn_edit"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/edit"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Edit"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true" />
-
     <TextView
         android:id="@+id/tv_titulo"
         android:layout_width="wrap_content"
@@ -24,22 +14,75 @@
         android:textStyle="bold"
         android:textColor="@color/def"
         android:text="Título da Viagem"
-        android:layout_centerInParent="true" />
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"/>
 
-    <ImageButton
-        android:id="@+id/btn_delete"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/delete"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Delete"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_location"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/location2"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginEnd="8dp"/>
+
+        <ImageButton
+            android:id="@+id/btn_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/image"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginEnd="8dp"/>
+
+        <ImageButton
+            android:id="@+id/btn_edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/edit"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginEnd="8dp"/>
+
+        <ImageButton
+            android:id="@+id/btn_delete"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/delete"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_titulo"
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/location"
+            android:layout_marginEnd="5dp"/>
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rua XPTO - Viana do Castelo"
+            android:textSize="12sp"
+            android:textColor="@color/def"/>
+    </LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="80dp"
         android:src="@drawable/rectangle_130" />
 
 </RelativeLayout>

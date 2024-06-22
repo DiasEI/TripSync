@@ -25,6 +25,7 @@
     <string name="nome">Nome</string>
     <string name="foto">Fotografia</string>
     <string name="selectFoto">Selecionar Foto</string>
+    <string name="selectFotos">Selecionar Fotos</string>
     <string name="edit">Editar Perfil</string>
     <string name="email" translatable="false">Email</string>
     <string name="intro2">Adicione e partilhe as suas viagens connosco!</string>
@@ -53,5 +54,6 @@
     <string name="cost">Custos Totais</string>
     <string name="visit">Para Visitar</string>
     <string name="criar">Criar</string>
+    <string name="atualizar">Atualizar</string>
 
 </resources>

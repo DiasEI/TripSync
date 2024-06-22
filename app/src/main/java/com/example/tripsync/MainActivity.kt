@@ -50,9 +50,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        // Load the fragment into the frame layout
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.frame_layout, fragment)
-            .commit()
+        // Get the currently visible fragment
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.frame_layout)
+        // Check if the new fragment is different from the current one
+        if (currentFragment == null || currentFragment.javaClass != fragment.javaClass) {
+            // Load the new fragment into the frame layout
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .commit()
+        }
     }
 }

@@ -1,14 +1,7 @@
 package com.example.tripsync.fragments
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
-import android.util.Base64
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,16 +12,14 @@ import android.widget.EditText
 import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.tripsync.R
-import com.example.tripsync.RegisterActivity.Companion.MAX_DIMENSION
-import com.example.tripsync.RegisterActivity.Companion.REQUEST_CODE_SELECT_IMAGE
 import com.example.tripsync.api.ApiClient
 import com.example.tripsync.api.Trip
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.ByteArrayOutputStream
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,13 +34,8 @@ class AddViagem : Fragment() {
     private lateinit var etCustos: EditText
     private lateinit var etClassificacao: NumberPicker
     private lateinit var btnCriar: Button
-    private lateinit var btnSelecionarFoto: Button
-    private lateinit var btnVisitar: Button
-
     private var userId: String? = null
     private var token: String? = null
-
-    private var selectedImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,8 +53,6 @@ class AddViagem : Fragment() {
         etCustos = view.findViewById(R.id.et_custos)
         etClassificacao = view.findViewById(R.id.et_class)
         btnCriar = view.findViewById(R.id.btn_criar_viagem)
-        btnSelecionarFoto = view.findViewById(R.id.btn_selecionar_foto)
-        btnVisitar = view.findViewById(R.id.btn_visitar)
 
         // Set up NumberPicker
         etClassificacao.minValue = 0
@@ -86,10 +70,6 @@ class AddViagem : Fragment() {
             return view
         }
 
-        // Adicione logs para verificar o userId e o token
-        Log.d("AddViagem", "User ID: $userId, Token: $token")
-
-        // Set onClickListener for date fields
         etDataInicio.setOnClickListener {
             showDatePickerDialog { date -> etDataInicio.setText(date) }
         }
@@ -98,23 +78,8 @@ class AddViagem : Fragment() {
             showDatePickerDialog { date -> etDataFim.setText(date) }
         }
 
-        // Set onClickListener for Selecionar Foto button
-        btnSelecionarFoto.setOnClickListener {
-            selecionarFoto()
-        }
-
-        // Set onClickListener for the Criar Viagem button
         btnCriar.setOnClickListener {
             adicionarViagem()
-        }
-
-        // Set onClickListener for the Visitar button
-        btnVisitar.setOnClickListener {
-            // Intent to open Google Maps
-            val gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(etCidade.text.toString() + ", " + etPais.text.toString()))
-            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-            mapIntent.setPackage("com.google.android.apps.maps")
-            startActivity(mapIntent)
         }
 
         return view
@@ -134,49 +99,6 @@ class AddViagem : Fragment() {
         }, year, month, day)
 
         datePickerDialog.show()
-    }
-
-    private fun selecionarFoto() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, REQUEST_CODE_SELECT_IMAGE)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == REQUEST_CODE_SELECT_IMAGE && resultCode == Activity.RESULT_OK) {
-            data?.data?.let {
-                selectedImageUri = it
-                Log.d("AddViagem", "Imagem selecionada: $selectedImageUri")
-            }
-            Toast.makeText(activity, "Imagem selecionada com sucesso", Toast.LENGTH_SHORT).show()
-        } else {
-            Log.e("AddViagem", "Seleção de imagem cancelada ou falhou. Result Code: $resultCode")
-        }
-    }
-
-    private fun getByteArrayFromUri(uri: Uri): ByteArray? {
-        return try {
-            val inputStream = requireActivity().contentResolver.openInputStream(uri)
-            val bitmap = BitmapFactory.decodeStream(inputStream)
-            val resizedBitmap = resizeBitmap(bitmap, MAX_DIMENSION)
-            val outputStream = ByteArrayOutputStream()
-            resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream)
-            outputStream.toByteArray()
-        } catch (e: IOException) {
-            e.printStackTrace()
-            null
-        }
-    }
-
-    private fun resizeBitmap(bitmap: Bitmap, maxDimension: Int): Bitmap {
-        val width = bitmap.width
-        val height = bitmap.height
-        val scale = maxDimension.toFloat() / Math.max(width, height)
-        val matrix = Matrix()
-        matrix.postScale(scale, scale)
-        return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, false)
     }
 
     private fun adicionarViagem() {
@@ -208,15 +130,6 @@ class AddViagem : Fragment() {
             return
         }
 
-        val photoByteArray = selectedImageUri?.let { uri ->
-            getByteArrayFromUri(uri)
-        }
-
-        val base64Photo: String? = photoByteArray?.let {
-            val base64Image = Base64.encodeToString(it, Base64.DEFAULT)
-            "data:image/jpeg;base64,$base64Image"
-        }
-
         val trip = Trip(
             id_viagem = UUID.randomUUID().toString(),
             titulo = titulo,
@@ -228,7 +141,6 @@ class AddViagem : Fragment() {
             custos = custos,
             classificacao = classificacao,
             id_utilizador = userId!!,
-            foto = base64Photo
         )
 
         Log.d("AddViagem", "Trip data: $trip")
@@ -238,8 +150,7 @@ class AddViagem : Fragment() {
                 if (response.isSuccessful) {
                     Toast.makeText(activity, "Viagem adicionada com sucesso", Toast.LENGTH_SHORT).show()
                     Log.d("AddViagem", "Viagem adicionada com sucesso")
-                    // Clear fields on success
-                    clearFields()
+                    navigateToListViagens()
                 } else {
                     val errorBody = response.errorBody()?.string()
                     Toast.makeText(activity, "Erro ao adicionar viagem: $errorBody", Toast.LENGTH_SHORT).show()
@@ -253,16 +164,13 @@ class AddViagem : Fragment() {
             }
         })
     }
-
-    private fun clearFields() {
-        etTitulo.text.clear()
-        etDescricao.text.clear()
-        etCidade.text.clear()
-        etPais.text.clear()
-        etDataInicio.text.clear()
-        etDataFim.text.clear()
-        etCustos.text.clear()
-        etClassificacao.value = 0
-        selectedImageUri = null
+    private fun navigateToListViagens() {
+        val fragment = ListViagens()
+        val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
+
 }
