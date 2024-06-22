@@ -104,6 +104,8 @@ class ListViagens : Fragment() {
         val fragment = EditViagem()
         val args = Bundle()
         args.putString("tripId", viagem.id_viagem)
+        // Log do tripId
+        Log.d("ListViagens", "Editing trip with ID: ${viagem.id_viagem}")
         fragment.arguments = args
 
         val fragmentManager = requireActivity().supportFragmentManager

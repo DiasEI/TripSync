@@ -41,7 +41,7 @@ class EditViagem : Fragment() {
     private lateinit var et_custos: EditText
     private lateinit var et_class: NumberPicker
     private var selectedImageUri: Uri? = null
-    private lateinit var btn_ficheiros: ImageView
+    private lateinit var btn_ficheiros: Button
     private lateinit var btn_visitar: Button
     private lateinit var btnGuardar: Button
     private lateinit var btnVoltar: ImageButton
@@ -69,7 +69,6 @@ class EditViagem : Fragment() {
         btnGuardar = view.findViewById(R.id.btnGuardar)
         btnVoltar = view.findViewById(R.id.btnVoltar)
 
-
         // Set up NumberPicker
         et_class.minValue = 0
         et_class.maxValue = 10
@@ -78,7 +77,6 @@ class EditViagem : Fragment() {
         tripId = arguments?.getString("tripId")
 
 
-        loadViagem()
 
         btn_ficheiros.setOnClickListener {
             openGallery()
@@ -92,6 +90,8 @@ class EditViagem : Fragment() {
             requireActivity().supportFragmentManager.popBackStack()
         }
 
+        loadViagem() // Load the trip details
+
         return view
     }
 
@@ -104,9 +104,6 @@ class EditViagem : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
             selectedImageUri = data.data
-            Glide.with(this)
-                .load(selectedImageUri)
-                .into(btn_ficheiros)
         }
     }
 
@@ -114,8 +111,11 @@ class EditViagem : Fragment() {
         val sharedPreferences = requireActivity().getSharedPreferences("TripPrefs", Context.MODE_PRIVATE)
         userId = sharedPreferences.getString("userId", null)
         token = sharedPreferences.getString("token", null)
+        tripId = arguments?.getString("tripId")
+        // Log the tripId
+        Log.d("EditViagem", "Received tripId: $tripId")
 
-        if (userId != null && token != null && tripId != null) {
+        if (tripId != null) {
             ApiClient.apiService.getTripDetails(tripId!!).enqueue(object : Callback<Trip> {
                 override fun onResponse(call: Call<Trip>, response: Response<Trip>) {
                     if (response.isSuccessful) {
@@ -126,20 +126,26 @@ class EditViagem : Fragment() {
                             et_cidade.setText(it.cidade)
                             et_pais.setText(it.pais)
 
+                            // Convert the date strings to Date objects
                             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                            et_inicio.setText(dateFormat.format(it.data_inicio))
-                            et_fim.setText(dateFormat.format(it.data_fim))
-                            et_class.setValue(it.classificacao)
+                            try {
+                                val dataInicioDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).parse(it.data_inicio)
+                                val dataFimDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).parse(it.data_fim)
+                                et_inicio.setText(dataInicioDate?.let { date -> dateFormat.format(date) })
+                                et_fim.setText(dataFimDate?.let { date -> dateFormat.format(date) })
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+
+                            et_class.value = it.classificacao
                             et_custos.setText(it.custos.toString())
-
-
 
                             it.foto?.let { foto ->
                                 when (foto) {
                                     is ByteArray -> {
                                         Glide.with(this@EditViagem)
                                             .load(foto)
-                                            .into(btn_ficheiros)
+                                            .into(btn_ficheiros as ImageView)
                                     }
                                     is Map<*, *> -> {
                                         val fotoData =
@@ -147,7 +153,7 @@ class EditViagem : Fragment() {
                                                 .toByteArray()
                                         Glide.with(this@EditViagem)
                                             .load(fotoData)
-                                            .into(btn_ficheiros)
+                                            .into(btn_ficheiros as ImageView)
                                     }
                                     else -> {
                                     }
@@ -168,6 +174,7 @@ class EditViagem : Fragment() {
         }
     }
 
+
     private fun guardar() {
         val titulo = et_titulo.text.toString()
         val descricao = et_descricao.text.toString()
@@ -175,10 +182,9 @@ class EditViagem : Fragment() {
         val pais = et_pais.text.toString()
         val data_inicio = et_inicio.text.toString()
         val data_fim = et_fim.text.toString()
-        val custos = et_custos.text.toString().toFloat()
+        val custos = et_custos.text.toString().toFloatOrNull()
         val classificacao = et_class.value
         var fotoData: String? = null
-
 
         if (selectedImageUri != null) {
             try {
@@ -190,7 +196,7 @@ class EditViagem : Fragment() {
             }
         }
 
-        if (titulo.isEmpty() || descricao.isEmpty() || cidade.isEmpty() || pais.isEmpty() || data_inicio.isEmpty() || data_fim.isEmpty() || custos == null || classificacao == null) {
+        if (titulo.isEmpty() || descricao.isEmpty() || cidade.isEmpty() || pais.isEmpty() || data_inicio.isEmpty() || data_fim.isEmpty() || custos == null) {
             Toast.makeText(activity, "Preencha todos os campos corretamente", Toast.LENGTH_SHORT).show()
             return
         }
