@@ -1,7 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <ImageButton
         android:id="@+id/btn_edit"
@@ -19,6 +22,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/def"
         android:text="Título da Viagem"
         android:layout_centerInParent="true" />
 
@@ -31,5 +35,11 @@
         android:contentDescription="Delete"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="75dp"
+        android:src="@drawable/rectangle_130" />
 
 </RelativeLayout>
