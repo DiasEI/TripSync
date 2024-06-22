@@ -54,6 +54,10 @@ data class AddFotosRequest(
     val foto: List<FotoData>
 )
 
+data class GetFotosResponse(
+    val fotos: List<FotoData>
+)
+
 data class FotoData(
     val id_foto: String?,
     val imageData: Any? = null
@@ -85,9 +89,12 @@ interface ApiService {
     @PUT("api/v2/viagens/update/{id}")
     fun updateTripDetails(@Path("id") tripId: String, @Body trip: Trip): Call<Trip>
 
-    @DELETE("api/v2/viagens/delete/{id_viagem}")
-    fun deleteViagem(@Path("id_viagem") idViagem: String): Call<Void>
+    @DELETE("api/v2/viagens/delete/{id}")
+    fun deleteViagem(@Path("id") idViagem: String): Call<Void>
 
     @POST("api/v2/viagens/fotos")
     fun addFotos(@Body addFotosRequest: AddFotosRequest): Call<Void>
+
+    @GET("api/v2/viagens/fotos/{id}")
+    fun getFotosByViagem(@Path("id") idViagem: String): Call<GetFotosResponse>
 }

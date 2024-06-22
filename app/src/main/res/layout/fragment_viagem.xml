@@ -46,10 +46,12 @@
             android:padding="16dp">
 
             <ViewFlipper
-                android:id="@+id/foto"
+                android:id="@+id/vfFlipper"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:scaleType="centerCrop">
+                android:scaleType="centerCrop"
+                android:inAnimation="@android:anim/slide_in_left"
+                android:outAnimation="@android:anim/slide_out_right">
 
                 <ImageView
                     android:layout_width="match_parent"

@@ -2,18 +2,23 @@ package com.example.tripsync.fragments
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.ViewFlipper
 import androidx.fragment.app.Fragment
 import com.example.tripsync.R
 import com.example.tripsync.api.ApiClient
+import com.example.tripsync.api.GetFotosResponse
 import com.example.tripsync.api.Trip
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,6 +36,7 @@ class Viagens : Fragment() {
     private lateinit var tvDataFim: TextView
     private lateinit var tvCustos: TextView
     private lateinit var tvClassificacao: TextView
+    private lateinit var viewFlipper: ViewFlipper
     private var tripId: String? = null
     private var token: String? = null
 
@@ -48,8 +54,7 @@ class Viagens : Fragment() {
         tvDataFim = view.findViewById(R.id.tvDataFim)
         tvCustos = view.findViewById(R.id.tvCustos)
         tvClassificacao = view.findViewById(R.id.tvClassificacao)
-
-        // Get tripId from arguments
+        viewFlipper = view.findViewById(R.id.vfFlipper)
         tripId = arguments?.getString("tripId")
 
         loadViagem()
@@ -77,28 +82,13 @@ class Viagens : Fragment() {
                     if (response.isSuccessful) {
                         val trip = response.body()
                         trip?.let {
-                            tvTitulo.text = it.titulo
-                            tvDescricao.text = it.descricao
-                            tvCidade.text = it.cidade
-                            tvPais.text = it.pais
-
-                            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                            try {
-                                val dataInicioDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(it.data_inicio)
-                                val dataFimDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(it.data_fim)
-                                tvDataInicio.text = dataInicioDate?.let { date -> dateFormat.format(date) }
-                                tvDataFim.text = dataFimDate?.let { date -> dateFormat.format(date) }
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
-                            tvClassificacao.text = it.classificacao.toString()
-                            tvCustos.text = it.custos.toString()
+                            updateTripDetails(it)
+                            fetchFotosForViagem(tripId!!)
                         }
                     } else {
                         Toast.makeText(requireContext(), "Failed to load trip details", Toast.LENGTH_SHORT).show()
                     }
                 }
-
                 override fun onFailure(call: Call<Trip>, t: Throwable) {
                     Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
@@ -106,6 +96,68 @@ class Viagens : Fragment() {
         } else {
             Toast.makeText(requireContext(), "User not logged in or tripId missing", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun updateTripDetails(trip: Trip) {
+        tvTitulo.text = trip.titulo
+        tvDescricao.text = trip.descricao
+        tvCidade.text = trip.cidade
+        tvPais.text = trip.pais
+
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        try {
+            val dataInicioDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(trip.data_inicio)
+            val dataFimDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(trip.data_fim)
+            tvDataInicio.text = dataInicioDate?.let { dateFormat.format(it) }
+            tvDataFim.text = dataFimDate?.let { dateFormat.format(it) }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        tvClassificacao.text = trip.classificacao.toString()
+        tvCustos.text = trip.custos.toString()
+    }
+
+    private fun fetchFotosForViagem(viagemId: String) {
+        ApiClient.apiService.getFotosByViagem(viagemId).enqueue(object : Callback<GetFotosResponse> {
+            override fun onResponse(call: Call<GetFotosResponse>, response: Response<GetFotosResponse>) {
+                if (response.isSuccessful) {
+                    val fotosResponse = response.body()
+                    fotosResponse?.let { fotos ->
+                        viewFlipper.removeAllViews()
+
+                        for (fotoData in fotos.fotos) {
+                            try {
+                                val imageData = fotoData.imageData as String
+                                val decodedBytes = Base64.decode(imageData, Base64.DEFAULT)
+                                val bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+
+                                val imageView = ImageView(requireContext())
+                                imageView.setImageBitmap(bitmap)
+                                imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                                viewFlipper.addView(imageView)
+                            } catch (e: IllegalArgumentException) {
+                                Log.e("Viagens", "Error decoding Base64 string", e)
+                            } catch (e: ClassCastException) {
+                                Log.e("Viagens", "Invalid imageData type", e)
+                            }
+                        }
+
+                        if (fotos.fotos.size > 1) {
+                            viewFlipper.isAutoStart = true
+                            viewFlipper.flipInterval = 3000
+                            viewFlipper.startFlipping()
+                        }
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Failed to fetch photos", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<GetFotosResponse>, t: Throwable) {
+                Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("Viagens", "Error fetching photos", t)
+            }
+        })
     }
 
     private fun showDeleteConfirmationDialog() {
