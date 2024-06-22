@@ -218,6 +218,7 @@ class AddViagem : Fragment() {
         }
 
         val trip = Trip(
+            id_viagem = UUID.randomUUID().toString(),
             titulo = titulo,
             descricao = descricao,
             cidade = cidade,
@@ -230,7 +231,6 @@ class AddViagem : Fragment() {
             foto = base64Photo
         )
 
-        // Adicione logs para verificar os dados da viagem antes de enviar a solicitação
         Log.d("AddViagem", "Trip data: $trip")
 
         ApiClient.apiService.adicionarViagem(trip).enqueue(object : Callback<Void> {

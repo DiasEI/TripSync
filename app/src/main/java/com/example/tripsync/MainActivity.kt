@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.example.tripsync.fragments.AddViagem
 import com.example.tripsync.fragments.Adicionar
 import com.example.tripsync.fragments.Home
+import com.example.tripsync.fragments.ListViagens
 import com.example.tripsync.fragments.Perfil
 import com.example.tripsync.fragments.Settings
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.settings -> {
                     loadFragment(Settings())
+                    true
+                }
+                R.id.perf -> {
+                    loadFragment(ListViagens())
                     true
                 }
                 else -> false

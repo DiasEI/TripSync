@@ -1,13 +1,12 @@
 package com.example.tripsync.api
 
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
-import java.util.ArrayList
 
 //Auth Data
 data class LoginRequest(val username: String, val password: String)
@@ -38,6 +37,7 @@ data class User(
 
 //Trips Data
 data class Trip(
+    val id_viagem: String,
     val titulo: String,
     val descricao: String,
     val cidade: String,
@@ -48,7 +48,7 @@ data class Trip(
     val classificacao: Int,
     val foto: Any? = null,
     val id_utilizador: String
-    )
+)
 
 //Requests
 interface ApiService {
@@ -76,4 +76,6 @@ interface ApiService {
     @PUT("api/v2/viagens/update/{id}")
     fun updateTripDetails(@Path("id") tripId: String, @Body trip: Trip): Call<Trip>
 
+    @DELETE("api/v2/viagens/delete/{id_viagem}")
+    fun deleteViagem(@Path("id_viagem") idViagem: String): Call<Void>
 }
