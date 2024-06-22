@@ -1,7 +1,6 @@
 package com.example.tripsync.fragments
 
 import android.app.Activity
-import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -16,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -39,12 +39,12 @@ class EditViagem : Fragment() {
     private lateinit var et_inicio: EditText
     private lateinit var et_fim: EditText
     private lateinit var et_custos: EditText
-    private lateinit var et_class: EditText
+    private lateinit var et_class: NumberPicker
+    private var selectedImageUri: Uri? = null
     private lateinit var btn_ficheiros: ImageView
     private lateinit var btn_visitar: Button
     private lateinit var btnGuardar: Button
     private lateinit var btnVoltar: ImageButton
-    private var selectedImageUri: Uri? = null
     private var userId: String? = null
     private var tripId: String? = null
     private var token: String? = null
@@ -69,8 +69,14 @@ class EditViagem : Fragment() {
         btnGuardar = view.findViewById(R.id.btnGuardar)
         btnVoltar = view.findViewById(R.id.btnVoltar)
 
+
+        // Set up NumberPicker
+        et_class.minValue = 0
+        et_class.maxValue = 10
+
         // Get tripId from arguments
         tripId = arguments?.getString("tripId")
+
 
         loadViagem()
 
@@ -123,9 +129,10 @@ class EditViagem : Fragment() {
                             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                             et_inicio.setText(dateFormat.format(it.data_inicio))
                             et_fim.setText(dateFormat.format(it.data_fim))
-
+                            et_class.setValue(it.classificacao)
                             et_custos.setText(it.custos.toString())
-                            et_class.setText(it.classificacao.toString())
+
+
 
                             it.foto?.let { foto ->
                                 when (foto) {
@@ -168,9 +175,10 @@ class EditViagem : Fragment() {
         val pais = et_pais.text.toString()
         val data_inicio = et_inicio.text.toString()
         val data_fim = et_fim.text.toString()
-        val custos = et_custos.text.toString().toFloatOrNull()
-        val classificacao = et_class.text.toString().toIntOrNull()
+        val custos = et_custos.text.toString().toFloat()
+        val classificacao = et_class.value
         var fotoData: String? = null
+
 
         if (selectedImageUri != null) {
             try {

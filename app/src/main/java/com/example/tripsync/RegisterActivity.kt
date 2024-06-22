@@ -9,7 +9,6 @@ import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -161,7 +160,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val REQUEST_CODE_SELECT_IMAGE = 100
-        private const val MAX_DIMENSION = 1024
+        const val REQUEST_CODE_SELECT_IMAGE = 100
+        const val MAX_DIMENSION = 1024
     }
 }
