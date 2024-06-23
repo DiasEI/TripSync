@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -199,11 +200,14 @@ class Home : Fragment() {
     }
 
     private fun performSearch(query: String) {
-        // Implement your search logic here
-        // For example, you could filter a list of items, make a network request, etc.
-        // Here's a simple example that prints the query to the log
-        println("Search query: $query")
-        // You can replace the println with your actual search logic
+        val gmmIntentUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=$query")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        if (mapIntent.resolveActivity(requireActivity().packageManager) != null) {
+            startActivity(mapIntent)
+        } else {
+            Toast.makeText(requireContext(), "Google Maps app is not installed", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
