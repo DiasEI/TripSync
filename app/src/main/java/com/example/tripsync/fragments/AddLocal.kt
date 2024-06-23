@@ -1,6 +1,7 @@
 package com.example.tripsync.fragments
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import com.example.tripsync.R
 import com.example.tripsync.api.AddLocalRequest
 import com.example.tripsync.api.ApiClient
 import com.example.tripsync.api.LocalData
+import com.example.tripsync.utils.NetworkUtils.isNetworkAvailable
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -25,6 +27,7 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -123,8 +126,18 @@ class AddLocal : Fragment() {
         val classificacao = etClassificacao.value
 
         val localData = LocalData(null, nome, localizacao, tipo, classificacao)
+        val localRequest = AddLocalRequest(tripId ?: "", listOf(localData))
 
-        val call = ApiClient.apiService.addLocal(AddLocalRequest(tripId ?: "", listOf(localData)))
+        if (isNetworkAvailable(requireContext())) {
+            sendAddLocalRequest(localRequest)
+        } else {
+            saveLocalRequest(localRequest)
+            Toast.makeText(requireContext(), "Network unavailable. Data saved locally.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun sendAddLocalRequest(request: AddLocalRequest) {
+        val call = ApiClient.apiService.addLocal(request)
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
@@ -142,6 +155,15 @@ class AddLocal : Fragment() {
                 Toast.makeText(requireContext(), "Network error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun saveLocalRequest(request: AddLocalRequest) {
+        // Use SharedPreferences or file storage to save the request
+        val sharedPreferences = requireContext().getSharedPreferences("local_requests", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val json = Gson().toJson(request)
+        editor.putString("unsent_request", json)
+        editor.apply()
     }
 
     companion object {

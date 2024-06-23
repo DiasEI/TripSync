@@ -1,11 +1,13 @@
 package com.example.tripsync.fragments
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +19,11 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
@@ -24,6 +31,9 @@ import com.bumptech.glide.load.resource.bitmap.TransformationUtils
 import com.bumptech.glide.request.RequestOptions
 import com.example.tripsync.LoginActivity
 import com.example.tripsync.R
+import com.example.tripsync.workers.SendFotoRequestsWorker
+import com.example.tripsync.workers.SendLocalRequestsWorker
+import com.example.tripsync.workers.SendViagemRequestsWorker
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.libraries.places.api.Places
@@ -35,6 +45,7 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import java.security.MessageDigest
+import java.util.concurrent.TimeUnit
 
 class Home : Fragment() {
     private lateinit var placesClient: PlacesClient
@@ -58,14 +69,12 @@ class Home : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        // Initialize ImageViews
         imageViews = imageViewIds.map { id -> view.findViewById<ImageView>(id) }
-        // Initialize Places SDK
         Places.initialize(requireContext(), getString(R.string.MAPS_API_KEY))
         placesClient = Places.createClient(requireContext())
-        // Initialize FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        scheduleSendRequestsWork(requireContext())
         getCurrentPlace()
 
         val logoutButton: ImageButton = view.findViewById(R.id.logout)
@@ -208,6 +217,53 @@ class Home : Fragment() {
         } else {
             Toast.makeText(requireContext(), "Google Maps app is not installed", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun scheduleSendRequestsWork(context: Context) {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val sendLocalRequestsRequest = PeriodicWorkRequestBuilder<SendLocalRequestsWorker>(
+            repeatInterval = 15,
+            repeatIntervalTimeUnit = TimeUnit.MINUTES
+        )
+            .setConstraints(constraints)
+            .build()
+
+        val sendFotoRequestWorker = PeriodicWorkRequestBuilder<SendFotoRequestsWorker>(
+            repeatInterval = 15,
+            repeatIntervalTimeUnit = TimeUnit.MINUTES
+        )
+            .setConstraints(constraints)
+            .build()
+
+        val sendViagemRequestsRequest = PeriodicWorkRequestBuilder<SendViagemRequestsWorker>(
+            repeatInterval = 15,
+            repeatIntervalTimeUnit = TimeUnit.MINUTES
+        )
+            .setConstraints(constraints)
+            .build()
+
+        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+            "sendLocalRequestsWork",
+            ExistingPeriodicWorkPolicy.KEEP,
+            sendLocalRequestsRequest
+        )
+
+        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+            "sendFotoRequestWorker",
+            ExistingPeriodicWorkPolicy.KEEP,
+            sendFotoRequestWorker
+        )
+
+        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+            "sendViagemRequestsWork",
+            ExistingPeriodicWorkPolicy.KEEP,
+            sendViagemRequestsRequest
+        )
+
+        Log.d("OfflineData", "Scheduled Offline Request")
     }
 
 }

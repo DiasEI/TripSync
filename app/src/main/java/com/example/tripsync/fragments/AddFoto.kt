@@ -1,6 +1,7 @@
 package com.example.tripsync.fragments
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -23,6 +24,8 @@ import com.example.tripsync.adapters.FotosAdapter
 import com.example.tripsync.api.AddFotosRequest
 import com.example.tripsync.api.ApiClient
 import com.example.tripsync.api.FotoData
+import com.example.tripsync.utils.NetworkUtils.isNetworkAvailable
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -102,26 +105,55 @@ class AddFoto : Fragment() {
             }
         }
 
-        val addFotosRequest = tripId?.let { tripId ->
-            AddFotosRequest(tripId, fotoDataList)
-        }
+        if (isNetworkAvailable(requireContext())) {
+            val addFotosRequest = tripId?.let { tripId ->
+                AddFotosRequest(tripId, fotoDataList)
+            }
 
-        addFotosRequest?.let {
-            val call = ApiClient.apiService.addFotos(it)
-            call.enqueue(object : Callback<Void> {
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(requireContext(), "Fotos uploaded successfully", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(requireContext(), "Failed to upload fotos", Toast.LENGTH_SHORT).show()
+            addFotosRequest?.let {
+                val call = ApiClient.apiService.addFotos(it)
+                call.enqueue(object : Callback<Void> {
+                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(
+                                requireContext(),
+                                "Fotos uploaded successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                requireContext(),
+                                "Failed to upload fotos",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Toast.makeText(requireContext(), "Network error: ${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
+                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Network error: ${t.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
+            }
+        } else {
+            saveFotosRequestLocally(fotoDataList)
+            Toast.makeText(
+                requireContext(),
+                "Network unavailable. Data saved locally.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
+    }
+
+    private fun saveFotosRequestLocally(fotoDataList: List<FotoData>) {
+        val sharedPreferences = requireContext().getSharedPreferences("local_fotos_requests", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val json = Gson().toJson(fotoDataList)
+        editor.putString("unsent_fotos_request", json)
+        editor.apply()
     }
 
     private fun getByteArrayFromUri(uri: Uri): ByteArray? {

@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.tripsync.R
 import com.example.tripsync.api.ApiClient
 import com.example.tripsync.api.Trip
+import com.example.tripsync.utils.NetworkUtils.isNetworkAvailable
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -145,8 +147,19 @@ class AddViagem : Fragment() {
             id_utilizador = userId!!,
         )
 
-        Log.d("AddViagem", "Trip data: $trip")
+        if (isNetworkAvailable(requireContext())) {
+            sendTripToServer(trip)
+        } else {
+            saveTripRequestLocally(trip)
+            Toast.makeText(
+                requireContext(),
+                "Network unavailable. Data saved locally.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
+    private fun sendTripToServer(trip: Trip) {
         ApiClient.apiService.adicionarViagem(trip).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
@@ -166,6 +179,15 @@ class AddViagem : Fragment() {
             }
         })
     }
+
+    private fun saveTripRequestLocally(trip: Trip) {
+        val sharedPreferences = requireContext().getSharedPreferences("local_viagens_requests", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val json = Gson().toJson(trip)
+        editor.putString("unsent_viagens_request", json)
+        editor.apply()
+    }
+
     private fun navigateToListViagens() {
         val fragment = ListViagens()
         val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
