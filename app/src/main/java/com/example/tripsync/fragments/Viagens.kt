@@ -2,6 +2,7 @@ package com.example.tripsync.fragments
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
@@ -48,6 +49,7 @@ class Viagens : Fragment(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private var tripId: String? = null
     private var token: String? = null
+    private var tripDetails: Trip? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,6 +101,11 @@ class Viagens : Fragment(), OnMapReadyCallback {
             activity?.supportFragmentManager?.popBackStack()
         }
 
+        val btnSendEmail = view.findViewById<Button>(R.id.btnSendEmail)
+        btnSendEmail.setOnClickListener {
+            sendTripDetailsByEmail()
+        }
+
         return view
     }
 
@@ -117,6 +124,7 @@ class Viagens : Fragment(), OnMapReadyCallback {
                     if (response.isSuccessful) {
                         val trip = response.body()
                         trip?.let {
+                            tripDetails = it
                             updateTripDetails(it)
                             fetchFotosForViagem(tripId!!)
                         }
@@ -282,5 +290,39 @@ class Viagens : Fragment(), OnMapReadyCallback {
                 Log.e("Viagens", "Erro de rede", t)
             }
         })
+    }
+
+    private fun sendTripDetailsByEmail() {
+        tripDetails?.let { trip ->
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val dataInicioDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(trip.data_inicio)
+            val dataFimDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(trip.data_fim)
+
+            val emailBody = """
+                |Trip Details:
+                |Title: ${trip.titulo}
+                |Description: ${trip.descricao}
+                |City: ${trip.cidade}
+                |Country: ${trip.pais}
+                |Start Date: ${dataInicioDate?.let { dateFormat.format(it) }}
+                |End Date: ${dataFimDate?.let { dateFormat.format(it) }}
+                |Cost: ${trip.custos}
+                |Rating: ${trip.classificacao}
+            """.trimMargin()
+
+            val emailIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "message/rfc822"
+                putExtra(Intent.EXTRA_SUBJECT, "Trip Details: ${trip.titulo}")
+                putExtra(Intent.EXTRA_TEXT, emailBody)
+            }
+
+            try {
+                startActivity(Intent.createChooser(emailIntent, "Send email using:"))
+            } catch (ex: android.content.ActivityNotFoundException) {
+                Toast.makeText(requireContext(), "No email clients installed.", Toast.LENGTH_SHORT).show()
+            }
+        } ?: run {
+            Toast.makeText(requireContext(), "Trip details are not available", Toast.LENGTH_SHORT).show()
+        }
     }
 }

@@ -288,6 +288,15 @@
                 android:layout_marginVertical="10dp"
                 android:backgroundTint="@color/def"/>
 
+            <Button
+                android:id="@+id/btnSendEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Send Email"
+                android:layout_below="@id/btn_delete"
+                android:layout_marginVertical="10dp"
+                android:backgroundTint="@color/def"/>
+
         </LinearLayout>
 
     </ScrollView>
