@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.picasso)
+    implementation(libs.androidx.work.runtime.ktx)
 
     // Retrofit dependencies
     implementation(libs.retrofit)

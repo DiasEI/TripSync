@@ -222,7 +222,7 @@ class Viagens : Fragment(), OnMapReadyCallback {
                 val marker = MarkerOptions()
                     .position(latLng)
                     .title(local.nome)
-                    .snippet(local.tipo)
+                    .snippet(local.classificacao.toString())
 
                 map.addMarker(marker)
             }
