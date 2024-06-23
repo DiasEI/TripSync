@@ -72,4 +72,17 @@
     <string name="no">No</string>
     <string name="locais">Locals</string>
 
+    <!-- Error Handling Tags -->
+    <string name="errorFoto">Error while loading files.</string>
+    <string name="okFoto">Files uploaded with success.</string>
+    <string name="errorLocal">Error while loading Local.</string>
+    <string name="okLocal">Local uploaded with success.</string>
+    <string name="errorViagem">Error while loading Trip.</string>
+    <string name="errorViagemFields">Complete all the fields correctly.</string>
+    <string name="errorViagemFormat">Invalid date format.</string>
+    <string name="okViagem">Trip uploaded with success.</string>
+    <string name="errorUser">User not authenticated or missing ID.</string>
+    <string name="localSave">Network unavailable. Data saved locally.</string>
+    <string name="cancelPlace">Place selection canceled.</string>
+
 </resources>

@@ -87,7 +87,7 @@ class Viagens : Fragment(), OnMapReadyCallback {
                     .addToBackStack(null)
                     .commit()
             } else {
-                Toast.makeText(requireContext(), "Trip ID not available", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.errorUser), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -137,7 +137,7 @@ class Viagens : Fragment(), OnMapReadyCallback {
                 }
             })
         } else {
-            Toast.makeText(requireContext(), "User not logged in or tripId missing", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.errorUser), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -198,7 +198,6 @@ class Viagens : Fragment(), OnMapReadyCallback {
 
             override fun onFailure(call: Call<GetFotosResponse>, t: Throwable) {
                 Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-                Log.e("Viagens", "Error fetching photos", t)
             }
         })
     }
@@ -218,7 +217,6 @@ class Viagens : Fragment(), OnMapReadyCallback {
 
             override fun onFailure(call: Call<GetLocalResponse>, t: Throwable) {
                 Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-                Log.e("Viagens", "Error fetching local data", t)
             }
         })
     }
@@ -281,13 +279,11 @@ class Viagens : Fragment(), OnMapReadyCallback {
                 } else {
                     val errorBody = response.errorBody()?.string()
                     Toast.makeText(activity, "Erro ao apagar viagem: $errorBody", Toast.LENGTH_SHORT).show()
-                    Log.e("Viagens", "Erro ao apagar viagem: $errorBody")
                 }
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 Toast.makeText(activity, "Erro de rede: ${t.message}", Toast.LENGTH_SHORT).show()
-                Log.e("Viagens", "Erro de rede", t)
             }
         })
     }

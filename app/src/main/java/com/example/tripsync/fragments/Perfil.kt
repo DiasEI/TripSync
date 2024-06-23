@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -107,7 +106,6 @@ class Perfil : Fragment() {
                     if (response.isSuccessful) {
                         val user = response.body()
                         user?.let {
-                            Log.e("ProfileLoad", "Data: ${response.body()}")
                             etNome.setText(it.nome)
                             etTel.setText(it.telemovel.toString())
                             etEmail.setText(it.email)
@@ -144,7 +142,7 @@ class Perfil : Fragment() {
                 }
             })
         } else {
-            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.errorUser), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -184,7 +182,7 @@ class Perfil : Fragment() {
                 }
             })
         } else {
-            Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.errorUser), Toast.LENGTH_SHORT).show()
         }
     }
 }

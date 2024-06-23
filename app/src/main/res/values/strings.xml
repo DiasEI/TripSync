@@ -76,4 +76,18 @@
     <string name="no">Não</string>
     <string name="locais">Locais</string>
 
+    <!-- Error Handling Tags -->
+    <string name="errorFoto">Erro ao carregar ficheiros.</string>
+    <string name="okFoto">Ficheiro carregados com sucesso.</string>
+    <string name="errorLocal">Erro ao carregar local.</string>
+    <string name="okLocal">Local carregado com sucesso.</string>
+    <string name="errorViagem">Error ao carregar Viagem.</string>
+    <string name="errorViagemFields">Preencha todos os campos corretamente.</string>
+    <string name="errorViagemFormat">Formato de data inválido.</string>
+    <string name="okViagem">Viagem carregada com sucesso.</string>
+    <string name="errorUser">Utilizador não autenticado ou ID em falta.</string>
+    <string name="localSave">Erro de conexão, dados guardados localmente.</string>
+    <string name="cancelPlace">Seleção do local cancelada.</string>
+
+
 </resources>

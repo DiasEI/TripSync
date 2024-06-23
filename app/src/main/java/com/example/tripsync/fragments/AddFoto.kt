@@ -100,7 +100,7 @@ class AddFoto : Fragment() {
                     val fotoData = FotoData(null, base64Foto)
                     fotoDataList.add(fotoData)
                 } else {
-                    Toast.makeText(requireContext(), "Failed to encode foto", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.errorFoto), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -115,36 +115,20 @@ class AddFoto : Fragment() {
                 call.enqueue(object : Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                         if (response.isSuccessful) {
-                            Toast.makeText(
-                                requireContext(),
-                                "Fotos uploaded successfully",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText( requireContext(), getString(R.string.okFoto), Toast.LENGTH_SHORT).show()
                         } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "Failed to upload fotos",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText( requireContext(), getString(R.string.errorFoto), Toast.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<Void>, t: Throwable) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Network error: ${t.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText( requireContext(), getString(R.string.networkerror), Toast.LENGTH_SHORT).show()
                     }
                 })
             }
         } else {
             saveFotosRequestLocally(fotoDataList)
-            Toast.makeText(
-                requireContext(),
-                "Network unavailable. Data saved locally.",
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast.makeText( requireContext(), getString(R.string.localSave), Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.example.tripsync.R
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -26,6 +27,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         val view = inflater.inflate(R.layout.fragment_maps, container, false)
         placeLatLng = arguments?.getParcelable("placeLatLng")
         placeName = arguments?.getString("placeName")
+
+        val btnVoltar = view.findViewById<ImageButton>(R.id.btnVoltar)
+        btnVoltar.setOnClickListener {
+            activity?.supportFragmentManager?.popBackStack()
+        }
+
         return view
     }
 

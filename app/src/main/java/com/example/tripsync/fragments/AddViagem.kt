@@ -3,7 +3,6 @@ package com.example.tripsync.fragments
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,8 +68,7 @@ class AddViagem : Fragment() {
         token = sharedPreferences.getString("token", null)
 
         if (userId == null || token == null) {
-            Toast.makeText(activity, "Erro: Usuário não autenticado", Toast.LENGTH_SHORT).show()
-            Log.e("AddViagem", "Usuário não autenticado")
+            Toast.makeText(activity, getString(R.string.errorUser), Toast.LENGTH_SHORT).show()
             return view
         }
 
@@ -116,8 +114,7 @@ class AddViagem : Fragment() {
         val classificacao = etClassificacao.value
 
         if (titulo.isEmpty() || descricao.isEmpty() || cidade.isEmpty() || pais.isEmpty() || dataInicio.isEmpty() || dataFim.isEmpty() || custos == null) {
-            Toast.makeText(activity, "Preencha todos os campos corretamente", Toast.LENGTH_SHORT).show()
-            Log.e("AddViagem", "Campos não preenchidos corretamente")
+            Toast.makeText(activity, getString(R.string.errorViagemFields), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -129,8 +126,7 @@ class AddViagem : Fragment() {
             dataInicioDate = dateFormat.format(SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dataInicio)!!)
             dataFimDate = dateFormat.format(SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dataFim)!!)
         } catch (e: Exception) {
-            Toast.makeText(activity, "Formato de data inválido", Toast.LENGTH_SHORT).show()
-            Log.e("AddViagem", "Formato de data inválido", e)
+            Toast.makeText(activity, getString(R.string.errorViagemFormat), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -151,11 +147,7 @@ class AddViagem : Fragment() {
             sendTripToServer(trip)
         } else {
             saveTripRequestLocally(trip)
-            Toast.makeText(
-                requireContext(),
-                "Network unavailable. Data saved locally.",
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast.makeText( requireContext(), getString(R.string.localSave), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -163,19 +155,15 @@ class AddViagem : Fragment() {
         ApiClient.apiService.adicionarViagem(trip).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(activity, "Viagem adicionada com sucesso", Toast.LENGTH_SHORT).show()
-                    Log.d("AddViagem", "Viagem adicionada com sucesso")
+                    Toast.makeText(activity, getString(R.string.okViagem), Toast.LENGTH_SHORT).show()
                     navigateToListViagens()
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    Toast.makeText(activity, "Erro ao adicionar viagem: $errorBody", Toast.LENGTH_SHORT).show()
-                    Log.e("AddViagem", "Erro ao adicionar viagem: $errorBody")
+                    Toast.makeText(activity, getString(R.string.errorViagem), Toast.LENGTH_SHORT).show()
                 }
             }
-
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                Toast.makeText(activity, "Erro de rede: ${t.message}", Toast.LENGTH_SHORT).show()
-                Log.e("AddViagem", "Erro de rede", t)
+                Toast.makeText(activity, getString(R.string.networkerror), Toast.LENGTH_SHORT).show()
             }
         })
     }

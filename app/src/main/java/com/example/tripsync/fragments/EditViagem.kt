@@ -3,7 +3,6 @@ package com.example.tripsync.fragments
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -128,7 +127,7 @@ class EditViagem : Fragment() {
                             et_custos.setText(it.custos.toString())
                         }
                     } else {
-                        Toast.makeText(requireContext(), "Failed to load trip details", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), getString(R.string.errorViagem), Toast.LENGTH_SHORT).show()
                     }
                 }
                 override fun onFailure(call: Call<Trip>, t: Throwable) {
@@ -136,7 +135,7 @@ class EditViagem : Fragment() {
                 }
             })
         } else {
-            Toast.makeText(requireContext(), "User not logged in or tripId missing", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.errorUser), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -152,7 +151,7 @@ class EditViagem : Fragment() {
         val classificacao = et_class.value
 
         if (titulo.isEmpty() || descricao.isEmpty() || cidade.isEmpty() || pais.isEmpty() || data_inicio.isEmpty() || data_fim.isEmpty() || custos == null) {
-            Toast.makeText(activity, "Preencha todos os campos corretamente", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, getString(R.string.errorViagemFields), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -164,8 +163,7 @@ class EditViagem : Fragment() {
             dataInicioDate = dateFormat.format(SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(data_inicio)!!)
             dataFimDate = dateFormat.format(SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(data_fim)!!)
         } catch (e: Exception) {
-            Toast.makeText(activity, "Formato de data inválido", Toast.LENGTH_SHORT).show()
-            Log.d("Guardar", "Date parsing error: ${e.message}")
+            Toast.makeText(activity, getString(R.string.errorViagemFormat), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -183,28 +181,22 @@ class EditViagem : Fragment() {
                 id_utilizador = userId!!,
             )
 
-            // Log the request data
-            Log.d("Guardar", "Request data: $trip")
-
             ApiClient.apiService.updateTripDetails(tripId!!, trip).enqueue(object : Callback<Trip> {
                 override fun onResponse(call: Call<Trip>, response: Response<Trip>) {
                     if (response.isSuccessful) {
-                        Toast.makeText(requireContext(), "Viagem atualizada com sucesso", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), getString(R.string.okViagem), Toast.LENGTH_SHORT).show()
                         requireActivity().supportFragmentManager.popBackStack()
                     } else {
-                        Toast.makeText(requireContext(), "Erro ao atualizar viagem", Toast.LENGTH_SHORT).show()
-                        Log.d("Guardar", "API response error: ${response.errorBody()?.string()}")
+                        Toast.makeText(requireContext(), getString(R.string.errorViagem), Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<Trip>, t: Throwable) {
-                    Toast.makeText(requireContext(), "Erro: ${t.message}", Toast.LENGTH_SHORT).show()
-                    Log.d("Guardar", "API call failure: ${t.message}")
+                    Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
             })
         } else {
-            Toast.makeText(requireContext(), "User not logged in or tripId missing", Toast.LENGTH_SHORT).show()
-            Log.d("Guardar", "Authentication error: User not logged in or tripId is missing.")
+            Toast.makeText(requireContext(), getString(R.string.errorUser), Toast.LENGTH_SHORT).show()
         }
     }
 }

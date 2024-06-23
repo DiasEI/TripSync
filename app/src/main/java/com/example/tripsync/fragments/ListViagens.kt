@@ -43,7 +43,7 @@ class ListViagens : Fragment() {
         if (userId != null && token != null) {
             loadViagens()
         } else {
-            Toast.makeText(activity, "Erro: Usuário não autenticado", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, getString(R.string.errorUser), Toast.LENGTH_SHORT).show()
         }
 
         return view
@@ -57,12 +57,12 @@ class ListViagens : Fragment() {
                     viagens.addAll(response.body()!!)
                     viagemAdapter.notifyDataSetChanged()
                 } else {
-                    Toast.makeText(activity, "Erro ao carregar viagens", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, getString(R.string.errorViagem), Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<List<Trip>>, t: Throwable) {
-                Toast.makeText(activity, "Erro de rede: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }

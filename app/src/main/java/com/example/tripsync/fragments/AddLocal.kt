@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -109,11 +108,10 @@ class AddLocal : Fragment() {
                 }
                 AutocompleteActivity.RESULT_ERROR -> {
                     val status = Autocomplete.getStatusFromIntent(data!!)
-                    Log.e(TAG, "Error: ${status.statusMessage}")
                     Toast.makeText(requireContext(), "Error: ${status.statusMessage}", Toast.LENGTH_SHORT).show()
                 }
                 Activity.RESULT_CANCELED -> {
-                    Toast.makeText(requireContext(), "Place selection canceled", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.cancelPlace), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -132,7 +130,7 @@ class AddLocal : Fragment() {
             sendAddLocalRequest(localRequest)
         } else {
             saveLocalRequest(localRequest)
-            Toast.makeText(requireContext(), "Network unavailable. Data saved locally.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.localSave), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -141,24 +139,19 @@ class AddLocal : Fragment() {
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
-                    Log.d(TAG, "addLocal onResponse: Success")
-                    Toast.makeText(requireContext(), "Local added successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.okLocal), Toast.LENGTH_SHORT).show()
                     activity?.supportFragmentManager?.popBackStack()
                 } else {
-                    Log.e(TAG, "addLocal onResponse: Failed with code ${response.code()}")
-                    Toast.makeText(requireContext(), "Failed to add local: ${response.message()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.errorLocal), Toast.LENGTH_SHORT).show()
                 }
             }
-
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                Log.e(TAG, "addLocal onFailure: ${t.message}")
-                Toast.makeText(requireContext(), "Network error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.networkerror), Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun saveLocalRequest(request: AddLocalRequest) {
-        // Use SharedPreferences or file storage to save the request
         val sharedPreferences = requireContext().getSharedPreferences("local_requests", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val json = Gson().toJson(request)
@@ -167,7 +160,6 @@ class AddLocal : Fragment() {
     }
 
     companion object {
-        private const val TAG = "AddLocalFragment"
         private const val AUTOCOMPLETE_REQUEST_CODE = 1001
     }
 }
