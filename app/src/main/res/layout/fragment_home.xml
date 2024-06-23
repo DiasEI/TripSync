@@ -74,30 +74,17 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="20dp">
 
-                <EditText
-                    android:id="@+id/search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="11"
-                    android:textSize="15sp"
-                    android:hint="@string/search"
+                <fragment
+                    android:id="@+id/place_autocomplete_fragment"
+                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                    android:layout_height="45dp"
+                    android:layout_width="match_parent"
                     android:importantForAutofill="no"
-                    android:background="@drawable/round_edit_text"
-                    android:inputType="text"
-                    android:paddingStart="16dp"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSearch"
-                    android:layout_width="20dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/def"
-                    android:layout_marginStart="15dp"
-                    app:icon="@drawable/search"
-                    android:onClick="pesquisa"
-                    app:cornerRadius="10dp"
-                    app:iconGravity="textStart"
-                    app:iconPadding="0dp"/>
+                    android:paddingStart="16dp"
+                    android:hint="@string/search"
+                    app:layout_constraintEnd_toStartOf="@+id/btnSearch"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             </LinearLayout>
 

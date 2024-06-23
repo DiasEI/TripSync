@@ -1,6 +1,7 @@
 package com.example.tripsync.fragments
 
 import android.Manifest
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,7 +11,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -33,6 +33,7 @@ import com.example.tripsync.R
 import com.example.tripsync.workers.SendFotoRequestsWorker
 import com.example.tripsync.workers.SendLocalRequestsWorker
 import com.example.tripsync.workers.SendViagemRequestsWorker
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.libraries.places.api.Places
@@ -41,7 +42,8 @@ import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse
 import com.google.android.libraries.places.api.net.PlacesClient
-import com.google.android.material.button.MaterialButton
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.snackbar.Snackbar
 import java.security.MessageDigest
 import java.util.concurrent.TimeUnit
@@ -49,6 +51,7 @@ import java.util.concurrent.TimeUnit
 class Home : Fragment() {
     private lateinit var placesClient: PlacesClient
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var autocompleteFragment: AutocompleteSupportFragment
     private val REQUEST_LOCATION_PERMISSION = 1
 
     private val imageViewIds = listOf(
@@ -73,6 +76,40 @@ class Home : Fragment() {
         placesClient = Places.createClient(requireContext())
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        // Initialize Autocomplete fragment
+        autocompleteFragment = childFragmentManager.findFragmentById(R.id.place_autocomplete_fragment)
+                as AutocompleteSupportFragment
+
+        // Specify the types of place data to return
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
+
+        // Set up the Autocomplete search
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                // Handle selected place
+                val placeName = place.name
+                val placeLatLng = place.latLng
+
+                // Launch map fragment with selected place
+                val bundle = Bundle().apply {
+                    putParcelable("placeLatLng", placeLatLng)
+                    putString("placeName", placeName)
+                }
+                val mapsFragment = MapsFragment()
+                mapsFragment.arguments = bundle
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.frame_layout, mapsFragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+
+            override fun onError(status: Status) {
+                // Handle error
+                Log.e(TAG, "Error: ${status.statusMessage}")
+                Snackbar.make(requireView(), "Error: ${status.statusMessage}", Snackbar.LENGTH_SHORT).show()
+            }
+        })
+
         scheduleSendRequestsWork(requireContext())
         getCurrentPlace()
 
@@ -81,16 +118,6 @@ class Home : Fragment() {
             val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)
             activity?.finish()
-        }
-
-        val search: EditText = view.findViewById(R.id.search)
-        val btnSearch: MaterialButton = view.findViewById(R.id.btnSearch)
-
-        btnSearch.setOnClickListener {
-            val query = search.text.toString().trim()
-            if (query.isNotEmpty()) {
-                performSearch(query)
-            }
         }
 
         return view
@@ -205,14 +232,6 @@ class Home : Fragment() {
                 Toast.makeText(requireContext(), "Location permission denied", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    private fun performSearch(query: String) {
-        // Implement your search logic here
-        // For example, you could filter a list of items, make a network request, etc.
-        // Here's a simple example that prints the query to the log
-        println("Search query: $query")
-        // You can replace the println with your actual search logic
     }
 
     fun scheduleSendRequestsWork(context: Context) {
