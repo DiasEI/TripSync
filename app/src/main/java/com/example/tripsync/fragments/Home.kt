@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -85,8 +84,6 @@ class Home : Fragment() {
             }
         }
 
-        setupImageViewClickListeners()
-
         return view
     }
 
@@ -153,49 +150,11 @@ class Home : Fragment() {
         }
     }
 
-    private fun setupImageViewClickListeners() {
-        for (imageViewId in imageViewIds) {
-            view?.findViewById<ImageView>(imageViewId)?.setOnClickListener {
-                // Determine which image view was clicked based on imageViewId
-                val clickedIndex = imageViewIds.indexOf(imageViewId)
-                // Navigate to MapsFragment and pass current location data
-                navigateToMapsFragment()
-            }
-        }
-    }
-
-    private fun navigateToMapsFragment() {
-        // Check if location permission is granted
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            // Get last known location
-            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                location?.let {
-                    val bundle = Bundle().apply {
-                        putDouble("latitude", it.latitude)
-                        putDouble("longitude", it.longitude)
-                    }
-                    val mapsFragment = MapsFragment()
-                    mapsFragment.arguments = bundle
-
-                    // Navigate to MapsFragment
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.frame_layout, mapsFragment)
-                        .addToBackStack(null)
-                        .commit()
-                } ?: run {
-                    Snackbar.make(requireView(), "Unable to retrieve location", Snackbar.LENGTH_SHORT).show()
-                }
-            }.addOnFailureListener { exception ->
-                Log.e("Location", "Error getting location: ${exception.message}")
-                Snackbar.make(requireView(), "Error getting location", Snackbar.LENGTH_SHORT).show()
-            }
-        } else {
-            // Request location permission
-            requestLocationPermission()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        imageViews.forEach { imageView ->
+            Glide.with(imageView)
+                .clear(imageView)
         }
     }
 

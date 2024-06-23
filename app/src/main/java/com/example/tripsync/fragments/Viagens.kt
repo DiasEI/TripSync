@@ -19,14 +19,22 @@ import androidx.fragment.app.Fragment
 import com.example.tripsync.R
 import com.example.tripsync.api.ApiClient
 import com.example.tripsync.api.GetFotosResponse
+import com.example.tripsync.api.GetLocalResponse
+import com.example.tripsync.api.LocalData
 import com.example.tripsync.api.Trip
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class Viagens : Fragment() {
+class Viagens : Fragment(), OnMapReadyCallback {
 
     private lateinit var tvTitulo: TextView
     private lateinit var tvDescricao: TextView
@@ -37,6 +45,7 @@ class Viagens : Fragment() {
     private lateinit var tvCustos: TextView
     private lateinit var tvClassificacao: TextView
     private lateinit var viewFlipper: ViewFlipper
+    private lateinit var map: GoogleMap
     private var tripId: String? = null
     private var token: String? = null
 
@@ -57,7 +66,28 @@ class Viagens : Fragment() {
         viewFlipper = view.findViewById(R.id.vfFlipper)
         tripId = arguments?.getString("tripId")
 
+        val mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
         loadViagem()
+
+        val btnEdit = view.findViewById<Button>(R.id.btnEdit)
+        btnEdit.setOnClickListener {
+            val tripId = arguments?.getString("tripId")
+            if (tripId != null) {
+                val bundle = Bundle().apply {
+                    putString("tripId", tripId)
+                }
+                val editFragment = EditViagem()
+                editFragment.arguments = bundle
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.frame_layout, editFragment)
+                    .addToBackStack(null)
+                    .commit()
+            } else {
+                Toast.makeText(requireContext(), "Trip ID not available", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         val btnDelete = view.findViewById<Button>(R.id.btn_delete)
         btnDelete.setOnClickListener {
@@ -70,6 +100,11 @@ class Viagens : Fragment() {
         }
 
         return view
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+        tripId?.let { fetchAndDisplayLocals(it) }
     }
 
     private fun loadViagem() {
@@ -158,6 +193,60 @@ class Viagens : Fragment() {
                 Log.e("Viagens", "Error fetching photos", t)
             }
         })
+    }
+
+    private fun fetchAndDisplayLocals(viagemId: String) {
+        ApiClient.apiService.getLocalByViagem(viagemId).enqueue(object : Callback<GetLocalResponse> {
+            override fun onResponse(call: Call<GetLocalResponse>, response: Response<GetLocalResponse>) {
+                if (response.isSuccessful) {
+                    val localsResponse = response.body()
+                    localsResponse?.let { locals ->
+                        displayLocalsOnMap(locals.locais)
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Failed to fetch local data", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<GetLocalResponse>, t: Throwable) {
+                Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("Viagens", "Error fetching local data", t)
+            }
+        })
+    }
+
+    private fun displayLocalsOnMap(locals: List<LocalData>) {
+        for (local in locals) {
+            val latLng = parseLatLng(local.localizacao)
+            if (latLng != null) {
+                val marker = MarkerOptions()
+                    .position(latLng)
+                    .title(local.nome)
+                    .snippet(local.tipo)
+
+                map.addMarker(marker)
+            }
+        }
+
+        // Move camera to the first marker position
+        if (locals.isNotEmpty()) {
+            val firstLocal = parseLatLng(locals[0].localizacao)
+            firstLocal?.let {
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(it, 12f))
+            }
+        }
+    }
+
+    private fun parseLatLng(location: String): LatLng? {
+        val latLngStr = location.split(",")
+        return try {
+            val lat = latLngStr[0].toDouble()
+            val lng = latLngStr[1].toDouble()
+            LatLng(lat, lng)
+        } catch (e: Exception) {
+            Log.e("Viagens", "Error parsing location: $location", e)
+            null
+        }
     }
 
     private fun showDeleteConfirmationDialog() {

@@ -20,19 +20,19 @@
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/plane"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/plane"
+                    android:background="@color/white"/>
 
                 <TextView
                     android:id="@+id/tv_add_viagem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:text="@string/addTrip"
                     android:textColor="@color/def"
                     android:textSize="20sp"
-                    android:layout_marginStart="40dp"
+                    android:layout_marginStart="30dp"
                     android:fontFamily="@font/nunito_bold"/>
 
             </LinearLayout>

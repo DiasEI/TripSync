@@ -255,8 +255,25 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tvLocais"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/locais"
+                android:textColor="@color/def"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="10dp"/>
+
+            <fragment
+                android:id="@+id/mapFragment"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"/>
+
             <Button
-                android:id="@+id/btn_edit"
+                android:id="@+id/btnEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/editViagem"

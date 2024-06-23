@@ -1,13 +1,8 @@
 package com.example.tripsync.fragments
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,21 +10,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
 import com.example.tripsync.R
 import com.example.tripsync.api.ApiClient
 import com.example.tripsync.api.Trip
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.IOException
-import java.io.InputStream
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 class EditViagem : Fragment() {
 
@@ -62,11 +54,9 @@ class EditViagem : Fragment() {
         et_class = view.findViewById(R.id.et_class)
         btnGuardar = view.findViewById(R.id.btnGuardar)
 
-        // Set up NumberPicker
         et_class.minValue = 0
         et_class.maxValue = 10
 
-        // Get tripId from arguments
         tripId = arguments?.getString("tripId")
 
         et_inicio.setOnClickListener {
@@ -81,7 +71,12 @@ class EditViagem : Fragment() {
             guardar()
         }
 
-        loadViagem() // Load the trip details
+        val btnVoltar = view.findViewById<ImageButton>(R.id.btnVoltar)
+        btnVoltar.setOnClickListener{
+            activity?.supportFragmentManager?.popBackStack()
+        }
+
+        loadViagem()
 
         return view
     }

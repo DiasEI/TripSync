@@ -11,24 +11,32 @@
         android:paddingVertical="20dp"
         android:layout_centerHorizontal="true">
 
-        <ImageButton
-            android:id="@+id/btnVoltar"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/vector__1_"
-            android:background="@android:color/transparent"
-            android:layout_marginTop="3dp"/>
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_header"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@string/add"
-            android:textColor="@color/def"
-            android:textSize="20sp"
-            android:fontFamily="@font/nunito_bold"/>
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/btnVoltar"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/vector__1_"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="3dp"/>
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/add"
+                android:textColor="@color/def"
+                android:textSize="20sp"
+                android:fontFamily="@font/nunito_bold"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

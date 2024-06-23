@@ -34,10 +34,8 @@ class AddFoto : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var btnSelecionarFoto: Button
     private lateinit var btnAdicionarFoto: Button
-
-    private val selectedFotoUris: MutableList<Uri> = mutableListOf()
     private lateinit var adapter: FotosAdapter
-
+    private val selectedFotoUris: MutableList<Uri> = mutableListOf()
     private var tripId: String? = null
 
     override fun onCreateView(

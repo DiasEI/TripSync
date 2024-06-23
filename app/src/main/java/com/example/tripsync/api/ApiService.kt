@@ -63,6 +63,23 @@ data class FotoData(
     val imageData: Any? = null
 )
 
+data class AddLocalRequest(
+    val id_viagem: String,
+    val locais: List<LocalData>
+)
+
+data class GetLocalResponse(
+    val locais: List<LocalData>
+)
+
+data class LocalData(
+    val id_local: String?,
+    val nome: String,
+    val localizacao: String,
+    val tipo: String,
+    val classificacao: Int
+)
+
 //Requests
 interface ApiService {
     @POST("api/v2/auth/signin")
@@ -97,4 +114,10 @@ interface ApiService {
 
     @GET("api/v2/viagens/fotos/{id}")
     fun getFotosByViagem(@Path("id") idViagem: String): Call<GetFotosResponse>
+
+    @POST("api/v2/viagens/local")
+    fun addLocal(@Body addLocalRequest: AddLocalRequest): Call<Void>
+
+    @GET("api/v2/viagens/local/{id}")
+    fun getLocalByViagem(@Path("id") idViagem: String): Call<GetLocalResponse>
 }
