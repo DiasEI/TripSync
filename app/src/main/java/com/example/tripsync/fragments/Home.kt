@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -50,7 +49,7 @@ import java.security.MessageDigest
 import java.util.concurrent.TimeUnit
 
 class Home : Fragment() {
-    private lateinit var placesClient: PlacesClient
+    lateinit var placesClient: PlacesClient
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var autocompleteFragment: AutocompleteSupportFragment
     private val REQUEST_LOCATION_PERMISSION = 1
@@ -124,7 +123,7 @@ class Home : Fragment() {
         return view
     }
 
-    private fun getCurrentPlace() {
+    fun getCurrentPlace() {
         val placeFields = listOf(
             Place.Field.NAME,
             Place.Field.LAT_LNG,

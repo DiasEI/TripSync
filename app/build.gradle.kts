@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-
+    // Core Android dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -48,26 +48,34 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.picasso)
     implementation(libs.androidx.work.runtime.ktx)
-
     // Retrofit dependencies
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    // UI dependencies
     implementation(libs.androidx.ui.text.android)
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.recyclerview)
     implementation(libs.play.services.maps)
     implementation(libs.common)
     implementation(libs.places)
-
-    // Test dependencies
+    // JUnit dependencies
+    implementation(libs.androidx.junit.ktx)
+    // Unit testing dependencies
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.androidx.junit.v120)
+    testImplementation(libs.androidx.rules)
+    // AndroidX Fragment testing dependencies
+    debugImplementation(libs.androidx.fragment.testing)
+    // Android instrumented testing dependencies
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
+    androidTestImplementation(libs.androidx.rules)
+    androidTestImplementation(libs.androidx.uiautomator)
+    // Image loading dependencies
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
-
-    // HTTP logging
+    // HTTP logging dependencies
     implementation(libs.okhttp)
     implementation(libs.okhttp3.logging.interceptor)
 }
